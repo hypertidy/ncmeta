@@ -1,0 +1,4 @@
+# ncmeta
+
+Straightforward NetCDF metadata. 
+
