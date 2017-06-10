@@ -1,0 +1,20 @@
+Package: ncmeta
+Title: Straightforward NetCDF Metadata
+Version: 0.0.0.9000
+Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c("aut", "cre")), 
+             person("Tomas", "Remenyi", role = "ctb"))
+Description: Extract metadata from NetCDF data sources, these can be files, file handles or
+ servers.
+Depends: R (>= 3.4.0)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Imports: dplyr, 
+    RNetCDF,
+    tibble
+Suggests: testthat,
+    covr
+Roxygen: list(markdown = TRUE)
+URL: https://github.com/hypertidy/ncmeta
+BugReports: https://github.com/hypertidy/ncmeta/issues
