@@ -46,14 +46,16 @@ nc_inq.NetCDF <- function(x, ...) {
 #' @export
 #' @importFrom dplyr bind_rows
 nc_inq.character <- function(x, ...) {
-  dplyr::bind_rows(lapply(x, nc_inq0))
-}
-#' @importFrom RNetCDF close.nc open.nc
-#' @importFrom dplyr mutate
-nc_inq0 <- function(x) {
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-  dplyr::mutate(nc_inq(nc), filename = x)
+ nc_inq(nc)
 }
+# #' @importFrom RNetCDF close.nc open.nc
+# #' @importFrom dplyr mutate
+# nc_inq0 <- function(x) {
+#   nc <- RNetCDF::open.nc(x)
+#   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+#   dplyr::mutate(nc_inq(nc), filename = x)
+# }
 
 

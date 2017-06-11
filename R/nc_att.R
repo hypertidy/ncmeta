@@ -10,10 +10,12 @@
 #' @param attribute name or index (zero based) of attribute
 #' @param ... ignored
 #'
-#' @return
+#' @return data frame of attribute 
 #' @export
 #'
 #' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_att(f, 0, 0)
 #' @name nc_att
 #' @export 
 nc_att <- function(x, variable, attribute, ...) {
@@ -24,8 +26,10 @@ nc_att <- function(x, variable, attribute, ...) {
 #' @importFrom rlang .data
 nc_att.NetCDF <- function(x, variable, attribute, ...) {
  att <- RNetCDF::att.get.nc(x, variable, attribute)
-  tibble::tibble(attribute = attribute, variable = variable, value = list(att))
-}
+ as_tibble(list(attribute = attribute, variable = variable, value = list(att)))
+# structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
+ 
+ }
 #' @name nc_att
 #' @export 
 #' @importFrom tibble tibble
@@ -41,10 +45,12 @@ nc_att.character <- function(x, variable, attribute, ...) {
 #' @param x filename or handle
 #' @param ... ignored
 #'
-#' @return
+#' @return data frame of attributes
 #' @export
 #'
 #' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_atts(f)
 nc_atts <- function(x, ...) {
  UseMethod("nc_atts") 
 }
@@ -57,7 +63,10 @@ nc_atts.NetCDF <- function(x, ...) {
   global <- tibble(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts)
   var <- bind_rows(var, global)
-  bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
+  #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
+#bind_rows <- function(x) x
+    bind_rows(lapply(split(var, var$name), 
+                     function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 }
 #' @name nc_atts
 #' @export
