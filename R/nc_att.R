@@ -26,7 +26,7 @@ nc_att <- function(x, variable, attribute, ...) {
 #' @importFrom rlang .data
 nc_att.NetCDF <- function(x, variable, attribute, ...) {
  att <- RNetCDF::att.get.nc(x, variable, attribute)
- as_tibble(list(attribute = attribute, variable = variable, value = list(att)))
+ faster_tibble(list(attribute = attribute, variable = variable, value = list(att)))
 # structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
  
  }

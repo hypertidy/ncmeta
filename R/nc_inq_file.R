@@ -40,16 +40,21 @@ nc_inq <- function(x, ...) {
 #' @importFrom RNetCDF file.inq.nc
 #' @importFrom tibble as_tibble
 nc_inq.NetCDF <- function(x, ...) {
-  tibble::as_tibble(RNetCDF::file.inq.nc(x))
+    faster_tibble(RNetCDF::file.inq.nc(x)) 
 }
 #' @name nc_inq
 #' @export
 #' @importFrom dplyr bind_rows
 nc_inq.character <- function(x, ...) {
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
- nc_inq(nc)
-}
+ ifun <- function(x) { 
+    nc <- RNetCDF::open.nc(x)
+    on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+    nc_inq(nc)
+ }
+ out <- dplyr::bind_rows( lapply(x, ifun), .id = "filename")
+ out$filename <- x[as.integer(out$filename)]
+ out[, c("ndims", "nvars", "ngatts", "unlimdimid", "filename")]
+ }
 # #' @importFrom RNetCDF close.nc open.nc
 # #' @importFrom dplyr mutate
 # nc_inq0 <- function(x) {

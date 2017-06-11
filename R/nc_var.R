@@ -22,6 +22,6 @@ nc_var.character <- function(x, i) {
 #'@name nc_var
 #'@export
 nc_var.NetCDF <- function(x, i) {
-  tibble::as_tibble(RNetCDF::var.inq.nc(x, i))
+  as_tibble(RNetCDF::var.inq.nc(x, i))
 }
 
