@@ -45,24 +45,24 @@ microbenchmark(nc_open = ncdf4::nc_open(f),
                ncdump = ncdump::NetCDF(f), 
                ncmeta = nc_meta(f) , times = 10)
 #> Unit: milliseconds
-#>     expr        min         lq      mean    median        uq      max
-#>  nc_open   9.432109   9.995843  92.33632  10.57890  12.55095 521.8955
-#>   ncdump 100.277510 104.792988 134.62141 109.81531 112.07907 309.3730
-#>   ncmeta  79.238553  82.633048 111.10907  83.97404  88.53951 336.8737
-#>  neval cld
-#>     10   a
-#>     10   a
-#>     10   a
+#>     expr       min       lq      mean   median       uq       max neval
+#>  nc_open  9.377792 10.28603  10.54871 10.58718 10.73256   11.7029    10
+#>   ncdump 78.430394 80.77171 220.25889 82.48041 94.45352 1384.1578    10
+#>   ncmeta 69.983725 70.21157  84.56027 71.86467 78.69532  175.5543    10
+#>  cld
+#>    a
+#>    a
+#>    a
                #RNetCDF = RNetCDF::print.nc(RNetCDF::open.nc(f)))
 #sink(NULL)
 
 
 system.time(ncdf4::nc_open(f))
 #>    user  system elapsed 
-#>   0.012   0.000   0.012
+#>   0.012   0.000   0.011
 system.time(nc_meta(f))
 #>    user  system elapsed 
-#>   0.076   0.000   0.077
+#>   0.068   0.000   0.068
 system.time({
  nc_dims(f)
 
@@ -71,9 +71,9 @@ system.time({
   nc_atts(f)
 })
 #>    user  system elapsed 
-#>   0.096   0.000   0.095
+#>   0.076   0.000   0.077
 
 system.time(ncdump::NetCDF(f))
 #>    user  system elapsed 
-#>   0.092   0.000   0.092
+#>   0.088   0.000   0.089
 ```
