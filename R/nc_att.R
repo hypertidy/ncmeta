@@ -59,9 +59,16 @@ nc_atts <- function(x, ...) {
 #' @importFrom dplyr distinct
 #' @importFrom tibble tibble
 nc_atts.NetCDF <- function(x, ...) {
-  var <- dplyr::distinct(nc_vars(x), .data$id, .data$name, .data$natts)
-  global <- tibble(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
+    global <- tibble(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts)
+  
+    ## bomb out if ndims is NA
+    if (is.na(global$ndims)) {
+      warning("no dimensions or variables recognizable")
+      return(global)
+    }
+  var <- dplyr::distinct(nc_vars(x), .data$id, .data$name, .data$natts)
+    
   var <- bind_rows(var, global)
   #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 #bind_rows <- function(x) x
