@@ -59,21 +59,24 @@ nc_atts <- function(x, ...) {
 #' @importFrom dplyr distinct
 #' @importFrom tibble tibble
 nc_atts.NetCDF <- function(x, ...) {
-    global <- tibble(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
+    global <- tibble::tibble(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts)
   
-    ## bomb out if ndims is NA
-    if (is.na(global$ndims)) {
-      warning("no dimensions or variables recognizable")
-      return(global)
-    }
-  var <- dplyr::distinct(nc_vars(x), .data$id, .data$name, .data$natts)
+    vars <- nc_vars(x)
     
-  var <- bind_rows(var, global)
+  ## bomb out if ndims is NA
+  if (nrow(vars) < 1L) {
+    warning("no variables recognizable")
+    return(global)
+  } else {
+    var <- dplyr::distinct(vars, .data$id, .data$name, .data$natts)
+  }
+  
+  var <- dplyr::bind_rows(var, global)
   #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 #bind_rows <- function(x) x
-    bind_rows(lapply(split(var, var$name), 
-                     function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
+    dplyr::bind_rows(lapply(split(var, var$name), 
+                     function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 }
 #' @name nc_atts
 #' @export
