@@ -41,8 +41,8 @@ afile <- "/rdsi/PRIVATE/raad/data/ftp.aviso.altimetry.fr/global/delayed-time/gri
 fp <- getOption("default.datadir")
 l3_file <- "/rdsi/PRIVATE/raad/data/oceandata.sci.gsfc.nasa.gov/MODISA/L3BIN/2002/184/A2002184.L3b_DAY_RRS.nc"
 we_are_raady <- FALSE
-if (!is.null(fp) && file.exists(file.path(fp, "data"))) we_are_raady <- TRUE
 
+if (!is.null(fp) && file.exists(file.path(fp, "data"))) we_are_raady <- TRUE
 test_that("no attributes vs. no variables", {
   skip_if_not(we_are_raady)
   expect_silent(ncmeta::nc_meta(afile))
