@@ -26,6 +26,6 @@ data frame of variable information
 Return a data frame about the variable at index \code{i}.
 }
 \seealso{
-\code{nc_vars`` to obtain information about all variables,}nc_inq` for an
+\code{nc_vars} to obtain information about all variables, \code{nc_inq} for an
 overview of the file
 }
