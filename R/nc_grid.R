@@ -35,6 +35,6 @@ nc_grids_dimvar <- function(dimension, variable, axes) {
     dplyr::arrange(desc(nchar(shape)), shape, variable)
   ## catch the NA shapes (the scalars) and set to "-"
   out$shape[is.na(out$shape) | out$shape == "DNA"] <- "S"
-  out 
+  out  %>% dplyr::rename(grid = shape)
 }
 
