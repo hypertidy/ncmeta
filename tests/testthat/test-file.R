@@ -5,6 +5,7 @@ f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "nc
 inq_structure <- structure(c("double", "double", "double", "logical", "character"
 ), .Names = c("ndims", "nvars", "ngatts", "unlimdimid", "filename"
 ))
+
 test_that("file inquiry works", {
   inq <- nc_inq(f) %>% expect_s3_class("tbl_df")
   expect_that(nrow(inq), equals(1L))

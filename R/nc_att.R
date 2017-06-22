@@ -62,8 +62,8 @@ nc_atts.NetCDF <- function(x, ...) {
     global <- tibble::tibble(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts)
   
+    #vars <- nc_axes(x)
     vars <- nc_vars(x)
-    
   ## bomb out if ndims is NA
   if (nrow(vars) < 1L) {
     warning("no variables recognizable")

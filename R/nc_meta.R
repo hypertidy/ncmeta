@@ -17,9 +17,11 @@ nc_meta <- function(x, ...) {
 #' @name nc_meta
 #' @export
 nc_meta.NetCDF <- function(x, ...) {
-  list(dimension = nc_dims(x), 
+  structure(list(dimension = nc_dims(x), 
        variable = nc_vars(x), 
-       attribute = nc_atts(x))
+       attribute = nc_atts(x), 
+       axes = nc_axes(x)), 
+       class = "ncmeta")
 }
 
 #' @name nc_meta

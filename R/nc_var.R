@@ -33,15 +33,15 @@ nc_axes <- function(x, i) {
 }
 #'@name nc_axes
 #'@export
-nc_axes.character <- function(x, i = NULL) {
+nc_axes.character <- function(x) {
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-  nc_axes(nc, i)
+  nc_axes(nc)
 }
 
 #'@name nc_axes
 #'@export
-nc_axes.NetCDF <- function(x, i = NULL) {
+nc_axes.NetCDF <- function(x) {
    axes <-   dplyr::bind_rows(
     lapply(nc_vars(x)$name, function(variable) {
      nc_axis_var(x, variable)
@@ -49,8 +49,4 @@ nc_axes.NetCDF <- function(x, i = NULL) {
     ) 
    axes %>% dplyr::transmute(id = row_number(), variable = name, dimension = dimids)
    
-}
-
-nc_axis_var <- function(x, i) {
-  as_tibble(RNetCDF::var.inq.nc(x, i))
 }

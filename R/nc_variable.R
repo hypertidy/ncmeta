@@ -23,6 +23,6 @@ nc_vars.character <- function(x, ...) {
 #' @importFrom dplyr %>% 
 nc_vars.NetCDF <- function(x, ...) {
   dplyr::bind_rows(lapply(seq_len(nc_inq(x)$nvars), function(i) nc_var(x, i-1))) %>% 
-    distinct(id, name, type, ndims, nats)
+    distinct(id, name, type, ndims, natts)
   
 }
