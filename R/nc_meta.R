@@ -20,7 +20,8 @@ nc_meta.NetCDF <- function(x, ...) {
   structure(list(dimension = nc_dims(x), 
        variable = nc_vars(x), 
        attribute = nc_atts(x), 
-       axes = nc_axes(x)), 
+       axis = nc_axes(x), 
+       grid = nc_grids(x)), 
        class = "ncmeta")
 }
 
@@ -30,5 +31,7 @@ nc_meta.character <- function(x, ...) {
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   
-  nc_meta(nc)
+  out <- nc_meta(nc)
+  out$source <- nc_sources(x)
+  out
 }

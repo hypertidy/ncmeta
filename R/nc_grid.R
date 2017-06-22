@@ -5,7 +5,7 @@ nc_grids <- function(x, ...) UseMethod("nc_grids")
 #' @name nc_grids
 #' @export
 nc_grids.character <- function(x, ...) {
-  nc_grids(nc_meta(x))
+  nc_grids_dimvar(nc_dims(x), nc_vars(x), nc_axes(x))
 }
 
 #' @name nc_grids
@@ -13,7 +13,7 @@ nc_grids.character <- function(x, ...) {
 #' @importFrom dplyr %>% arrange group_by
 #' @importFrom tibble tibble
 nc_grids.NetCDF <- function(x, ...) {
-  nc_grids(nc_meta(x))
+  nc_grids_dimvar(nc_dims(x), nc_vars(x), nc_axes(x))
 }
 
 
@@ -22,11 +22,10 @@ nc_grids.NetCDF <- function(x, ...) {
 # nc_axes(f, var) ## just these ones
 # nc_axis(i)  ## just one, of all ??
 
-#' @name nc_grids
-#' @export
-nc_grids.ncmeta <- function(x) {
-  if (nrow(x$variable) < 1 & nrow(x$dimension) < 1) return(tibble::tibble())
-  shape_instances_byvar <- x$axes %>% 
+
+nc_grids_dimvar <- function(dimension, variable, axes) {
+  if (nrow(variable) < 1 & nrow(dimension) < 1) return(tibble::tibble())
+  shape_instances_byvar <- axes %>% 
    # dplyr::group_by(variable) %>% 
     split(.$variable) %>% purrr::map(function(xa) xa$dimension)
   shape_classify_byvar <- factor(unlist(lapply(shape_instances_byvar, 
@@ -37,8 +36,5 @@ nc_grids.ncmeta <- function(x) {
   ## catch the NA shapes (the scalars) and set to "-"
   out$shape[is.na(out$shape) | out$shape == "DNA"] <- "S"
   out 
-  out$grid <- out$shape
-  out$shape <- NULL
-  out
 }
 
