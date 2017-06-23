@@ -13,5 +13,5 @@ nc_sources <- function(x, ...) {
 #' @name nc_sources
 #' @export
 nc_sources.character <- function(x, ...) {
-  tibble(creation = Sys.time(), source = x)
+  tibble(access = Sys.time(), source = x)
 }
