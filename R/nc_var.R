@@ -41,12 +41,13 @@ nc_axes.character <- function(x) {
 
 #'@name nc_axes
 #'@export
+#'@importFrom dplyr row_number transmute
 nc_axes.NetCDF <- function(x) {
    axes <-   dplyr::bind_rows(
     lapply(nc_vars(x)$name, function(variable) {
      nc_axis_var(x, variable)
     })
     ) 
-   axes %>% dplyr::transmute(id = row_number(), variable = name, dimension = dimids)
+   axes %>% dplyr::transmute(id = dplyr::row_number(), variable = name, dimension = dimids)
    
 }
