@@ -26,7 +26,7 @@ nc_att <- function(x, variable, attribute, ...) {
 #' @importFrom rlang .data
 nc_att.NetCDF <- function(x, variable, attribute, ...) {
  att <- RNetCDF::att.get.nc(x, variable, attribute)
- faster_tibble(list(attribute = attribute, variable = variable, value = list(att)))
+ faster_as_tibble(list(attribute = attribute, variable = variable, value = list(att)))
 # structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
  
  }
@@ -59,8 +59,8 @@ nc_atts <- function(x, ...) {
 #' @importFrom dplyr distinct
 #' @importFrom tibble tibble
 nc_atts.NetCDF <- function(x, ...) {
-    global <- tibble::tibble(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
-                   ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts)
+    global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
+                   ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts))
   
     #vars <- nc_axes(x)
     vars <- nc_vars(x)
@@ -69,7 +69,9 @@ nc_atts.NetCDF <- function(x, ...) {
     warning("no variables recognizable")
     return(global)
   } else {
-    var <- dplyr::distinct(vars, .data$id, .data$name, .data$natts)
+    #var <- dplyr::distinct(vars, .data$id, .data$name, .data$natts)
+    var <- vars[, c("id", "name", "natts")]
+    var <- var[!duplicated(var), ]
   }
   
   var <- dplyr::bind_rows(var, global)

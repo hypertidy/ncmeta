@@ -22,7 +22,7 @@ nc_dim.character <- function(x, i, ...) {
 #'@name nc_dim
 #'@export
 nc_dim.NetCDF <- function(x, i, ...) {
-  faster_tibble(RNetCDF::dim.inq.nc(x, i))
+  faster_as_tibble(RNetCDF::dim.inq.nc(x, i))
 }
 #'@name nc_dim
 #'@export

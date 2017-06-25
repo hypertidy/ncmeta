@@ -40,7 +40,7 @@ nc_inq <- function(x, ...) {
 #' @importFrom RNetCDF file.inq.nc
 #' @importFrom tibble as_tibble
 nc_inq.NetCDF <- function(x, ...) {
-    faster_tibble(RNetCDF::file.inq.nc(x)) 
+    faster_as_tibble(RNetCDF::file.inq.nc(x)) 
 }
 #' @name nc_inq
 #' @export
