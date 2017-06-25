@@ -77,7 +77,7 @@ nc_atts.NetCDF <- function(x, ...) {
   var <- dplyr::bind_rows(var, global)
   #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 #bind_rows <- function(x) x
-    dplyr::bind_rows(lapply(split(var, var$name), 
+    dplyr::bind_rows(lapply(split_fast_tibble(var, var$name), 
                      function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 }
 #' @name nc_atts
