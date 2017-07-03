@@ -24,3 +24,8 @@ test_that("file all dimensions inquiry works", {
               equals(structure(c("double", "character", "double", "logical"), 
               .Names = c("id","name", "length", "unlim"))))
 })
+
+
+nc_axes(f)
+nc_axis(f, 0)
+
