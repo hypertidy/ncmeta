@@ -20,3 +20,4 @@ Suggests: testthat,
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/hypertidy/ncmeta
 BugReports: https://github.com/hypertidy/ncmeta/issues
+ByteCompile: TRUE
