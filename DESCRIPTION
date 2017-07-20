@@ -6,7 +6,7 @@ Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c(
              person("Ben", "Raymond", role = "ctb"))
 Description: Extract metadata from NetCDF data sources, these can be files, file handles or
  servers.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.3.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
