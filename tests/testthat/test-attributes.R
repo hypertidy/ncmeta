@@ -24,10 +24,9 @@ test_that("individual attribute inquiry works", {
 
 l3binfile <- system.file("extdata", "S2008001.L3b_DAY_CHL.nc", package = "ncmeta")
 
-nc_atts(l3binfile)
 test_that("failure is graceful", {
-  expect_warning(nc_atts(l3binfile), "no variables recognizable")
-  abin <- nc_atts(l3binfile)
+  expect_warning(abin <- nc_atts(l3binfile), "no variables recognizable")
+  
   abin %>%  expect_s3_class("tbl_df") %>% 
     expect_named(c("id", "name", "type", "ndims", "dimids", "natts")) 
   expect_that(nrow(abin), equals(1L))

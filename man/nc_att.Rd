@@ -27,12 +27,12 @@ nc_att(x, variable, attribute, ...)
 data frame of attribute
 }
 \description{
-Variable attributes are number 0:(n-1). Globabl attributes are indexed
+Variable attributes are number 0:(n-1). Global attributes are indexed
 by -1 or the label "NC_GLOBAL".
 }
 \details{
-\code{nc_inq} includes the number of globabl attributes
-\code{nc_vars} inclues the number ofvariable attributes
+\code{nc_inq} includes the number of global attributes
+\code{nc_vars} includes the number of variable attributes
 }
 \examples{
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")

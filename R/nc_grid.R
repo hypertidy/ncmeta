@@ -1,7 +1,20 @@
-#' @name nc_grids
+#' NetCDF grids
+#' 
+#' An `grid` is a discretized space, defined by a set of dimensions. 
+#' 
+#' Each data source has a set of dimensions available for use by variables. Each grid is
+#' an n-dimensional space available for use by 0, 1 or more variables. A grid only really
+#' exists if  variable is defined for it, and 'grid' is an implicit entity not an explicit
+#' part of the NetCDF API definition. The Unidata pages refer to "shape", which is more or less what
+#' we mean by "grid". 
+#'  @name nc_grids
 #' @export
 nc_grids <- function(x, ...) UseMethod("nc_grids")
 
+#' @param x NetCDF source
+#'
+#' @param ... ignored
+#'
 #' @name nc_grids
 #' @export
 nc_grids.character <- function(x, ...) {
@@ -25,6 +38,8 @@ nc_grids.NetCDF <- function(x, ...) {
 # nc_axis(i)  ## just one, of all ??
 
 
+#' @importFrom dplyr desc arrange
+#' @importFrom rlang .data
 nc_grids_dimvar <- function(dimension, variable, axes) {
   if (nrow(variable) < 1 & nrow(dimension) < 1) return(tibble::tibble())
   shape_instances_byvar <- split(axes$dimension, axes$variable)
@@ -34,9 +49,9 @@ nc_grids_dimvar <- function(dimension, variable, axes) {
                                                function(xb) paste(paste0("D", xb), collapse = ","))))
   out <- tibble::tibble(variable  = names(shape_classify_byvar), 
                 shape = levels(shape_classify_byvar)[shape_classify_byvar]) 
-  out <-   dplyr::arrange(out, desc(nchar(shape)), shape, variable)
+  out <-   dplyr::arrange(out, dplyr::desc(nchar(.data$shape)), .data$shape, variable)
   ## catch the NA shapes (the scalars) and set to "-"
   out$shape[is.na(out$shape) | out$shape == "DNA"] <- "S"
-  out  %>% dplyr::rename(grid = shape)
+  out  %>% dplyr::rename(grid = .data$shape)
 }
 

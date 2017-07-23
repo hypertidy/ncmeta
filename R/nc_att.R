@@ -1,10 +1,10 @@
 #' NetCDF attributes
 #'
-#' Variable attributes are number 0:(n-1). Globabl attributes are indexed 
+#' Variable attributes are number 0:(n-1). Global attributes are indexed 
 #' by -1 or the label "NC_GLOBAL".
 #' 
-#' `nc_inq` includes the number of globabl attributes
-#' `nc_vars` inclues the number ofvariable attributes 
+#' `nc_inq` includes the number of global attributes
+#' `nc_vars` includes the number of variable attributes 
 #' @param x or file handle
 #' @param variable name or index (zero based) of variable
 #' @param attribute name or index (zero based) of attribute
@@ -41,7 +41,7 @@ nc_att.character <- function(x, variable, attribute, ...) {
 
 #' NetCDF attributes
 #'
-#' All attributes in the file, globals are treated as if they bleong to variable 'NC_GLOBAL'. 
+#' All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'. 
 #' @param x filename or handle
 #' @param ... ignored
 #'
@@ -63,9 +63,10 @@ nc_atts.NetCDF <- function(x, ...) {
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts))
   
     #vars <- nc_axes(x)
-    vars <- nc_vars(x)
+    vars <- try(nc_vars(x), silent = TRUE)
+    
   ## bomb out if ndims is NA
-  if (nrow(vars) < 1L) {
+  if (inherits(vars, "try-error") || nrow(vars) < 1L) {
     warning("no variables recognizable")
     return(global)
   } else {

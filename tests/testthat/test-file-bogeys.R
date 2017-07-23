@@ -2,9 +2,9 @@ context("file-bogeys")
 
 test_that("files and bad files are handled", {
   skip_if_not(we_are_raady())
-  oisst_dayfile <- raadtools::sstfiles()$fullname[1]
+  oisst_dayfile <- raadfiles::oisst_daily_files()$fullname[1]
   nc_meta(oisst_dayfile)
-  oisst_monfile <- raadtools::sstfiles(time.resolution = "monthly")$fullname[1]
+  oisst_monfile <- raadfiles::oisst_monthly_files()$fullname[1]
   nc_meta(oisst_monfile)
   roms_file <- raadtools::cpolarfiles()$fullname[1]
   nc_meta(roms_file)

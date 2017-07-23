@@ -23,7 +23,7 @@ nc_atts(x, ...)
 data frame of attributes
 }
 \description{
-All attributes in the file, globals are treated as if they bleong to variable 'NC_GLOBAL'.
+All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'.
 }
 \examples{
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")

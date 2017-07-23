@@ -1,6 +1,15 @@
+#' NetCDF axes
+#' 
+#' An `axis` is an instance of a dimension. 
+#' 
+#' Each data source has a set of dimensions available for use by variables. Each axis is
+#' a 1-dimensional instance. 
+#'
+#' @param x NetCDF source
+#'
 #'@name nc_axes
 #'@export
-nc_axes <- function(x, i) {
+nc_axes <- function(x) {
   UseMethod("nc_axes")
 }
 #'@name nc_axes
@@ -13,7 +22,8 @@ nc_axes.character <- function(x) {
 
 #'@name nc_axes
 #'@export
-#'@importFrom dplyr  transmute
+#'@importFrom dplyr  row_number transmute 
+#'@importFrom rlang .data
 nc_axes.NetCDF <- function(x) {
   vars_to_query <- nc_vars(x)
   if (nrow(vars_to_query) < 1L) return(tibble())
@@ -23,7 +33,7 @@ nc_axes.NetCDF <- function(x) {
     })
   ) 
 #  axes$id <- seq_len(nrow(axes)) ## row_number wtf
-  axes %>% dplyr::transmute(axis = row_number(), variable = name, dimension = dimids)
+  axes %>% dplyr::transmute(axis = row_number(), variable = .data$name, dimension = .data$dimids)
   
 }
 

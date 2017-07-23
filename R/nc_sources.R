@@ -3,7 +3,7 @@
 #' A record of file, URL, or any data source with NetCDF. 
 #' @param x data source string
 #'
-#' @param ... 
+#' @param ... ignored
 #'
 #' @name nc_sources
 #' @export

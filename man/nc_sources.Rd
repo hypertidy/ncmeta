@@ -13,7 +13,7 @@ nc_sources(x, ...)
 \arguments{
 \item{x}{data source string}
 
-\item{...}{}
+\item{...}{ignored}
 }
 \description{
 A record of file, URL, or any data source with NetCDF.

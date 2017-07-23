@@ -5,9 +5,7 @@
 ncmeta
 ======
 
-Straightforward NetCDF metadata.
-
-To stand in stead of RNetCDF or ncdf4 for metadata extraction when speed and simplicity is required.
+Straightforward NetCDF metadata for use in building interfaces to this format.
 
 Installation
 ------------
@@ -39,41 +37,17 @@ f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "nc
 u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
 
 library(microbenchmark)
-#tf <- "/dev/null"
-#sink(tf)
-microbenchmark(nc_open = ncdf4::nc_open(f), 
+junk <- capture.output(a <- microbenchmark(nc_open = ncdf4::nc_open(f), 
                ncdump = ncdump::NetCDF(f), 
-               ncmeta = nc_meta(f) , times = 10)
+               ncmeta = nc_meta(f) ,
+               RNetCDF = RNetCDF::print.nc(RNetCDF::open.nc(f)), 
+                times = 10)
+)
+print(a)
 #> Unit: milliseconds
-#>     expr       min       lq      mean   median       uq       max neval
-#>  nc_open  9.377792 10.28603  10.54871 10.58718 10.73256   11.7029    10
-#>   ncdump 78.430394 80.77171 220.25889 82.48041 94.45352 1384.1578    10
-#>   ncmeta 69.983725 70.21157  84.56027 71.86467 78.69532  175.5543    10
-#>  cld
-#>    a
-#>    a
-#>    a
-               #RNetCDF = RNetCDF::print.nc(RNetCDF::open.nc(f)))
-#sink(NULL)
-
-
-system.time(ncdf4::nc_open(f))
-#>    user  system elapsed 
-#>   0.012   0.000   0.011
-system.time(nc_meta(f))
-#>    user  system elapsed 
-#>   0.068   0.000   0.068
-system.time({
- nc_dims(f)
-
-  nc_vars(f)
-
-  nc_atts(f)
-})
-#>    user  system elapsed 
-#>   0.076   0.000   0.077
-
-system.time(ncdump::NetCDF(f))
-#>    user  system elapsed 
-#>   0.088   0.000   0.089
+#>     expr       min        lq      mean    median        uq       max neval
+#>  nc_open  14.34570  15.35177 117.12905  16.91639  27.48768 650.92596    10
+#>   ncdump 110.63908 118.47559 147.32338 123.79462 133.56880 301.39276    10
+#>   ncmeta 196.51606 200.15000 241.23814 210.87253 224.48348 517.77853    10
+#>  RNetCDF  33.36362  37.01619  45.11226  38.48978  42.23410  96.42561    10
 ```

@@ -18,10 +18,8 @@ knitr::opts_chunk$set(
 
 # ncmeta
 
-Straightforward NetCDF metadata. 
+Straightforward NetCDF metadata for use in building interfaces to this format. 
 
-
-To stand in stead of RNetCDF or ncdf4 for metadata extraction when speed and simplicity is required. 
 
 ## Installation
 
@@ -51,24 +49,11 @@ f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "nc
 u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
 
 library(microbenchmark)
-#tf <- "/dev/null"
-#sink(tf)
-microbenchmark(nc_open = ncdf4::nc_open(f), 
+junk <- capture.output(a <- microbenchmark(nc_open = ncdf4::nc_open(f), 
                ncdump = ncdump::NetCDF(f), 
-               ncmeta = nc_meta(f) , times = 10)
-               #RNetCDF = RNetCDF::print.nc(RNetCDF::open.nc(f)))
-#sink(NULL)
-
-
-system.time(ncdf4::nc_open(f))
-system.time(nc_meta(f))
-system.time({
- nc_dims(f)
-
-  nc_vars(f)
-
-  nc_atts(f)
-})
-
-system.time(ncdump::NetCDF(f))
+               ncmeta = nc_meta(f) ,
+               RNetCDF = RNetCDF::print.nc(RNetCDF::open.nc(f)), 
+                times = 10)
+)
+print(a)
 ```
