@@ -26,4 +26,3 @@ nc_axis.NetCDF <- function(x, i) {
   nc_axes(x) %>% dplyr::filter(.data$axis == i)
 }
 
-
