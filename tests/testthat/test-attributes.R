@@ -7,7 +7,8 @@ test_that("attributes works", {
     expect_named(c("attribute", "variable", "value")) 
   expect_that(nrow(da), equals(87L))
   expect_that(da$value, is_a("list"))
-  du <- nc_atts(u) %>%  expect_s3_class("tbl_df") %>% 
+ skip("avoiding thredds tests for RNetCDF")
+    du <- nc_atts(u) %>%  expect_s3_class("tbl_df") %>% 
     expect_named(c("attribute", "variable", "value"))
   expect_that(nrow(du), equals(119L))
   expect_that(du$value, is_a("list"))
@@ -35,3 +36,4 @@ test_that("failure is graceful", {
   expect_true(all(is.na(c(abin$dimids, abin$ndims))))
   expect_that(abin$natts, equals(49))
 })
+
