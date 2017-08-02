@@ -1,6 +1,6 @@
 Package: ncmeta
 Title: Straightforward NetCDF Metadata
-Version: 0.0.1.900191
+Version: 0.0.1.9001191
 Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c("aut", "cre")), 
              person("Tomas", "Remenyi", role = "ctb"), 
              person("Ben", "Raymond", role = "ctb"))
