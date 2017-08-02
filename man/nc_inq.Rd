@@ -8,14 +8,16 @@
 \alias{nc_inq.character}
 \title{File info}
 \usage{
-nc_inq(x, ...)
+nc_inq(x, groups = FALSE, ...)
 
-\method{nc_inq}{NetCDF}(x, ...)
+\method{nc_inq}{NetCDF}(x, groups = FALSE, ...)
 
-\method{nc_inq}{character}(x, ...)
+\method{nc_inq}{character}(x, groups = FALSE, ...)
 }
 \arguments{
 \item{x}{filename or handle}
+
+\item{groups}{recurse into groups, \code{FALSE} by default}
 
 \item{...}{ignored}
 }

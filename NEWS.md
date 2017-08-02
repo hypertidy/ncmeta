@@ -1,3 +1,9 @@
+# ncmeta dev
+
+* nc_inq now can recurse into groups, but doesn't do this by default
+
+* tested and checked to work with RNetCDF > 2.0-1
+
 # ncmeta 0.0.1
 
 * ncmeta now provides support for dimensions that do not have explicit coordinates: dimension and variable tables now have

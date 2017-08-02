@@ -10,7 +10,7 @@ test_that("files and bad files are handled", {
   nc_meta(roms_file)
   
   l3_file <- raadtools::ocfiles()$fullname[1]  
-  nc_meta(l3_file)
+  expect_warning(nc_meta(l3_file), "no variables recognizable")
 })
 
 

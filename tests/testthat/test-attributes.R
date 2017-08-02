@@ -8,6 +8,7 @@ test_that("attributes works", {
   expect_that(nrow(da), equals(87L))
   expect_that(da$value, is_a("list"))
  skip("avoiding thredds tests for RNetCDF")
+ ## still skipping wit early RNetCDF-2 MDSumner 2017-08-02
     du <- nc_atts(u) %>%  expect_s3_class("tbl_df") %>% 
     expect_named(c("attribute", "variable", "value"))
   expect_that(nrow(du), equals(119L))

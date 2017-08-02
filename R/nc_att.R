@@ -59,8 +59,9 @@ nc_atts <- function(x, ...) {
 #' @importFrom dplyr distinct
 #' @importFrom tibble tibble
 nc_atts.NetCDF <- function(x, ...) {
+  nc_inq_file <- nc_inq(x)
     global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
-                   ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts))
+                   ndims = NA_real_, dimids = NA_real_, natts = nc_inq_file$ngatts))
   
     #vars <- nc_axes(x)
     vars <- try(nc_vars(x), silent = TRUE)
