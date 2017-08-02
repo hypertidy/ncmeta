@@ -13,7 +13,7 @@ LazyData: true
 RoxygenNote: 6.0.1
 Imports: dplyr, 
     rlang,
-    RNetCDF,
+    RNetCDF (>= 2.0-1),
     tibble
 Suggests: testthat,
     covr
@@ -21,3 +21,4 @@ Roxygen: list(markdown = TRUE)
 URL: https://github.com/hypertidy/ncmeta
 BugReports: https://github.com/hypertidy/ncmeta/issues
 ByteCompile: TRUE
+Remotes: mjwoods/RNetCDF
