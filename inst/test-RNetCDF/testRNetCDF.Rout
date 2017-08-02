@@ -1,0 +1,60 @@
+
+R version 3.4.1 (2017-06-30) -- "Single Candle"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(RNetCDF)
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> files <- raadfiles:::get_raw_raad_filenames() %>% 
++   dplyr::filter(grepl("\\.nc$", file) | grepl("\\.netcdf$", file) | grepl("\\.nc4$", file) | grepl("\\.h5", file)) %>% 
++   dplyr::transmute(fullname = file.path(root, file))
+> # files %>% mutate(ex = substr(fullname, nchar(fullname) - 2, nchar(fullname))) %>% distinct(ex)
+> # # A tibble: 4 x 1
+> # ex
+> # <chr>
+> #   1   .nc
+> # 2   cdf
+> # 3   .h5
+> # 4   nc4
+> 
+> read_and_churn <- function(x) {
++   nc <- RNetCDF::open.nc(x)
++   on.exit(RNetCDF::close.nc(nc))
++   RNetCDF::print.nc(nc)
++   invisible(NULL)
++ }
+> i <- 0
+> sink("/dev/null")
+> while(TRUE) {
++   i <- i + 1
++   fname <- files %>% sample_n(1) %>% pull(fullname)
++   catch <- try(read_and_churn(fname))
++   if (inherits(catch, "try-error")) {
++     writeLines(c(i, fname), "bombout")
++   }
++ }
