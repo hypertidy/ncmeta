@@ -1,3 +1,7 @@
+# nmeta dev
+
+* align to RNetCDF 1.9-1
+
 # ncmeta 0.0.1
 
 * ncmeta now provides support for dimensions that do not have explicit coordinates: dimension and variable tables now have
