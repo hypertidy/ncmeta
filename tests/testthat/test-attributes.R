@@ -2,6 +2,7 @@ context("attributes")
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
 
+testthat::skip_on_cran()
 test_that("attributes works", {
   da <- nc_atts(f) %>% expect_s3_class("tbl_df") %>% 
     expect_named(c("attribute", "variable", "value")) 

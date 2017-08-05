@@ -1,4 +1,5 @@
 context("dimension")
+skip_on_cran()
 
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 test_that("file specific dimension inquiry works", {
@@ -8,7 +9,9 @@ test_that("file specific dimension inquiry works", {
   expect_that(dim0$name, equals("lat"))
   expect_that(dim0$length, equals(2160))  ## double
   expect_that(dim0$unlim, equals(FALSE))
-  expect_that(unlist(lapply(dim0, typeof)), equals(structure(c("integer", "character", "double", "logical"), .Names = c("id", 
+
+    expect_that(unlist(lapply(dim0, typeof)), 
+              equals(structure(c("double", "character", "double", "logical"), .Names = c("id", 
                                                                                                                        "name", "length", "unlim"))))
   
 })
@@ -21,7 +24,7 @@ test_that("file all dimensions inquiry works", {
   expect_that(dimension$length, equals(c(2160, 4320, 3, 256)))  ## double
   expect_false(any(dimension$unlim))
   expect_that(unlist(lapply(dimension, typeof)), 
-              equals(structure(c("integer", "character", "double", "logical"), 
+              equals(structure(c("double", "character", "double", "logical"), 
               .Names = c("id","name", "length", "unlim"))))
 })
 
