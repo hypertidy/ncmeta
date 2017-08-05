@@ -58,3 +58,360 @@ The following objects are masked from ‘package:base’:
 +     writeLines(c(i, fname), "bombout")
 +   }
 + }
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Invalid dimension ID or name
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Invalid dimension ID or name
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : NetCDF: HDF error
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Invalid dimension ID or name
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Invalid dimension ID or name
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Invalid dimension ID or name
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Invalid dimension ID or name
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Invalid dimension ID or name
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Invalid dimension ID or name
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Invalid dimension ID or name
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Invalid dimension ID or name
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Invalid dimension ID or name
+Error : NetCDF: HDF error
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+Error : NetCDF: Unknown file format
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
