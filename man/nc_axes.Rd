@@ -8,14 +8,18 @@
 \alias{nc_axes.NetCDF}
 \title{NetCDF axes}
 \usage{
-nc_axes(x)
+nc_axes(x, variables = NULL, ...)
 
-\method{nc_axes}{character}(x)
+\method{nc_axes}{character}(x, variables = NULL, ...)
 
-\method{nc_axes}{NetCDF}(x)
+\method{nc_axes}{NetCDF}(x, variables = NULL, ...)
 }
 \arguments{
 \item{x}{NetCDF source}
+
+\item{variables}{names of vars to query}
+
+\item{...}{ignored}
 }
 \description{
 An \code{axis} is an instance of a dimension.
