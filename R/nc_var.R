@@ -22,7 +22,9 @@ nc_var.character <- function(x, i) {
 #'@name nc_var
 #'@export
 nc_var.NetCDF <- function(x, i) {
-  as_tibble(RNetCDF::var.inq.nc(x, i))
+  out <- RNetCDF::var.inq.nc(x, i)
+  out$dimids <- NULL
+  faster_as_tibble(out)
 }
 
 

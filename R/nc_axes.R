@@ -6,15 +6,17 @@
 #' a 1-dimensional instance. 
 #'
 #' @param x NetCDF source
+#' @param variables names of vars to query
+#' @param ... ignored
 #'
 #'@name nc_axes
 #'@export
-nc_axes <- function(x) {
+nc_axes <- function(x, variables = NULL, ...) {
   UseMethod("nc_axes")
 }
 #'@name nc_axes
 #'@export
-nc_axes.character <- function(x) {
+nc_axes.character <- function(x, variables = NULL, ...) {
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_axes(nc)
@@ -24,23 +26,36 @@ nc_axes.character <- function(x) {
 #'@export
 #'@importFrom dplyr  row_number transmute 
 #'@importFrom rlang .data
-nc_axes.NetCDF <- function(x) {
-  vars_to_query <- nc_vars(x)
-  if (nrow(vars_to_query) < 1L) return(tibble())
-  axes <-   dplyr::bind_rows(
-    lapply(vars_to_query$name, function(variable) {
+nc_axes.NetCDF <- function(x, variables = NULL, ...) {
+  if (is.null(variables)) {
+    vars_to_query <- nc_vars(x)
+    if (nrow(vars_to_query) < 1L) return(tibble())
+    variables <- vars_to_query$name
+  }
+ axes <-   dplyr::bind_rows(
+    lapply(variables, function(variable) {
       nc_axis_var(x, variable)
     })
-  ) 
+  )
+
 #  axes$id <- seq_len(nrow(axes)) ## row_number wtf
-  axes %>% dplyr::transmute(axis = row_number(), variable = .data$name, dimension = .data$dimids)
-  
+
+  #dplyr::transmute(axes, axis = row_number(), variable = .data$name, dimension = .data$dimids)
+    faster_as_tibble(list(axis = seq_len(nrow(axes)), variable = axes[["name"]], dimension = axes[["dimids"]]))
+
 }
 
 ## note this is a bit weird, but we have to ensure
 ## we work relative to all axes, so use the hidden function nc_axis_var
 nc_axis_var <- function(x, i) {
-  as_tibble(RNetCDF::var.inq.nc(x, i))
+  out <- RNetCDF::var.inq.nc(x, i)
+  #dimids <- out$dimids
+  
+  ## as_tibble expands each vector to the length of the longest one
+  ## which is what we want here
+  longest <- max(lengths(out))
+  if (longest > 1L) out <- lapply(out, function(a) rep_len(a, length.out = longest))
+  faster_as_tibble(out)
 }
 
 

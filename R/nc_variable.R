@@ -23,9 +23,13 @@ nc_vars.character <- function(x, ...) {
 #' @importFrom dplyr %>% 
 #' @importFrom rlang .data
 nc_vars.NetCDF <- function(x, ...) {
-  vars <- nc_inq(x)$nvars
-  if (vars  < 1) return(tibble::tibble())
-  dplyr::bind_rows(lapply(seq_len(vars), function(i) nc_var(x, i-1))) %>% 
-    dplyr::distinct(.data$id, .data$name, .data$type, .data$ndims, .data$natts)
+  nvars <- nc_inq(x)$nvars
+  if (nvars  < 1) return(tibble::tibble())
+  nc_vars_internal(x, nvars)
+}
+nc_vars_internal <- function(x, nvars) {
+  dplyr::bind_rows(lapply(seq_len(nvars), function(i) nc_var(x, i-1))) 
+  #%>% 
+  #  dplyr::distinct(.data$id, .data$name, .data$type, .data$ndims, .data$natts)
   
 }
