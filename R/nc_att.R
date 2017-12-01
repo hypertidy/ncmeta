@@ -36,16 +36,19 @@ nc_att_internal <- function(x, variable_id, attribute_id, variable_name) {
   nameflag <- 0
   globflag <- if (variable_id < 0) 1 else 0
   
-  attinfo <- .Call("R_nc_inq_att", as.integer(x), as.integer(variable_id), 
-        as.character(""), as.integer(attribute_id), as.integer(nameflag), 
-        as.integer(globflag), PACKAGE = "RNetCDF")
+  # attinfo <- .Call("R_nc_inq_att", as.integer(x), as.integer(variable_id), 
+  #       as.character(""), as.integer(attribute_id), as.integer(nameflag), 
+  #       as.integer(globflag), PACKAGE = "RNetCDF")
+  # 
+  attinfo <- RNetCDF::att.inq.nc(x, variable_id, attribute_id)
   attribute <- attinfo[["name"]]
   numflag <- if(attinfo[["type"]] == "NC_CHAR") 0 else 1
   
-  att <- .Call("R_nc_get_att", as.integer(x), as.integer(variable_id), 
-               attribute, as.integer(numflag), as.integer(globflag), 
-               PACKAGE = "RNetCDF")
-  faster_as_tibble(list(attribute = attribute, variable = variable_name, value = list(att[["value"]])))
+  # att <- .Call("R_nc_get_att", as.integer(x), as.integer(variable_id), 
+  #              attribute, as.integer(numflag), as.integer(globflag), 
+  #              PACKAGE = "RNetCDF")
+  att <- RNetCDF::att.get.nc(x, variable_id, attribute_id)
+  faster_as_tibble(list(attribute = attribute, variable = variable_name, value = att))
 }
 #' @name nc_att
 #' @export 
