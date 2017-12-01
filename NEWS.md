@@ -1,5 +1,7 @@
 # ncmeta 0.0.1
 
+*updates from CRAN feedback
+
 * ncmeta now provides support for dimensions that do not have explicit 
  coordinates: dimension and variable tables now have information about 
  "dimvals", in the form of "dim_coord" and "coord_dim" i.e. if a variable 

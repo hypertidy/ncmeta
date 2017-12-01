@@ -31,6 +31,6 @@ NetCDF variables
 Obtain information about a single dimension by index.
 }
 \seealso{
-\code{nc_vars`` to obtain information about all dimensions,}nc_inq` for an
+\code{nc_vars} to obtain information about all dimensions, \code{nc_inq} for an
 overview of the file
 }

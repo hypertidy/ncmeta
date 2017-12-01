@@ -25,5 +25,10 @@ while all dimension, variable, and attribute metadata is extracted.
 }
 \examples{
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_meta(f)
+\donttest{
+\dontrun{
 u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
+nc_meta(u)
+}}
 }

@@ -5,7 +5,7 @@
 #' @param i index of dimension (zero based)
 #'
 #' @name nc_dim
-#' @seealso `nc_vars`` to obtain information about all dimensions, `nc_inq` for an 
+#' @seealso `nc_vars` to obtain information about all dimensions, `nc_inq` for an 
 #' overview of the file
 #' @export
 nc_dim <- function(x, i, ...) {

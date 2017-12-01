@@ -24,10 +24,14 @@ Get information about a NetCDF data source, may be a file path, or a \code{RNetC
 file handle, or an Thredds server address.
 }
 \examples{
-#f <- raadfiles:::cmip5_files()$fullname[1]
-#nc_inq(f)
-#nc_var(f, 0)
-#nc_dim(f, 0)
+\donttest{
+\dontrun{
+ f <- raadfiles:::cmip5_files()$fullname[1]
+ nc_inq(f)
+ nc_var(f, 0)
+ nc_dim(f, 0)
+ }
+}
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 nc_inq(f)
 nc_var(f, 0)
@@ -35,12 +39,15 @@ nc_dim(f, 0)
 
 nc_vars(f)
 nc_dims(f)
+\donttest{
+\dontrun{
 ## thredds (see rerddap)
-#u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
-#nc_inq(u)
+u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
+nc_inq(u)
 # A tibble: 1 x 5
 #ndims nvars ngatts unlimdimid
 #<dbl> <dbl>  <dbl>      <lgl>
 #  1     2    18     37         NA
 # ... with 1 more variables: filename <chr>
+}}
 }

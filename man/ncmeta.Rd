@@ -6,7 +6,8 @@
 \alias{ncmeta-package}
 \title{ncmeta: straightforward NetCDF metadata}
 \description{
-\code{ncmeta} provides a consistent set of tools to obtain metadata from NetCDF.
+\code{ncmeta} provides a consistent set of tools to obtain metadata from NetCDF. NetCDF
+is 'Network Common Data Form' https://www.unidata.ucar.edu/software/netcdf/.
 These functions are generics, allowing methods to be written for various providers so that
 everything can work from a common basis. All functions return a data frame.
 }
