@@ -5,12 +5,12 @@ Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c(
              person("Tomas", "Remenyi", role = "ctb"), 
              person("Ben", "Raymond", role = "ctb"))
 Description: Extract metadata from 'NetCDF' data sources, these can be files, file handles or
- servers. This package leverages and extends the 'RNetCDF' package which has lower level functions
- to obtain metadata from these sources, providing a consistent set of functions that all
- return data frames. We introduce named concepts of 'grid', 'axis' and 'source' which are all
- meaningful entities without formal definition in the 'NetCDF' library 
- <https://www.unidata.ucar.edu/software/netcdf/>. 'RNetCDF' matches the library itself with only the 
- named concepts of 'variables', 'dimensions' and 'attributes'. 
+ servers. This package leverages and extends the lower level functions of the 'RNetCDF' package 
+ providing a consistent set of functions that all return data frames. We introduce named concepts 
+ of 'grid', 'axis' and 'source' which are all meaningful entities without formal definition in the 
+ 'NetCDF' library <https://www.unidata.ucar.edu/software/netcdf/>. 'RNetCDF' matches the library 
+ itself with only the named concepts of 'variables', 'dimensions' and 'attributes'. 'ncmeta'
+ provides a required framework for the in-development 'tidync' project <https://github.com/hypertidy/ncmeta>.
 Depends: R (>= 3.3.0)
 License: GPL-3
 Encoding: UTF-8
