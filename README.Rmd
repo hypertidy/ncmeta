@@ -32,9 +32,12 @@ devtools::install_github("hypertidy/ncmeta")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to find out the basic information on 
+structures in a NetCDF file:
 
 ```{r example,eval=FALSE}
+library(ncmeta)
+filename <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 nc_inq(filename) # one-row summary of file
 
 nc_dim(filename, 0)  ## first dimesion
