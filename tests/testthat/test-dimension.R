@@ -1,8 +1,8 @@
 context("dimension")
-skip_on_cran()
 
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 test_that("file specific dimension inquiry works", {
+  
   dim0 <- nc_dim(f, 0) %>% expect_s3_class("tbl_df")
   expect_that(nrow(dim0), equals(1L))
   expect_that(dim0$id, equals(0))

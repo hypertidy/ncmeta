@@ -1,10 +1,10 @@
 Package: ncmeta
-Title: Straightforward NetCDF Metadata
+Title: Straightforward 'NetCDF' Metadata
 Version: 0.0.1
 Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c("aut", "cre")), 
              person("Tomas", "Remenyi", role = "ctb"), 
              person("Ben", "Raymond", role = "ctb"))
-Description: Extract metadata from NetCDF data sources, these can be files, file handles or
+Description: Extract metadata from 'NetCDF' data sources, these can be files, file handles or
  servers.
 Depends: R (>= 3.3.0)
 License: GPL-3
