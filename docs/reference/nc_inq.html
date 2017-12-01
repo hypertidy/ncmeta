@@ -52,7 +52,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -105,45 +114,43 @@ file handle, or an Thredds server address.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#f &lt;- raadfiles:::cmip5_files()$fullname[1]</span>
-<span class='co'>#nc_inq(f)</span>
-<span class='co'>#nc_var(f, 0)</span>
-<span class='co'>#nc_dim(f, 0)</span>
-<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
+    <pre class="examples"><div class='input'> <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>raadfiles</span><span class='kw ns'>:::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raadfiles/topics/cmip5_files'>cmip5_files</a></span>()$<span class='no'>fullname</span>[<span class='fl'>1</span>]</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("filter_"): no applicable method for 'filter_' applied to an object of class "NULL"</span></div><div class='input'> <span class='fu'>nc_inq</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; <span class='error'>Error in nc_inq(f): object 'f' not found</span></div><div class='input'> <span class='fu'>nc_var</span>(<span class='no'>f</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='error'>Error in nc_var(f, 0): object 'f' not found</span></div><div class='input'> <span class='fu'>nc_dim</span>(<span class='no'>f</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='error'>Error in nc_dim(f, 0): object 'f' not found</span></div><div class='input'> 
+</div><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
 <span class='fu'>nc_inq</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;   ndims nvars ngatts unlimdimid
 #&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;lgl&gt;
 #&gt; 1     4     4     65         NA
-#&gt; # ... with 1 more variables: filename &lt;chr&gt;</div><div class='input'><span class='fu'><a href='nc_var.html'>nc_var</a></span>(<span class='no'>f</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 6
-#&gt;      id    name     type ndims dimids natts
-#&gt;   &lt;dbl&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     0 chlor_a NC_FLOAT     2      1    12
-#&gt; 2     0 chlor_a NC_FLOAT     2      0    12</div><div class='input'><span class='fu'><a href='nc_dim.html'>nc_dim</a></span>(<span class='no'>f</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
+#&gt; # ... with 1 more variables: filename &lt;chr&gt;</div><div class='input'><span class='fu'>nc_var</span>(<span class='no'>f</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;      id    name     type ndims natts
+#&gt; * &lt;dbl&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     0 chlor_a NC_FLOAT     2    12</div><div class='input'><span class='fu'>nc_dim</span>(<span class='no'>f</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;      id  name length unlim
 #&gt; * &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;
 #&gt; 1     0   lat   2160 FALSE</div><div class='input'>
-<span class='fu'><a href='nc_vars.html'>nc_vars</a></span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 6
-#&gt;      id    name     type ndims dimids natts
-#&gt;   &lt;dbl&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1     0 chlor_a NC_FLOAT     2      1    12
-#&gt; 2     0 chlor_a NC_FLOAT     2      0    12
-#&gt; 3     1     lat NC_FLOAT     1      0     5
-#&gt; 4     2     lon NC_FLOAT     1      1     5
-#&gt; 5     3 palette  UNKNOWN     2      3     0
-#&gt; 6     3 palette  UNKNOWN     2      2     0</div><div class='input'><span class='fu'><a href='nc_dims.html'>nc_dims</a></span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
+<span class='fu'>nc_vars</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
+#&gt;      id    name     type ndims natts
+#&gt;   &lt;dbl&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1     0 chlor_a NC_FLOAT     2    12
+#&gt; 2     1     lat NC_FLOAT     1     5
+#&gt; 3     2     lon NC_FLOAT     1     5
+#&gt; 4     3 palette  UNKNOWN     2     0</div><div class='input'><span class='fu'>nc_dims</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
 #&gt;      id          name length unlim
 #&gt;   &lt;dbl&gt;         &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;
 #&gt; 1     0           lat   2160 FALSE
 #&gt; 2     1           lon   4320 FALSE
 #&gt; 3     2           rgb      3 FALSE
 #&gt; 4     3 eightbitcolor    256 FALSE</div><div class='input'><span class='co'>## thredds (see rerddap)</span>
-<span class='co'>#u &lt;- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"</span>
-<span class='co'>#nc_inq(u)</span>
-<span class='co'># A tibble: 1 x 5</span>
-<span class='co'>#ndims nvars ngatts unlimdimid</span>
-<span class='co'>#&lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;lgl&gt;</span>
-<span class='co'>#  1     2    18     37         NA</span>
-<span class='co'># ... with 1 more variables: filename &lt;chr&gt;</span></div></pre>
+<span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='st'>"https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"</span>
+<span class='fu'>nc_inq</span>(<span class='no'>u</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   ndims nvars ngatts unlimdimid
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;lgl&gt;
+#&gt; 1     2    18     37         NA
+#&gt; # ... with 1 more variables: filename &lt;chr&gt;</div><div class='input'># A tibble: 1 x 5
+#ndims nvars ngatts unlimdimid
+#<dbl> <dbl>  <dbl>      <lgl>
+#  1     2    18     37         NA
+# ... with 1 more variables: filename <chr>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

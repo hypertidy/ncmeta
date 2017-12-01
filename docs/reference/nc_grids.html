@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NetCDF attributes — nc_atts • ncmeta</title>
+<title>NetCDF grids — nc_grids • ncmeta</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -83,27 +83,30 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>NetCDF attributes</h1>
+    <h1>NetCDF grids</h1>
     </div>
 
     
-    <p>All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'.</p>
+    <p>A <code>grid</code> is a discretized space, defined by a set of dimensions. These are the spaces used
+by one or more variables in a source. Traditional summaries are organized by variable, but
+when organized by space or grid we can treat multiple variables together using standard
+database techniques.</p>
     
 
-    <pre class="usage"><span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for NetCDF</span>
-<span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>nc_grids</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>nc_grids</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for NetCDF</span>
+<span class='fu'>nc_grids</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>filename or handle</p></td>
+      <td><p>NetCDF source</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -111,37 +114,23 @@
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>data frame of attributes</p>
+    <p>Each data source has a set of dimensions available for use by variables. Each grid is
+an n-dimensional space available for use by 0, 1 or more variables. A grid only really
+exists if  variable is defined for it, and 'grid' is an implicit entity not an explicit
+part of the NetCDF API definition. The Unidata pages refer to "shape", which is more or less what
+we mean by "grid".</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
-<span class='fu'>nc_atts</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 87 x 3
-#&gt;    attribute variable     value
-#&gt;        &lt;dbl&gt;    &lt;chr&gt;    &lt;list&gt;
-#&gt;  1         0  chlor_a &lt;chr [1]&gt;
-#&gt;  2         1  chlor_a &lt;chr [1]&gt;
-#&gt;  3         2  chlor_a &lt;chr [1]&gt;
-#&gt;  4         3  chlor_a &lt;dbl [1]&gt;
-#&gt;  5         4  chlor_a &lt;dbl [1]&gt;
-#&gt;  6         5  chlor_a &lt;dbl [1]&gt;
-#&gt;  7         6  chlor_a &lt;chr [1]&gt;
-#&gt;  8         7  chlor_a &lt;dbl [1]&gt;
-#&gt;  9         8  chlor_a &lt;dbl [1]&gt;
-#&gt; 10         9  chlor_a &lt;dbl [1]&gt;
-#&gt; # ... with 77 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

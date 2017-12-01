@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NetCDF attributes — nc_atts • ncmeta</title>
+<title>All news • ncmeta</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -81,69 +81,37 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9 contents">
+
+  <div class="col-md-9">
     <div class="page-header">
-    <h1>NetCDF attributes</h1>
+      <h1>Change log <small>All releases</small></h1>
     </div>
 
-    
-    <p>All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'.</p>
-    
-
-    <pre class="usage"><span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for NetCDF</span>
-<span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>filename or handle</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>ignored</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>data frame of attributes</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
-<span class='fu'>nc_atts</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 87 x 3
-#&gt;    attribute variable     value
-#&gt;        &lt;dbl&gt;    &lt;chr&gt;    &lt;list&gt;
-#&gt;  1         0  chlor_a &lt;chr [1]&gt;
-#&gt;  2         1  chlor_a &lt;chr [1]&gt;
-#&gt;  3         2  chlor_a &lt;chr [1]&gt;
-#&gt;  4         3  chlor_a &lt;dbl [1]&gt;
-#&gt;  5         4  chlor_a &lt;dbl [1]&gt;
-#&gt;  6         5  chlor_a &lt;dbl [1]&gt;
-#&gt;  7         6  chlor_a &lt;chr [1]&gt;
-#&gt;  8         7  chlor_a &lt;dbl [1]&gt;
-#&gt;  9         8  chlor_a &lt;dbl [1]&gt;
-#&gt; 10         9  chlor_a &lt;dbl [1]&gt;
-#&gt; # ... with 77 more rows</div></pre>
+    <div class="contents">
+    <div id="ncmeta-0-0-1" class="section level1">
+<h1 class="hasAnchor">
+<a href="#ncmeta-0-0-1" class="anchor"></a>ncmeta 0.0.1</h1>
+<p>*updates from CRAN feedback</p>
+<ul>
+<li><p>ncmeta now provides support for dimensions that do not have explicit coordinates: dimension and variable tables now have information about “dimvals”, in the form of “dim_coord” and “coord_dim” i.e. if a variable is 1D and its name corresponds to a dimension name, then it is a rectlinear coordinate vector of that dimension. (The coordinates can be of type “char”, and that must be dealt with down stream as it now is in tidync).</p></li>
+<li><p>new function nc_grids, the spaces available to variables</p></li>
+<li><p>new function nc_axes, nc_axis for the instances of dimensions</p></li>
+<li><p>nc_vars now returns only variables</p></li>
+<li><p>First working version.</p></li>
+</ul>
+</div>
+    </div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#ncmeta-0-0-1">0.0.1</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Straightforward NetCDF Metadata • ncmeta</title>
+<title>Straightforward 'NetCDF' Metadata • ncmeta</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -29,7 +29,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">News</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -60,66 +69,41 @@
 <div id="ncmeta" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ncmeta" class="anchor"></a>ncmeta</h1></div>
-<p>Straightforward NetCDF metadata.</p>
-<p>To stand in stead of RNetCDF or ncdf4 for metadata extraction when speed and simplicity is required.</p>
+<p>Straightforward NetCDF metadata for use in building interfaces to this format.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install ncmeta from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"hypertidy/ncmeta"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hypertidy/ncmeta"</span>)</code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/nc_inq.html">nc_inq</a></span>(filename) <span class="co"># one-row summary of file</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nc_inq</span>(filename) <span class="co"># one-row summary of file</span>
 
-<span class="kw"><a href="reference/nc_dim.html">nc_dim</a></span>(filename, <span class="dv">0</span>)  ## first dimesion
-<span class="kw"><a href="reference/nc_dims.html">nc_dims</a></span>(filename)  ## all dimensions</code></pre></div>
+<span class="kw">nc_dim</span>(filename, <span class="dv">0</span>)  ## first dimesion
+<span class="kw">nc_dims</span>(filename)  ## all dimensions</code></pre></div>
 <p>Compare timings.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ncmeta)
 f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class="dt">package =</span> <span class="st">"ncmeta"</span>)
 u &lt;-<span class="st"> "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"</span>
 
 <span class="kw">library</span>(microbenchmark)
-<span class="co">#tf &lt;- "/dev/null"</span>
-<span class="co">#sink(tf)</span>
-<span class="kw">microbenchmark</span>(<span class="dt">nc_open =</span> ncdf4<span class="op">::</span><span class="kw">nc_open</span>(f), 
-               <span class="dt">ncdump =</span> ncdump<span class="op">::</span><span class="kw">NetCDF</span>(f), 
-               <span class="dt">ncmeta =</span> <span class="kw"><a href="reference/nc_meta.html">nc_meta</a></span>(f) , <span class="dt">times =</span> <span class="dv">10</span>)
+junk &lt;-<span class="st"> </span><span class="kw">capture.output</span>(a &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark">microbenchmark</a></span>(<span class="dt">nc_open =</span> ncdf4<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdf4/topics/nc_open">nc_open</a></span>(f), 
+               <span class="dt">ncdump =</span> ncdump<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdump/topics/NetCDF">NetCDF</a></span>(f), 
+               <span class="dt">ncmeta =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_meta">nc_meta</a></span>(f) ,
+               <span class="dt">RNetCDF =</span> RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/print.nc">print.nc</a></span>(RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/open.nc">open.nc</a></span>(f)), 
+                <span class="dt">times =</span> <span class="dv">10</span>)
+)
+<span class="kw">print</span>(a)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;     expr       min        lq      mean   median       uq        max neval</span>
-<span class="co">#&gt;  nc_open  9.202257  9.423272  10.01619 10.05239 10.46512   10.80225    10</span>
-<span class="co">#&gt;   ncdump 75.242418 77.878249 192.24751 81.14567 91.69950 1125.97647    10</span>
-<span class="co">#&gt;   ncmeta 61.539212 64.533670  83.14371 71.74742 75.07954  185.62072    10</span>
-<span class="co">#&gt;  cld</span>
-<span class="co">#&gt;    a</span>
-<span class="co">#&gt;    a</span>
-<span class="co">#&gt;    a</span>
-               <span class="co">#RNetCDF = RNetCDF::print.nc(RNetCDF::open.nc(f)))</span>
-<span class="co">#sink(NULL)</span>
-
-
-<span class="kw">system.time</span>(ncdf4<span class="op">::</span><span class="kw">nc_open</span>(f))
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.016   0.000   0.012</span>
-<span class="kw">system.time</span>(<span class="kw"><a href="reference/nc_meta.html">nc_meta</a></span>(f))
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.064   0.000   0.063</span>
-<span class="kw">system.time</span>({
- <span class="kw"><a href="reference/nc_dims.html">nc_dims</a></span>(f)
-
-  <span class="kw"><a href="reference/nc_vars.html">nc_vars</a></span>(f)
-
-  <span class="kw"><a href="reference/nc_atts.html">nc_atts</a></span>(f)
-})
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.084   0.000   0.083</span>
-
-<span class="kw">system.time</span>(ncdump<span class="op">::</span><span class="kw">NetCDF</span>(f))
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.084   0.000   0.085</span></code></pre></div>
+<span class="co">#&gt;     expr      min        lq      mean    median        uq        max neval</span>
+<span class="co">#&gt;  nc_open 13.52635  14.56709  15.44254  15.31171  15.77560   18.70371    10</span>
+<span class="co">#&gt;   ncdump 98.48554 101.17441 231.65487 103.33283 114.31503 1305.08479    10</span>
+<span class="co">#&gt;   ncmeta 58.40526  64.33533  79.68108  68.82442  76.59199  175.56371    10</span>
+<span class="co">#&gt;  RNetCDF 32.99507  33.85573  42.81617  35.78740  38.90556  104.63962    10</span></code></pre></div>
 </div>
 </div>
 </div>

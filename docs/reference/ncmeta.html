@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NetCDF attributes — nc_atts • ncmeta</title>
+<title>ncmeta: straightforward NetCDF metadata — ncmeta • ncmeta</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -83,65 +83,69 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>NetCDF attributes</h1>
+    <h1>ncmeta: straightforward NetCDF metadata</h1>
     </div>
 
     
-    <p>All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'.</p>
+    <p><code>ncmeta</code> provides a consistent set of tools to obtain metadata from NetCDF. NetCDF
+is 'Network Common Data Form' https://www.unidata.ucar.edu/software/netcdf/.
+These functions are generics, allowing methods to be written for various providers so that
+everything can work from a common basis. All functions return a data frame.</p>
     
 
-    <pre class="usage"><span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-<span class='co'># S3 method for NetCDF</span>
-<span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>nc_atts</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <p>Each function responds to a character file name or data source (i.e. URL) or to a connection of a
+given class, this is so a source connection may be created a minimal number of times and kept open
+while a number of entities are queried.</p>
+<p>Each "given" entity may be referred to by index (0-based) or name, just as it would be by the NetCDF
+API and by the two R wrapper providers <code>RNetCDF</code> and <code>ncdf4</code>.</p><table><tr><td>
+<code>nc_att</code> </td>
+<td> find the given attribute of a given variable </td>
+</tr><tr><td>
+<code>nc_atts</code> </td>
+<td> find all attributes, of all variables and globals </td>
+</tr><tr><td>
+<code>nc_axes</code> </td>
+<td> find all the instances of dimensions </td>
+</tr><tr><td>
+<code>nc_axis</code> </td>
+<td> find given instance of a dimension (1-based)  </td>
+</tr><tr><td>
+<code>nc_dim</code> </td>
+<td> find the given dimension of a source (0-based) </td>
+</tr><tr><td>
+<code>nc_dims</code> </td>
+<td> find all the dimensions of a source </td>
+</tr><tr><td>
+<code>nc_grids</code> </td>
+<td> find the grids (sets of dimensions) of a source </td>
+</tr><tr><td>
+<code>nc_inq</code> </td>
+<td> inquire about a source (i.e. number of dimensions, number of variables, number of global attributes and presence of unlimited dimension </td>
+</tr><tr><td>
+<code>nc_meta</code> </td>
+<td> find all metadata for a source (runs all other functions) </td>
+</tr><tr><td>
+<code>nc_sources</code> </td>
+<td> tags a record of a source and its "access time" </td>
+</tr><tr><td>
+<code>nc_var</code> </td>
+<td> find a given variable (0-based) </td>
+</tr><tr><td>
+<code>nc_vars</code> </td>
+<td> find the variables of a source </td>
+</tr></table>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>filename or handle</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>ignored</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data frame of attributes</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
-<span class='fu'>nc_atts</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 87 x 3
-#&gt;    attribute variable     value
-#&gt;        &lt;dbl&gt;    &lt;chr&gt;    &lt;list&gt;
-#&gt;  1         0  chlor_a &lt;chr [1]&gt;
-#&gt;  2         1  chlor_a &lt;chr [1]&gt;
-#&gt;  3         2  chlor_a &lt;chr [1]&gt;
-#&gt;  4         3  chlor_a &lt;dbl [1]&gt;
-#&gt;  5         4  chlor_a &lt;dbl [1]&gt;
-#&gt;  6         5  chlor_a &lt;dbl [1]&gt;
-#&gt;  7         6  chlor_a &lt;chr [1]&gt;
-#&gt;  8         7  chlor_a &lt;dbl [1]&gt;
-#&gt;  9         8  chlor_a &lt;dbl [1]&gt;
-#&gt; 10         9  chlor_a &lt;dbl [1]&gt;
-#&gt; # ... with 77 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>
