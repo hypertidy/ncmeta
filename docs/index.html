@@ -80,8 +80,10 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nc_inq</span>(filename) <span class="co"># one-row summary of file</span>
+<p>This is a basic example which shows you how to find out the basic information on structures in a NetCDF file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ncmeta)
+filename &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class="dt">package =</span> <span class="st">"ncmeta"</span>)
+<span class="kw">nc_inq</span>(filename) <span class="co"># one-row summary of file</span>
 
 <span class="kw">nc_dim</span>(filename, <span class="dv">0</span>)  ## first dimesion
 <span class="kw">nc_dims</span>(filename)  ## all dimensions</code></pre></div>
@@ -93,17 +95,17 @@ u &lt;-<span class="st"> "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTra
 <span class="kw">library</span>(microbenchmark)
 junk &lt;-<span class="st"> </span><span class="kw">capture.output</span>(a &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark">microbenchmark</a></span>(<span class="dt">nc_open =</span> ncdf4<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdf4/topics/nc_open">nc_open</a></span>(f), 
                <span class="dt">ncdump =</span> ncdump<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdump/topics/NetCDF">NetCDF</a></span>(f), 
-               <span class="dt">ncmeta =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_meta">nc_meta</a></span>(f) ,
+               <span class="dt">ncmeta =</span> <span class="kw">nc_meta</span>(f) ,
                <span class="dt">RNetCDF =</span> RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/print.nc">print.nc</a></span>(RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/open.nc">open.nc</a></span>(f)), 
                 <span class="dt">times =</span> <span class="dv">10</span>)
 )
 <span class="kw">print</span>(a)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;     expr      min        lq      mean    median        uq        max neval</span>
-<span class="co">#&gt;  nc_open 13.52635  14.56709  15.44254  15.31171  15.77560   18.70371    10</span>
-<span class="co">#&gt;   ncdump 98.48554 101.17441 231.65487 103.33283 114.31503 1305.08479    10</span>
-<span class="co">#&gt;   ncmeta 58.40526  64.33533  79.68108  68.82442  76.59199  175.56371    10</span>
-<span class="co">#&gt;  RNetCDF 32.99507  33.85573  42.81617  35.78740  38.90556  104.63962    10</span></code></pre></div>
+<span class="co">#&gt;     expr      min       lq      mean    median        uq        max neval</span>
+<span class="co">#&gt;  nc_open 14.63275 14.73525  15.61648  14.80657  15.39439   20.75166    10</span>
+<span class="co">#&gt;   ncdump 98.02583 98.72675 228.47636 100.66841 105.34321 1312.31518    10</span>
+<span class="co">#&gt;   ncmeta 59.07320 59.66406  71.38096  62.91543  64.46559  152.28726    10</span>
+<span class="co">#&gt;  RNetCDF 34.92461 35.41263  43.48718  36.56464  38.18201   95.92419    10</span></code></pre></div>
 </div>
 </div>
 </div>

@@ -20,9 +20,11 @@ devtools::install_github("hypertidy/ncmeta")
 Example
 -------
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to find out the basic information on structures in a NetCDF file:
 
 ``` r
+library(ncmeta)
+filename <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 nc_inq(filename) # one-row summary of file
 
 nc_dim(filename, 0)  ## first dimesion
@@ -45,9 +47,14 @@ junk <- capture.output(a <- microbenchmark(nc_open = ncdf4::nc_open(f),
 )
 print(a)
 #> Unit: milliseconds
-#>     expr      min       lq      mean    median        uq       max neval
-#>  nc_open 14.15938 14.23332 112.95724  14.98906  21.33014 656.46713    10
-#>   ncdump 93.73832 95.89619 134.31769 101.12352 107.68589 370.77173    10
-#>   ncmeta 59.67635 61.19443  62.97108  61.91249  62.57958  70.01173    10
-#>  RNetCDF 32.97361 33.77285  52.62526  35.87184  40.15188 135.59934    10
+#>     expr       min        lq      mean    median        uq        max
+#>  nc_open  13.56007  14.02879  15.02549  15.12102  15.55856   16.83026
+#>   ncdump 105.62757 113.08354 239.31455 114.77067 119.17370 1295.12378
+#>   ncmeta  65.10995  66.00702  88.36383  69.92109  77.57083  197.78369
+#>  RNetCDF  36.96346  39.16939  47.54083  41.58221  44.08432  103.96997
+#>  neval
+#>     10
+#>     10
+#>     10
+#>     10
 ```
