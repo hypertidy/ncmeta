@@ -107,7 +107,8 @@ nc_atts.NetCDF <- function(x, ...) {
 nc_atts_internal <- function(x, n_global_atts, variables = NULL, ...) {
 
 global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
-                                  ndims = NA_real_, natts = n_global_atts))
+                                  ndims = NA_real_, natts = n_global_atts, 
+                                dim_coord = FALSE))
       
           
   
@@ -128,8 +129,10 @@ global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_characte
 
   l <- vector('list', length(var_names))
   
-  for (iatt in seq_along(var_names)) l[[iatt]] <- nc_att_internal(x, var_ids[iatt], iatt_vector[iatt], var_names[iatt])
-
+  for (iatt in seq_along(var_names)) {
+    l[[iatt]] <- nc_att_internal(x, var_ids[iatt], iatt_vector[iatt], var_names[iatt])
+    l[[iatt]][["value"]] <- list(l[[iatt]][["value"]])
+}
 
 
 do.call(rbind, l)

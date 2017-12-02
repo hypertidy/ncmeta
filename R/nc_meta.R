@@ -30,11 +30,12 @@ nc_meta.NetCDF <- function(x, ...) {
   ## does a dimension have dim-vals?
   if (nrow(dims) > 0) dims[["coord_dim"]] <- dims[["name"]] %in% vars[["name"]]
   ## is a variable a dim-val?
-  vars0 <- vars
+  
   if (nrow(vars) > 0) vars[["dim_coord"]] <- vars[["ndims"]] == 1L & vars[["name"]] %in% dims[["name"]]
+  
   structure(list(dimension = dims, 
        variable = vars, 
-       attribute = nc_atts_internal(x, inq$ngatts, vars0), 
+       attribute = nc_atts_internal(x, inq$ngatts, vars), 
        axis = axis,
        grid = nc_grids_dimvar(dims, vars, axis)),
        class = "ncmeta")
