@@ -1,3 +1,7 @@
+# ncmeta 0.0.2
+
+* fix attribute types problem
+
 # ncmeta 0.0.1
 
 *updates from CRAN feedback
