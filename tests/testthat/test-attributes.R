@@ -4,7 +4,7 @@ u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
 
 test_that("attributes works", {
   testthat::skip_on_cran()
-  
+  met <- nc_meta(f)
   da <- nc_atts(f) %>% expect_s3_class("tbl_df") %>% 
     expect_named(c("attribute", "variable", "value")) 
   expect_that(nrow(da), equals(87L))

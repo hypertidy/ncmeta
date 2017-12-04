@@ -31,25 +31,7 @@ nc_att.NetCDF <- function(x, variable, attribute, ...) {
 # structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
  
 }
-nc_att_internal <- function(x, variable_id, attribute_id, variable_name) {
-  #attinfo <- att.inq.nc(x, variable_id, attribute_id)
-  nameflag <- 0
-  globflag <- if (variable_id < 0) 1 else 0
-  
-  # attinfo <- .Call("R_nc_inq_att", as.integer(x), as.integer(variable_id), 
-  #       as.character(""), as.integer(attribute_id), as.integer(nameflag), 
-  #       as.integer(globflag), PACKAGE = "RNetCDF")
-  # 
-  attinfo <- RNetCDF::att.inq.nc(x, variable_id, attribute_id)
-  attribute <- attinfo[["name"]]
-  numflag <- if(attinfo[["type"]] == "NC_CHAR") 0 else 1
-  
-  # att <- .Call("R_nc_get_att", as.integer(x), as.integer(variable_id), 
-  #              attribute, as.integer(numflag), as.integer(globflag), 
-  #              PACKAGE = "RNetCDF")
-  att <- RNetCDF::att.get.nc(x, variable_id, attribute_id)
-  faster_as_tibble(list(attribute = attribute, variable = variable_name, value = att))
-}
+
 #' @name nc_att
 #' @export 
 #' @importFrom tibble tibble
@@ -104,15 +86,48 @@ nc_atts.NetCDF <- function(x, ...) {
 
 #varfun <- function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1))))
 
+#' @name nc_atts
+#' @export
+nc_atts.character <- function(x, ...)  {
+  nc <- RNetCDF::open.nc(x)
+  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc_atts(nc)
+}
+
+
+## TODO: these functions aren't being used? except by nc_meta itself
+## there are some internal functions that are used in different places
+## but not others ...
+nc_att_internal <- function(x, variable_id, attribute_id, variable_name) {
+  #attinfo <- att.inq.nc(x, variable_id, attribute_id)
+  nameflag <- 0
+  globflag <- if (variable_id < 0) 1 else 0
+
+  # attinfo <- .Call("R_nc_inq_att", as.integer(x), as.integer(variable_id),
+  #       as.character(""), as.integer(attribute_id), as.integer(nameflag),
+  #       as.integer(globflag), PACKAGE = "RNetCDF")
+  #
+  attinfo <- RNetCDF::att.inq.nc(x, variable_id, attribute_id)
+  attribute <- attinfo[["name"]]
+  numflag <- if(attinfo[["type"]] == "NC_CHAR") 0 else 1
+
+  # att <- .Call("R_nc_get_att", as.integer(x), as.integer(variable_id),
+  #              attribute, as.integer(numflag), as.integer(globflag),
+  #              PACKAGE = "RNetCDF")
+  att <- RNetCDF::att.get.nc(x, variable_id, attribute_id)
+  faster_as_tibble(list(attribute = attribute, variable = variable_name, value = att))
+}
+
+
 nc_atts_internal <- function(x, n_global_atts, variables = NULL, ...) {
 
-global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
-                                  ndims = NA_real_, natts = n_global_atts, 
+global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_",
+                                  ndims = NA_real_, natts = n_global_atts,
                                 dim_coord = FALSE))
-      
-          
-  
-  
+
+
+
+
   ## bomb out if ndims is NA
   if (is.null(variables) || nrow(variables) < 1L) {
     warning("no variables recognizable")
@@ -128,7 +143,7 @@ global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_characte
   var_ids <- rep(variables[["id"]], variables[["natts"]])
 
   l <- vector('list', length(var_names))
-  
+
   for (iatt in seq_along(var_names)) {
     l[[iatt]] <- nc_att_internal(x, var_ids[iatt], iatt_vector[iatt], var_names[iatt])
     l[[iatt]][["value"]] <- list(l[[iatt]][["value"]])
@@ -136,11 +151,4 @@ global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_characte
 
 
 do.call(rbind, l)
-}
-#' @name nc_atts
-#' @export
-nc_atts.character <- function(x, ...)  {
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-  nc_atts(nc)
 }
