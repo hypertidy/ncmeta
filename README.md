@@ -1,5 +1,5 @@
 
-[![Travis-CI Build Status](https://travis-ci.org/hypertidy/ncmeta.svg?branch=master)](https://travis-ci.org/hypertidy/ncmeta) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/ncmeta) [![CRAN status](http://www.r-pkg.org/badges/version/ncmeta)](https://cran.r-project.org/package=ncmeta) [![Coverage Status](https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg)](https://codecov.io/github/hypertidy/ncmeta?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/hypertidy/ncmeta.svg?branch=master)](https://travis-ci.org/hypertidy/ncmeta) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/ncmeta) [![CRAN status](http://www.r-pkg.org/badges/version/ncmeta)](https://cran.r-project.org/package=ncmeta) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ncmeta)](http://cran.r-project.org/web/packages/ncmeta/index.html) [![Coverage Status](https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg)](https://codecov.io/github/hypertidy/ncmeta?branch=master) ![cranlogs](http://cranlogs.r-pkg.org./badges/ncmeta)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 ncmeta
@@ -47,14 +47,9 @@ junk <- capture.output(a <- microbenchmark(nc_open = ncdf4::nc_open(f),
 )
 print(a)
 #> Unit: milliseconds
-#>     expr       min        lq      mean    median        uq        max
-#>  nc_open  14.76244  15.77639  16.19893  16.53470  16.65902   17.10492
-#>   ncdump 100.62247 104.08135 237.69712 106.14621 111.95256 1314.25375
-#>   ncmeta  68.73485  70.90362  84.83429  71.20265  73.63348  199.00647
-#>  RNetCDF  36.83804  37.73866  48.54410  39.96898  44.43127  108.39011
-#>  neval
-#>     10
-#>     10
-#>     10
-#>     10
+#>     expr      min       lq      mean   median       uq        max neval
+#>  nc_open 13.33410 14.12035  66.06054 14.57740 15.01434  529.88122    10
+#>   ncdump 50.36921 50.76524 160.00441 53.72871 63.94280 1025.91397    10
+#>   ncmeta 45.52577 50.17632  53.68040 52.70377 56.94338   63.68782    10
+#>  RNetCDF 33.47199 33.89722  51.10383 36.11723 46.24612  119.12752    10
 ```
