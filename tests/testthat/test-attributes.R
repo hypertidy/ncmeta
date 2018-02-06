@@ -9,7 +9,12 @@ test_that("attributes works", {
     expect_named(c("attribute", "variable", "value")) 
   expect_that(nrow(da), equals(87L))
   expect_that(da$value, is_a("list"))
- skip("avoiding thredds tests for RNetCDF")
+ })
+test_that("attributes from Thredds works", {
+  context("avoiding thredds tests for RNetCDF")
+  skip_on_cran()
+  skip_on_travis()
+  
     du <- nc_atts(u) %>%  expect_s3_class("tbl_df") %>% 
     expect_named(c("attribute", "variable", "value"))
   expect_that(nrow(du), equals(119L))
