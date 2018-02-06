@@ -3,6 +3,10 @@
 #' This function exists to maintain the open connection
 #' while all dimension, variable, and attribute metadata is extracted. 
 #'
+#' This function is pretty ambitious, and will send nearly any string
+#' to the underlying NetCDF library other than "", which immediately 
+#' generates an error. This should be robust, but might present fairly 
+#' obscure error messages from the underlying library. 
 #' @param ... ignored
 #' @param x data source address, file name or handle
 #'
@@ -16,6 +20,7 @@
 #' nc_meta(u)
 #' }}
 nc_meta <- function(x, ...) {
+  if (missing(x)) stop("'x' must be a valid NetCDF source, filename or URL")
  UseMethod("nc_meta")   
 }
 
@@ -44,9 +49,13 @@ nc_meta.NetCDF <- function(x, ...) {
 #' @name nc_meta
 #' @export
 nc_meta.character <- function(x, ...) {
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-  
+  if (nchar(x) < 1L) stop("'x' value is empty string, must be a valid NetCDF source")
+  nc <- try(RNetCDF::open.nc(x), silent = TRUE)
+  if (inherits(nc, "try-error")) {
+    stop(sprintf("failed to open 'x', value given was: \"%s\"", x))
+  } else {
+    on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  }
   out <- nc_meta(nc)
   out$source <- nc_sources(x)
   out
