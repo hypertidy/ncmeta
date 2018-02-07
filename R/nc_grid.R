@@ -44,7 +44,8 @@ nc_grids.NetCDF <- function(x, ...) {
 #' @importFrom dplyr desc arrange
 #' @importFrom rlang .data
 nc_grids_dimvar <- function(dimension, variable, axes) {
-  if (nrow(variable) < 1 & nrow(dimension) < 1) return(tibble::tibble())
+  
+  if (is.null(variable) || (nrow(variable) < 1 & nrow(dimension) < 1)) return(tibble::tibble())
   shape_instances_byvar <- split(axes$dimension, axes$variable)
 #    axes %>% 
  #   split_fast_tibble(.$variable) %>% purrr::map(function(xa) xa$dimension)

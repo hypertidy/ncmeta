@@ -31,12 +31,16 @@ nc_meta.NetCDF <- function(x, ...) {
   dims <- nc_dims_internal(x, inq[["ndims"]])
  
   vars <- nc_vars_internal(x, inq$nvars)
-  axis <- nc_axes(x, vars$name)
+ if (nrow(vars) > 1) axis <- nc_axes(x, vars$name) else axis <- nc_axes(x)
   ## does a dimension have dim-vals?
   if (nrow(dims) > 0) dims[["coord_dim"]] <- dims[["name"]] %in% vars[["name"]]
   ## is a variable a dim-val?
   
-  if (nrow(vars) > 0) vars[["dim_coord"]] <- vars[["ndims"]] == 1L & vars[["name"]] %in% dims[["name"]]
+  if (nrow(vars) > 0) {
+    vars[["dim_coord"]] <- vars[["ndims"]] == 1L & vars[["name"]] %in% dims[["name"]]
+  } else {
+    vars <- NULL ## avoid passing along a 0-row data frame
+  }
   
   structure(list(dimension = dims, 
        variable = vars, 

@@ -6,6 +6,7 @@ fast_tibble <- function(x) {
 # use with caution!  this will cause problems if a ragged list is given ...
 faster_as_tibble <- function(x) {
   ## stopifnot(length(unique(lengths(x))) == 1L)
+  
   structure(x, class = c("tbl_df", "tbl", "data.frame"), row.names = as.integer(seq_along(x[[1]])))
 }
 
