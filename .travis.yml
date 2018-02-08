@@ -1,14 +1,37 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: required
-cache: packages
-latex: false
-dist: trusty
+warnings_are_errors: true
+sudo: true
 
-before_install:
-  - sudo apt-get --yes --force-yes update -qq
-  - sudo apt-get install -y libudunits2-dev libnetcdf-dev 
+addons:
+    apt:
+        packages:
+            - libudunits2-dev
+            - libnetcdf-dev
+            - netcdf-bin
+
+matrix:
+    include:
+        - os: linux
+          r: release
+          dist: trusty # 14.04
+          env:
+           - BUILD_NAME=trusty_release
+           - DETAILS="release build"
+        - os: osx
+          r: release
+          env:
+           - BUILD_NAME=osx_release
+           - DETAILS="release build"
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+#r_github_packages:
+#      - jimhester/covr
 
 
 after_success:
