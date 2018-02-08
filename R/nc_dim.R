@@ -14,6 +14,8 @@ nc_dim <- function(x, i, ...) {
 #'@name nc_dim
 #'@export
 nc_dim.character <- function(x, i, ...) {
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+  
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_dim(nc, i)

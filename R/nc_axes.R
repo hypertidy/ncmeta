@@ -17,6 +17,8 @@ nc_axes <- function(x, variables = NULL, ...) {
 #'@name nc_axes
 #'@export
 nc_axes.character <- function(x, variables = NULL, ...) {
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+  
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_axes(nc)

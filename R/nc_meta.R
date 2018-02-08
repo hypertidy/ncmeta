@@ -53,7 +53,8 @@ nc_meta.NetCDF <- function(x, ...) {
 #' @name nc_meta
 #' @export
 nc_meta.character <- function(x, ...) {
-  if (nchar(x) < 1L) stop("'x' value is empty string, must be a valid NetCDF source")
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+
   nc <- try(RNetCDF::open.nc(x), silent = TRUE)
   if (inherits(nc, "try-error")) {
     stop(sprintf("failed to open 'x', value given was: \"%s\"", x))

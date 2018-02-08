@@ -36,6 +36,8 @@ nc_att.NetCDF <- function(x, variable, attribute, ...) {
 #' @export 
 #' @importFrom tibble tibble
 nc_att.character <- function(x, variable, attribute, ...) {
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+  
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_att(nc, variable, attribute)
@@ -89,6 +91,8 @@ nc_atts.NetCDF <- function(x, ...) {
 #' @name nc_atts
 #' @export
 nc_atts.character <- function(x, ...)  {
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+  
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_atts(nc)

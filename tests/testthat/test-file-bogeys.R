@@ -3,14 +3,16 @@ context("file-bogeys")
 test_that("files and bad files are handled", {
   skip_if_not(we_are_raady())
   oisst_dayfile <- raadfiles::oisst_daily_files()$fullname[1]
-  nc_meta(oisst_dayfile)
+  nc_meta(oisst_dayfile) %>% expect_named(c("dimension", "variable", "attribute", "axis", "grid", "source"
+  ))
   oisst_monfile <- raadfiles::oisst_monthly_files()$fullname[1]
-  nc_meta(oisst_monfile)
+  nc_meta(oisst_monfile) %>% expect_named(c("dimension", "variable", "attribute", "axis", "grid", "source"
+  ))
   roms_file <- raadtools::cpolarfiles()$fullname[1]
-  nc_meta(roms_file)
-  
+  nc_meta(roms_file) %>% expect_named(c("dimension", "variable", "attribute", "axis", "grid", "source"
+  ))
   l3_file <- raadtools::ocfiles()$fullname[1]  
-  nc_meta(l3_file)
+  expect_error(nc_vars(l3_file), "NetCDF: HDF error")
 })
 
 test_that("bad files and URLs fail gracefully", {

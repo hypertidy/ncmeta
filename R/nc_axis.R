@@ -16,6 +16,8 @@ nc_axis <- function(x, i) {
 #' @name nc_axis
 #' @export
 nc_axis.character <- function(x, i) {
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+  
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_axis(nc, i)

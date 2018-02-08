@@ -54,6 +54,8 @@ nc_inq.NetCDF <- function(x, ...) {
 #' @importFrom dplyr bind_rows
 nc_inq.character <- function(x, ...) {
  ifun <- function(x) { 
+   if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+   
     nc <- RNetCDF::open.nc(x)
     on.exit(RNetCDF::close.nc(nc), add  = TRUE)
     nc_inq(nc)
@@ -62,12 +64,5 @@ nc_inq.character <- function(x, ...) {
  out$filename <- x[as.integer(out$filename)]
  out[, c("ndims", "nvars", "ngatts", "unlimdimid", "filename")]
  }
-# #' @importFrom RNetCDF close.nc open.nc
-# #' @importFrom dplyr mutate
-# nc_inq0 <- function(x) {
-#   nc <- RNetCDF::open.nc(x)
-#   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-#   dplyr::mutate(nc_inq(nc), filename = x)
-# }
 
 

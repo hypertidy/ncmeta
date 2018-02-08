@@ -14,6 +14,8 @@ nc_vars <- function(x, ...)  {
 #' @name nc_vars
 #' @export
 nc_vars.character <- function(x, ...) {
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+  
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_vars(nc)

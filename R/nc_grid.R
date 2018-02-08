@@ -21,6 +21,8 @@ nc_grids <- function(x, ...) UseMethod("nc_grids")
 #' @name nc_grids
 #' @export
 nc_grids.character <- function(x, ...) {
+  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
+  
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   nc_grids_dimvar(nc_dims(nc), nc_vars(nc), nc_axes(nc))
