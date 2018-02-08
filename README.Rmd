@@ -4,11 +4,10 @@ output: github_document
 
 [![Build Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=trusty_release&label=ubuntu)](https://travis-ci.org/hypertidy/ncmeta)
 [![Build Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=osx_release&label=osx)](https://travis-ci.org/hypertidy/ncmeta) 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/ncmeta) 
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/ncmeta) 
  [![CRAN status](http://www.r-pkg.org/badges/version/ncmeta)](https://cran.r-project.org/package=ncmeta)
- [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ncmeta)](http://cran.r-project.org/web/packages/ncmeta/index.html)
+ ![cranlogs](http://cranlogs.r-pkg.org./badges/ncmeta)
 [![Coverage Status](https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg)](https://codecov.io/github/hypertidy/ncmeta?branch=master)
-![cranlogs](http://cranlogs.r-pkg.org./badges/ncmeta)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 

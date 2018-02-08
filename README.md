@@ -1,5 +1,5 @@
 
-[![Build Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=trusty_release&label=ubuntu)](https://travis-ci.org/hypertidy/ncmeta) [![Build Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=osx_release&label=osx)](https://travis-ci.org/hypertidy/ncmeta) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/ncmeta) [![CRAN status](http://www.r-pkg.org/badges/version/ncmeta)](https://cran.r-project.org/package=ncmeta) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ncmeta)](http://cran.r-project.org/web/packages/ncmeta/index.html) [![Coverage Status](https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg)](https://codecov.io/github/hypertidy/ncmeta?branch=master) ![cranlogs](http://cranlogs.r-pkg.org./badges/ncmeta)
+[![Build Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=trusty_release&label=ubuntu)](https://travis-ci.org/hypertidy/ncmeta) [![Build Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=osx_release&label=osx)](https://travis-ci.org/hypertidy/ncmeta) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/ncmeta) [![CRAN status](http://www.r-pkg.org/badges/version/ncmeta)](https://cran.r-project.org/package=ncmeta) ![cranlogs](http://cranlogs.r-pkg.org./badges/ncmeta) [![Coverage Status](https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg)](https://codecov.io/github/hypertidy/ncmeta?branch=master)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 ncmeta
@@ -48,8 +48,8 @@ junk <- capture.output(a <- microbenchmark(nc_open = ncdf4::nc_open(f),
 print(a)
 #> Unit: milliseconds
 #>     expr      min       lq      mean   median       uq        max neval
-#>  nc_open 13.20498 14.41661  15.10602 14.65449 15.48408   18.52317    10
-#>   ncdump 48.81095 50.03820 175.61033 52.26294 56.24378 1207.28938    10
-#>   ncmeta 40.22167 42.48800  51.07657 42.93289 45.97326   95.69861    10
-#>  RNetCDF 31.96636 32.52571  44.55217 33.55258 36.43650  139.49698    10
+#>  nc_open 12.23307 12.68172  13.18967 13.13182 13.37033   15.17942    10
+#>   ncdump 45.11056 45.41336 164.88877 47.93322 49.72675 1154.20297    10
+#>   ncmeta 36.42950 36.70403  39.09354 38.45877 41.60416   43.67622    10
+#>  RNetCDF 28.18936 29.05753  39.88902 29.43358 32.54862  127.04060    10
 ```
