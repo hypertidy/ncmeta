@@ -12,7 +12,7 @@ test_that("file specific dimension inquiry works", {
 
   #  expect_that(unlist(lapply(dim0, typeof)), 
   #            equals(structure(c("integer", "character", "double", "logical"), .Names = c("id", 
-                                                                                                                       "name", "length", "unlim"))))
+                                                                                                           #            "name", "length", "unlim"))))
   
 })
 
@@ -28,7 +28,4 @@ test_that("file all dimensions inquiry works", {
   #            .Names = c("id","name", "length", "unlim"))))
 })
 
-
-nc_axes(f)
-nc_axis(f, 0)
 

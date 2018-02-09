@@ -64,7 +64,7 @@
     
     
 <div class="contents">
-<p><a href="https://travis-ci.org/hypertidy/ncmeta"><img src="http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&amp;env=BUILD_NAME=trusty_release&amp;label=ubuntu" alt="Build Status"></a> <a href="https://travis-ci.org/hypertidy/ncmeta"><img src="http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&amp;env=BUILD_NAME=osx_release&amp;label=osx" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/hypertidy/ncmeta"><img src="https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://cran.r-project.org/package=ncmeta"><img src="http://www.r-pkg.org/badges/version/ncmeta" alt="CRAN status"></a> <a href="http://cran.r-project.org/web/packages/ncmeta/index.html"><img src="http://cranlogs.r-pkg.org/badges/ncmeta" alt="CRAN RStudio mirror downloads"></a> <a href="https://codecov.io/github/hypertidy/ncmeta?branch=master"><img src="https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg" alt="Coverage Status"></a> <img src="http://cranlogs.r-pkg.org./badges/ncmeta" alt="cranlogs"></p>
+<p><a href="https://travis-ci.org/hypertidy/ncmeta"><img src="http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&amp;env=BUILD_NAME=trusty_release&amp;label=ubuntu" alt="Build Status"></a> <a href="https://travis-ci.org/hypertidy/ncmeta"><img src="http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&amp;env=BUILD_NAME=osx_release&amp;label=osx" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/mdsumner/ncmeta"><img src="https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://cran.r-project.org/package=ncmeta"><img src="http://www.r-pkg.org/badges/version/ncmeta" alt="CRAN status"></a> <img src="http://cranlogs.r-pkg.org./badges/ncmeta" alt="cranlogs"><a href="https://codecov.io/github/hypertidy/ncmeta?branch=master"><img src="https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg" alt="Coverage Status"></a></p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="ncmeta" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
@@ -83,10 +83,10 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>This is a basic example which shows you how to find out the basic information on structures in a NetCDF file:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ncmeta)
 filename &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class="dt">package =</span> <span class="st">"ncmeta"</span>)
-<span class="kw">nc_inq</span>(filename) <span class="co"># one-row summary of file</span>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_inq">nc_inq</a></span>(filename) <span class="co"># one-row summary of file</span>
 
-<span class="kw">nc_dim</span>(filename, <span class="dv">0</span>)  ## first dimesion
-<span class="kw">nc_dims</span>(filename)  ## all dimensions</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_dim">nc_dim</a></span>(filename, <span class="dv">0</span>)  ## first dimesion
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_dims">nc_dims</a></span>(filename)  ## all dimensions</code></pre></div>
 <p>Compare timings.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ncmeta)
 f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class="dt">package =</span> <span class="st">"ncmeta"</span>)
@@ -95,17 +95,17 @@ u &lt;-<span class="st"> "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTra
 <span class="kw">library</span>(microbenchmark)
 junk &lt;-<span class="st"> </span><span class="kw">capture.output</span>(a &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark">microbenchmark</a></span>(<span class="dt">nc_open =</span> ncdf4<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdf4/topics/nc_open">nc_open</a></span>(f), 
                <span class="dt">ncdump =</span> ncdump<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdump/topics/NetCDF">NetCDF</a></span>(f), 
-               <span class="dt">ncmeta =</span> <span class="kw">nc_meta</span>(f) ,
+               <span class="dt">ncmeta =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_meta">nc_meta</a></span>(f) ,
                <span class="dt">RNetCDF =</span> RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/print.nc">print.nc</a></span>(RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/open.nc">open.nc</a></span>(f)), 
                 <span class="dt">times =</span> <span class="dv">10</span>)
 )
 <span class="kw">print</span>(a)
 <span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;     expr      min       lq      mean   median       uq       max neval</span>
-<span class="co">#&gt;  nc_open 13.78921 14.41033  72.88050 14.60704 14.68725 595.98707    10</span>
-<span class="co">#&gt;   ncdump 49.55604 50.41397 111.59874 52.78208 55.02517 569.87084    10</span>
-<span class="co">#&gt;   ncmeta 38.34943 41.00205  49.51063 44.11135 45.95755  88.71021    10</span>
-<span class="co">#&gt;  RNetCDF 28.81727 32.01806  45.28055 33.55333 37.68451 149.02792    10</span></code></pre></div>
+<span class="co">#&gt;     expr      min       lq      mean   median       uq        max neval</span>
+<span class="co">#&gt;  nc_open 13.63283 14.49149  15.39667 15.31960 15.65686   19.23701    10</span>
+<span class="co">#&gt;   ncdump 48.60811 51.72972 192.37643 56.08547 62.06293 1351.77502    10</span>
+<span class="co">#&gt;   ncmeta 41.63589 41.72070  44.36388 45.19075 46.04084   47.05273    10</span>
+<span class="co">#&gt;  RNetCDF 31.16529 33.56658  44.62793 35.11361 38.30596  129.15262    10</span></code></pre></div>
 </div>
 </div>
 </div>
