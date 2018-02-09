@@ -2,14 +2,16 @@
 
 language: R
 warnings_are_errors: true
-sudo: true
+sudo: false
 
 dist: trusty
 
-before_install:
-  - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
-  - sudo apt-get --yes --force-yes update -qq
-  - sudo apt install -y libudunits2-dev libnetcdf-dev netcdf-bin
+addons:
+    apt:
+        packages:
+            - libudunits2-dev
+            - libnetcdf-dev
+            - netcdf-bin
 
 matrix:
     include:
