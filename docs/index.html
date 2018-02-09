@@ -69,43 +69,46 @@
 <div id="ncmeta" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ncmeta" class="anchor"></a>ncmeta</h1></div>
-<p>Straightforward NetCDF metadata for use in building interfaces to this format.</p>
+<p>The <code>ncmeta</code> package provides straightforward NetCDF metadata, with a set of consistent entity-based functions for extracting metadata from a file or online source. We aim to fill a gap in between the generality and power of the NetCDF framework and the availability of easy to use modern software tools.</p>
+<p>There are two main packages for using NetCDF in R, <code>RNetCDF</code> and <code>ncdf4</code> and ncmeta use both of them, for subtle situations. Both packages are very close the native API of NetCDF itself, and ncmeta simply provides an easier high-level interpretation.</p>
+<div id="about-netcdf" class="section level2">
+<h2 class="hasAnchor">
+<a href="#about-netcdf" class="anchor"></a>About NetCDF</h2>
+<p>NetCDF is both a data model and an API, and provides a very general framework for expressing data formats. The explicit entities in NetCDF are <strong>variables</strong>, <strong>dimensions</strong> and <strong>attributes</strong> and ncmeta provides functions <code>nc_vars</code>, <code>nc_dims</code>, and <code>nc_atts</code> to extract their names, order and other metadata. There are matching functions <code>nc_var</code>, <code>nc_dim</code>, and <code>nc_att</code> with an extra identifier argument that extract specific information about individual an variable, dimension, or attribute.</p>
+<p>Ncmeta includes functions for implicit entities, these are <strong>grids</strong> and <strong>axes</strong>. These don’t exist in the NetCDF specification explicitly, but are meaningful and we think worth making explicit.</p>
+<p>A <strong>grid</strong> is an ordered set of dimensions, and the <a href="https://www.unidata.ucar.edu/software/netcdf/netcdf/The-NetCDF-Data-Model.html#The-NetCDF-Data-Model">Unidata site</a> refers <em>informally</em> to this concept as <strong>shape</strong>. Many NetCDF tools don’t explicitly present these shapes, or grids so we are a little tentative in our definitions.</p>
+<p>An <strong>axis</strong> is an <em>instance</em> of a dimension, the use of that dimension within a particular variable.</p>
+<p>Together these entities provide a more developer-friendly scheme for working with the range of formats provided by the NetCDF ecosystem.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install ncmeta from github with:</p>
+<p>Install ncmeta from CRAN with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"ncmeta"</span>)</code></pre></div>
+<p>You can install the development version of ncmeta from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hypertidy/ncmeta"</span>)</code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example which shows you how to find out the basic information on structures in a NetCDF file:</p>
+<p>This example shows some of the functions for extracting information from a NetCDF source.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ncmeta)
 filename &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class="dt">package =</span> <span class="st">"ncmeta"</span>)
 <span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_inq">nc_inq</a></span>(filename) <span class="co"># one-row summary of file</span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_dim">nc_dim</a></span>(filename, <span class="dv">0</span>)  ## first dimesion
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_dim">nc_dim</a></span>(filename, <span class="dv">0</span>)  ## first dimension
 <span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_dims">nc_dims</a></span>(filename)  ## all dimensions</code></pre></div>
-<p>Compare timings.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ncmeta)
-f &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class="dt">package =</span> <span class="st">"ncmeta"</span>)
-u &lt;-<span class="st"> "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"</span>
-
-<span class="kw">library</span>(microbenchmark)
-junk &lt;-<span class="st"> </span><span class="kw">capture.output</span>(a &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark">microbenchmark</a></span>(<span class="dt">nc_open =</span> ncdf4<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdf4/topics/nc_open">nc_open</a></span>(f), 
-               <span class="dt">ncdump =</span> ncdump<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ncdump/topics/NetCDF">NetCDF</a></span>(f), 
-               <span class="dt">ncmeta =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_meta">nc_meta</a></span>(f) ,
-               <span class="dt">RNetCDF =</span> RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/print.nc">print.nc</a></span>(RNetCDF<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RNetCDF/topics/open.nc">open.nc</a></span>(f)), 
-                <span class="dt">times =</span> <span class="dv">10</span>)
-)
-<span class="kw">print</span>(a)
-<span class="co">#&gt; Unit: milliseconds</span>
-<span class="co">#&gt;     expr      min       lq      mean   median        uq       max neval</span>
-<span class="co">#&gt;  nc_open 13.22438 13.39805  68.70769 14.42353  14.83141 556.31898    10</span>
-<span class="co">#&gt;   ncdump 47.77679 50.32493 144.76953 51.64000 124.70347 567.62912    10</span>
-<span class="co">#&gt;   ncmeta 39.47813 39.86225  49.65525 44.70757  47.29192  86.76336    10</span>
-<span class="co">#&gt;  RNetCDF 31.20620 31.85003  43.46018 32.35188  34.78461 141.02034    10</span></code></pre></div>
+</div>
+<div id="get-involved" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-involved" class="anchor"></a>Get involved!</h2>
+<p>Please let us know if you have any feedback, see the <a href="https://github.com/hypertidy/ncmeta">Issues tab</a> if you found a bug or have a question. Feel free to email the maintainer directly for other questions.</p>
+</div>
+<div id="community" class="section level2">
+<h2 class="hasAnchor">
+<a href="#community" class="anchor"></a>Community</h2>
+<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
 </div>
