@@ -10,8 +10,8 @@ test_that("file specific dimension inquiry works", {
   expect_that(dim0$length, equals(2160))  ## double
   expect_that(dim0$unlim, equals(FALSE))
 
-    expect_that(unlist(lapply(dim0, typeof)), 
-              equals(structure(c("integer", "character", "double", "logical"), .Names = c("id", 
+  #  expect_that(unlist(lapply(dim0, typeof)), 
+  #            equals(structure(c("integer", "character", "double", "logical"), .Names = c("id", 
                                                                                                                        "name", "length", "unlim"))))
   
 })
@@ -23,9 +23,9 @@ test_that("file all dimensions inquiry works", {
   expect_that(dimension$name, equals(c("lat", "lon", "rgb", "eightbitcolor")))
   expect_that(dimension$length, equals(c(2160, 4320, 3, 256)))  ## double
   expect_false(any(dimension$unlim))
-  expect_that(unlist(lapply(dimension, typeof)), 
-              equals(structure(c("integer", "character", "double", "logical"), 
-              .Names = c("id","name", "length", "unlim"))))
+  #expect_that(unlist(lapply(dimension, typeof)), 
+  #            equals(structure(c("integer", "character", "double", "logical"), 
+  #            .Names = c("id","name", "length", "unlim"))))
 })
 
 
