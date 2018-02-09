@@ -1,5 +1,10 @@
 ## Notes
 
+There is an error for solaris on CRAN, I don't know if this
+will fix it, but ncmeta is generally more robust. 
+
+https://cran.rstudio.com/web/checks/check_results_ncmeta.html
+
 Thanks!
 
 ## Test environments
