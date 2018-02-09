@@ -95,10 +95,10 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>This example shows some of the functions for extracting information from a NetCDF source.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ncmeta)
 filename &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class="dt">package =</span> <span class="st">"ncmeta"</span>)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_inq">nc_inq</a></span>(filename) <span class="co"># one-row summary of file</span>
+<span class="kw">nc_inq</span>(filename) <span class="co"># one-row summary of file</span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_dim">nc_dim</a></span>(filename, <span class="dv">0</span>)  ## first dimension
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ncmeta/topics/nc_dims">nc_dims</a></span>(filename)  ## all dimensions</code></pre></div>
+<span class="kw">nc_dim</span>(filename, <span class="dv">0</span>)  ## first dimension
+<span class="kw">nc_dims</span>(filename)  ## all dimensions</code></pre></div>
 </div>
 <div id="get-involved" class="section level2">
 <h2 class="hasAnchor">
