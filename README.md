@@ -5,12 +5,28 @@
 ncmeta
 ======
 
-Straightforward NetCDF metadata for use in building interfaces to this format.
+Ncmeta provides straightforward NetCDF metadata, with a set of consistent entity-based functions for extracting metadata from a file or online source.
+
+NetCDF is both a data model and an API, and provides a very general framework for expressing data formats. The explict entities in NetCDF are **variables**, **dimensions** and **attributes** and ncmeta provides functions `nc_vars`, `nc_dims`, and `nc_atts` to extract their names, order and other metadata. There are matching functions `nc_var`, `nc_dim`, and `nc_att` with an extra identifier argument that extract specific information about individual an variable, dimension, or attribute.
+
+Ncmeta includes functions for implicit entities, these are **grids** and **axes**. These don't exist in the NetCDF specification explicitly, but are meaningful and we think worth making explicit.
+
+A **grid** is an ordered set of dimensions, and the [Unidata site](https://www.unidata.ucar.edu/software/netcdf/netcdf/The-NetCDF-Data-Model.html#The-NetCDF-Data-Model) refers informally(??) to this concept as **shape**. Many NetCDF tools don't explicitly present these shapes, or grids so we are a little tentative in our definitions.
+
+An **axis** is an *instance* of a dimension, the use of that dimension within a particular variable.
+
+Together these entities provide a more developer-friendly scheme for working with the range of formats provided by the NetCDF ecosystem.
 
 Installation
 ------------
 
-You can install ncmeta from github with:
+Install ncmeta from CRAN with:
+
+``` r
+install.packages("ncmeta")
+```
+
+You can install the development version of ncmeta from github with:
 
 ``` r
 # install.packages("devtools")
@@ -20,36 +36,23 @@ devtools::install_github("hypertidy/ncmeta")
 Example
 -------
 
-This is a basic example which shows you how to find out the basic information on structures in a NetCDF file:
+This example shows some of the functions and for extracting information from a NetCDF source.
 
 ``` r
 library(ncmeta)
 filename <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 nc_inq(filename) # one-row summary of file
 
-nc_dim(filename, 0)  ## first dimesion
+nc_dim(filename, 0)  ## first dimension
 nc_dims(filename)  ## all dimensions
 ```
 
-Compare timings.
+Get involved!
+-------------
 
-``` r
-library(ncmeta)
-f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
-u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
+Please let us know if you have any feedback, see the [Issues tab](https://github.com/hypertidy/ncmeta) if you found a bug or have a question. Feel free to email the maintainer directly for other questions.
 
-library(microbenchmark)
-junk <- capture.output(a <- microbenchmark(nc_open = ncdf4::nc_open(f), 
-               ncdump = ncdump::NetCDF(f), 
-               ncmeta = nc_meta(f) ,
-               RNetCDF = RNetCDF::print.nc(RNetCDF::open.nc(f)), 
-                times = 10)
-)
-print(a)
-#> Unit: milliseconds
-#>     expr      min       lq      mean   median       uq        max neval
-#>  nc_open 13.38148 13.45887  14.00859 13.64158 13.96967   16.96096    10
-#>   ncdump 45.72161 47.05929 160.74127 50.61477 56.65144 1081.25067    10
-#>   ncmeta 38.64819 40.81086  50.49033 42.48875 50.79165   89.77316    10
-#>  RNetCDF 29.30707 30.01539  41.87232 31.94032 35.11016  127.43939    10
-```
+Community
+---------
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

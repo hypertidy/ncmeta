@@ -7,7 +7,7 @@
 #' File info
 #'
 #' Get information about a NetCDF data source, may be a file path, or a `RNetCDF` 
-#' file handle, or an Thredds server address. 
+#' file handle, or an OpenDAP/Thredds server address. 
 #' @param x filename or handle
 #' @param ... ignored
 #'

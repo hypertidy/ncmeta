@@ -88,7 +88,7 @@
 
     
     <p>Get information about a NetCDF data source, may be a file path, or a <code>RNetCDF</code>
-file handle, or an Thredds server address.</p>
+file handle, or an OpenDAP/Thredds server address.</p>
     
 
     <pre class="usage"><span class='fu'>nc_inq</span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -125,7 +125,7 @@ file handle, or an Thredds server address.</p>
 #&gt; 1     0 chlor_a NC_FLOAT     2    12</div><div class='input'><span class='fu'>nc_dim</span>(<span class='no'>f</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 4
 #&gt;      id name  length unlim
 #&gt; * &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;
-#&gt; 1     0 lat     2160 F    </div><div class='input'>
+#&gt; 1     0 lat     2160 FALSE</div><div class='input'>
 <span class='fu'>nc_vars</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 5
 #&gt;      id name    type     ndims natts
 #&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt; &lt;int&gt;
@@ -135,10 +135,10 @@ file handle, or an Thredds server address.</p>
 #&gt; 4     3 palette NC_UBYTE     2     0</div><div class='input'><span class='fu'>nc_dims</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 4
 #&gt;      id name           length unlim
 #&gt;   &lt;int&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;
-#&gt; 1     0 lat           2160    F    
-#&gt; 2     1 lon           4320    F    
-#&gt; 3     2 rgb              3.00 F    
-#&gt; 4     3 eightbitcolor  256    F    </div><div class='input'><span class='co'>## thredds (see rerddap)</span>
+#&gt; 1     0 lat           2160    FALSE
+#&gt; 2     1 lon           4320    FALSE
+#&gt; 3     2 rgb              3.00 FALSE
+#&gt; 4     3 eightbitcolor  256    FALSE</div><div class='input'><span class='co'>## thredds (see rerddap)</span>
 <span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='st'>"https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"</span>
 <span class='fu'>nc_inq</span>(<span class='no'>u</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;   ndims nvars ngatts unlimdimid filename                                       

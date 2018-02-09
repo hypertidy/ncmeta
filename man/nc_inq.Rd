@@ -21,7 +21,7 @@ nc_inq(x, ...)
 }
 \description{
 Get information about a NetCDF data source, may be a file path, or a \code{RNetCDF}
-file handle, or an Thredds server address.
+file handle, or an OpenDAP/Thredds server address.
 }
 \examples{
 \donttest{

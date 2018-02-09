@@ -1,6 +1,6 @@
 ## Notes
 
-Modified DESCRIPTION and examples thanks to CRAN feedback. 
+Thanks!
 
 ## Test environments
 * local ubuntu 14.04 install, R 3.4.3
@@ -9,12 +9,10 @@ Modified DESCRIPTION and examples thanks to CRAN feedback.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 notes
 
 
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
+None. 
 

@@ -8,3 +8,4 @@
 ^codecov\.yml$
 ^docs$
 ^cran-comments\.md$
+^CODE_OF_CONDUCT\.md$
