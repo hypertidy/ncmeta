@@ -2,9 +2,7 @@
 % Please edit documentation in R/nc_grid.R
 \name{nc_grids}
 \alias{nc_grids}
-\alias{nc_grids}
 \alias{nc_grids.character}
-\alias{nc_grids}
 \alias{nc_grids.NetCDF}
 \title{NetCDF grids}
 \usage{

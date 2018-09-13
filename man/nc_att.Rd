@@ -2,9 +2,7 @@
 % Please edit documentation in R/nc_att.R
 \name{nc_att}
 \alias{nc_att}
-\alias{nc_att}
 \alias{nc_att.NetCDF}
-\alias{nc_att}
 \alias{nc_att.character}
 \title{NetCDF attributes}
 \usage{

@@ -2,11 +2,8 @@
 % Please edit documentation in R/nc_dim.R
 \name{nc_dim}
 \alias{nc_dim}
-\alias{nc_dim}
 \alias{nc_dim.character}
-\alias{nc_dim}
 \alias{nc_dim.NetCDF}
-\alias{nc_dim}
 \alias{nc_dim.ncdf4}
 \title{NetCDF variables
 Obtain information about a single dimension by index.}

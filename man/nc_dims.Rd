@@ -2,11 +2,8 @@
 % Please edit documentation in R/nc_dimension.R
 \name{nc_dims}
 \alias{nc_dims}
-\alias{nc_dims}
 \alias{nc_dims.character}
-\alias{nc_dims}
 \alias{nc_dims.NetCDF}
-\alias{nc_dims}
 \alias{nc_dims.ncdf4}
 \title{NetCDF dimension}
 \usage{

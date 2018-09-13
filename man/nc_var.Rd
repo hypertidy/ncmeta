@@ -2,9 +2,7 @@
 % Please edit documentation in R/nc_var.R
 \name{nc_var}
 \alias{nc_var}
-\alias{nc_var}
 \alias{nc_var.character}
-\alias{nc_var}
 \alias{nc_var.NetCDF}
 \title{NetCDF variable}
 \usage{

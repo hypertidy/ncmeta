@@ -2,7 +2,6 @@
 % Please edit documentation in R/nc_sources.R
 \name{nc_sources}
 \alias{nc_sources}
-\alias{nc_sources}
 \alias{nc_sources.character}
 \title{NetCDF sources}
 \usage{

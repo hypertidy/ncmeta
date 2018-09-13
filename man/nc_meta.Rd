@@ -2,9 +2,7 @@
 % Please edit documentation in R/nc_meta.R
 \name{nc_meta}
 \alias{nc_meta}
-\alias{nc_meta}
 \alias{nc_meta.NetCDF}
-\alias{nc_meta}
 \alias{nc_meta.character}
 \title{Top level NetCDF metadata.}
 \usage{

@@ -2,9 +2,7 @@
 % Please edit documentation in R/nc_axes.R
 \name{nc_axes}
 \alias{nc_axes}
-\alias{nc_axes}
 \alias{nc_axes.character}
-\alias{nc_axes}
 \alias{nc_axes.NetCDF}
 \title{NetCDF axes}
 \usage{

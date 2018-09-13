@@ -2,9 +2,7 @@
 % Please edit documentation in R/nc_inq_file.R
 \name{nc_inq}
 \alias{nc_inq}
-\alias{nc_inq}
 \alias{nc_inq.NetCDF}
-\alias{nc_inq}
 \alias{nc_inq.character}
 \title{File info}
 \usage{

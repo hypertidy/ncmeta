@@ -45,8 +45,11 @@ nc_att.character <- function(x, variable, attribute, ...) {
 
 #' NetCDF attributes
 #'
-#' All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'. 
+#' All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'. Attributes 
+#' for a single variable may be returned by specifying 'variable' - 'NC_GLOBAL' can stand in to return
+#' only those attributes. 
 #' @param x filename or handle
+#' @param variable  optional single name of a variable, or 'NC_GLOBAL'
 #' @param ... ignored
 #'
 #' @return data frame of attributes
@@ -55,14 +58,15 @@ nc_att.character <- function(x, variable, attribute, ...) {
 #' @examples
 #' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 #' nc_atts(f)
-nc_atts <- function(x, ...) {
+nc_atts <- function(x, variable = NULL, ...) {
  UseMethod("nc_atts") 
 }
+
 #' @name nc_atts
 #' @export
 #' @importFrom dplyr distinct
 #' @importFrom tibble tibble
-nc_atts.NetCDF <- function(x, ...) {
+nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
     global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts))
   
@@ -82,20 +86,24 @@ nc_atts.NetCDF <- function(x, ...) {
   var <- dplyr::bind_rows(var, global)
   #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 #bind_rows <- function(x) x
-    dplyr::bind_rows(lapply(split_fast_tibble(var, var$name), 
+   out <-  dplyr::bind_rows(lapply(split_fast_tibble(var, var$name), 
                      function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
+   if (!is.null(variable) && !variable %in% out$variable) stop("specified variable not found")
+   vv <- variable[1]
+   if (!is.null(variable)) out <- dplyr::filter(out, .data$variable == vv)
+   out
 }
 
 #varfun <- function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1))))
 
 #' @name nc_atts
 #' @export
-nc_atts.character <- function(x, ...)  {
+nc_atts.character <- function(x, variable = NULL, ...)  {
   if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
   
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-  nc_atts(nc)
+  nc_atts(nc, variable = variable)
 }
 
 

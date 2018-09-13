@@ -2,20 +2,20 @@
 % Please edit documentation in R/nc_att.R
 \name{nc_atts}
 \alias{nc_atts}
-\alias{nc_atts}
 \alias{nc_atts.NetCDF}
-\alias{nc_atts}
 \alias{nc_atts.character}
 \title{NetCDF attributes}
 \usage{
-nc_atts(x, ...)
+nc_atts(x, variable = NULL, ...)
 
-\method{nc_atts}{NetCDF}(x, ...)
+\method{nc_atts}{NetCDF}(x, variable = NULL, ...)
 
-\method{nc_atts}{character}(x, ...)
+\method{nc_atts}{character}(x, variable = NULL, ...)
 }
 \arguments{
 \item{x}{filename or handle}
+
+\item{variable}{optional single name of a variable, or 'NC_GLOBAL'}
 
 \item{...}{ignored}
 }
@@ -23,7 +23,9 @@ nc_atts(x, ...)
 data frame of attributes
 }
 \description{
-All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'.
+All attributes in the file, globals are treated as if they belong to variable 'NC_GLOBAL'. Attributes
+for a single variable may be returned by specifying 'variable' - 'NC_GLOBAL' can stand in to return
+only those attributes.
 }
 \examples{
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
