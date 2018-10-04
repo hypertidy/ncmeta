@@ -21,10 +21,8 @@ nc_grids <- function(x, ...) UseMethod("nc_grids")
 #' @name nc_grids
 #' @export
 nc_grids.character <- function(x, ...) {
-  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
-  
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc <- nc_connection(x)
+  on.exit(nc_cleanup(nc), add = TRUE)
   nc_grids_dimvar(nc_dims(nc), nc_vars(nc), nc_axes(nc))
 }
 
@@ -32,16 +30,9 @@ nc_grids.character <- function(x, ...) {
 #' @export
 #' @importFrom dplyr %>% arrange group_by
 #' @importFrom tibble tibble
-nc_grids.NetCDF <- function(x, ...) {
+nc_grids.default <- function(x, ...) {
   nc_grids_dimvar(nc_dims(x), nc_vars(x), nc_axes(x))
 }
-
-
-# nc_vars(f)  ## should be distinct
-# nc_axes(f)  ## all of them 
-# nc_axes(f, var) ## just these ones
-# nc_axis(i)  ## just one, of all ??
-
 
 #' @importFrom dplyr desc arrange
 #' @importFrom rlang .data

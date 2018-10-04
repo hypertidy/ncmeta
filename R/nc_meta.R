@@ -9,6 +9,7 @@
 #' obscure error messages from the underlying library. 
 #' @param ... ignored
 #' @param x data source address, file name or handle
+#' @param group specify the name of a group to treat as source
 #'
 #' @export
 #' @examples 
@@ -19,19 +20,17 @@
 #' u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
 #' nc_meta(u)
 #' }}
-nc_meta <- function(x, ...) {
+nc_meta <- function(x, ..., group = NULL) {
   if (missing(x)) stop("'x' must be a valid NetCDF source, filename or URL")
  UseMethod("nc_meta")   
 }
 
-#' @name nc_meta
-#' @export
-nc_meta.NetCDF <- function(x, ...) {
+nc_meta.default <- function(x, ..., group = NULL) {
   inq <- nc_inq(x)
   dims <- nc_dims_internal(x, inq[["ndims"]])
- 
+  
   vars <- nc_vars_internal(x, inq$nvars)
- if (nrow(vars) > 1) axis <- nc_axes(x, vars$name) else axis <- nc_axes(x)
+  if (nrow(vars) > 1) axis <- nc_axes(x, vars$name) else axis <- nc_axes(x)
   ## does a dimension have dim-vals?
   if (nrow(dims) > 0) dims[["coord_dim"]] <- dims[["name"]] %in% vars[["name"]]
   ## is a variable a dim-val?
@@ -43,22 +42,40 @@ nc_meta.NetCDF <- function(x, ...) {
   }
   
   structure(list(dimension = dims, 
-       variable = vars, 
-       attribute = nc_atts_internal(x, inq$ngatts, vars), 
-       axis = axis,
-       grid = nc_grids_dimvar(dims, vars, axis)),
-       class = "ncmeta")
+                 variable = vars, 
+                 attribute = nc_atts_internal(x, inq$ngatts, vars), 
+                 axis = axis,
+                 grid = nc_grids_dimvar(dims, vars, axis)),
+            class = "ncmeta")
 }
-
 #' @name nc_meta
 #' @export
-nc_meta.character <- function(x, ...) {
+nc_meta.NetCDF <- function(x, ..., group = NULL) {
+  if (!is.null(group)) stop("group not supported with RNetCDF")
+  nc_meta.default(x, ..., group = NULL)
+}
+#' @name nc_meta
+#' @export
+nc_meta.ncdf4 <- function(x, ..., group = NULL) {
+ nc_meta.default(x, ..., group = group)  
+}
+#' @name nc_meta
+#' @export
+nc_meta.character <- function(x, ..., group = NULL) {
   if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
 
   nc <- try(RNetCDF::open.nc(x), silent = TRUE)
   if (inherits(nc, "try-error")) {
     stop(sprintf("failed to open 'x', value given was: \"%s\"", x))
   } else {
+    fileinfo <- try(file.inq.nc(nc))
+    if (inherits(fileinfo, "try-error")) stop("error on file.inq.nc")
+    if (fileinfo$ndims + fileinfo$nvars < 0) {
+      ## let's try ncdf4
+      nc <- try(ncdf4::nc_open(x, suppress_dimvals = TRUE))
+      if (inherits(nc, "try-error")) stop("error on open with ncdf4")
+      on.exit(ncdf4::nc_close(nc), add  = TRUE)
+    }
     on.exit(RNetCDF::close.nc(nc), add  = TRUE)
   }
   out <- nc_meta(nc)

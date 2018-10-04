@@ -16,15 +16,13 @@ nc_axis <- function(x, i) {
 #' @name nc_axis
 #' @export
 nc_axis.character <- function(x, i) {
-  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
-  
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc <- nc_connection(x)
+  on.exit(nc_cleanup(nc), add = TRUE)
   nc_axis(nc, i)
 }
 #' @name nc_axis
 #' @export
-nc_axis.NetCDF <- function(x, i) {
+nc_axis.default <- function(x, i) {  # CHECKME
   nc_axes(x) %>% dplyr::filter(.data$axis == i)
 }
 

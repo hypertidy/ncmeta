@@ -14,19 +14,26 @@ nc_var <- function(x, i) {
 #'@name nc_var
 #'@export
 nc_var.character <- function(x, i) {
-  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
-  
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc <- nc_connection(x)
+  on.exit(nc_cleanup(nc), add = TRUE)
   nc_var(nc, i)
 }
 
 #'@name nc_var
 #'@export
-nc_var.NetCDF <- function(x, i) {
+nc_var.NetCDF <- function(x, i) { # i is 0-based
   out <- RNetCDF::var.inq.nc(x, i)
   out$dimids <- NULL
-  faster_as_tibble(out)
+  tibble::as_tibble(out)
 }
 
+#'@name nc_var
+#'@export
+nc_var.ncdf4 <- function(x, i) {  # i is 0-based
+  dims <- unlist(lapply(x$dim, function(a) a$dimvarid$isdimvar))
+  names <- c(names(x$dim)[dims], names(x$var))
+  idx <- c(which(dims), seq_along(x$var) + sum(dims))
+  ndims <- c(rep(1, sum(dims)), unlist(lapply(x$var, "[[", "ndims")))
+  tibble::tibble(id = i, name = names[i + 1], type = "PLACEHOLDER", ndims = ndims[i + 1])  
+}
 

@@ -14,24 +14,20 @@ nc_vars <- function(x, ...)  {
 #' @name nc_vars
 #' @export
 nc_vars.character <- function(x, ...) {
-  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
-  
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc <- nc_connection(x)
+  on.exit(nc_cleanup(nc), add = TRUE)
   nc_vars(nc)
 }
 #' @name nc_vars
 #' @export
 #' @importFrom dplyr %>% 
 #' @importFrom rlang .data
-nc_vars.NetCDF <- function(x, ...) {
+nc_vars.default <- function(x, ...) {  ## CHECKME
   nvars <- nc_inq(x)$nvars
   if (nvars  < 1) return(tibble::tibble())
   nc_vars_internal(x, nvars)
 }
 nc_vars_internal <- function(x, nvars) {
   dplyr::bind_rows(lapply(seq_len(nvars), function(i) nc_var(x, i-1))) 
-  #%>% 
-  #  dplyr::distinct(.data$id, .data$name, .data$type, .data$ndims, .data$natts)
-  
+
 }

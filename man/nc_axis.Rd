@@ -3,14 +3,14 @@
 \name{nc_axis}
 \alias{nc_axis}
 \alias{nc_axis.character}
-\alias{nc_axis.NetCDF}
+\alias{nc_axis.default}
 \title{NetCDF axes}
 \usage{
 nc_axis(x, i)
 
 \method{nc_axis}{character}(x, i)
 
-\method{nc_axis}{NetCDF}(x, i)
+\method{nc_axis}{default}(x, i)
 }
 \arguments{
 \item{x}{NetCDF source}

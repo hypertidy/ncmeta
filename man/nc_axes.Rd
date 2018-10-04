@@ -3,14 +3,14 @@
 \name{nc_axes}
 \alias{nc_axes}
 \alias{nc_axes.character}
-\alias{nc_axes.NetCDF}
+\alias{nc_axes.default}
 \title{NetCDF axes}
 \usage{
 nc_axes(x, variables = NULL, ...)
 
 \method{nc_axes}{character}(x, variables = NULL, ...)
 
-\method{nc_axes}{NetCDF}(x, variables = NULL, ...)
+\method{nc_axes}{default}(x, variables = NULL, ...)
 }
 \arguments{
 \item{x}{NetCDF source}

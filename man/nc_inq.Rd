@@ -3,14 +3,17 @@
 \name{nc_inq}
 \alias{nc_inq}
 \alias{nc_inq.NetCDF}
+\alias{nc_inq.ncdf4}
 \alias{nc_inq.character}
 \title{File info}
 \usage{
-nc_inq(x, ...)
+nc_inq(x, ..., group = NULL)
 
-\method{nc_inq}{NetCDF}(x, ...)
+\method{nc_inq}{NetCDF}(x, ..., group = NULL)
 
-\method{nc_inq}{character}(x, ...)
+\method{nc_inq}{ncdf4}(x, ..., group = NULL)
+
+\method{nc_inq}{character}(x, ..., group = NULL)
 }
 \arguments{
 \item{x}{filename or handle}

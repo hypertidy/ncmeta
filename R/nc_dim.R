@@ -14,21 +14,20 @@ nc_dim <- function(x, i, ...) {
 #'@name nc_dim
 #'@export
 nc_dim.character <- function(x, i, ...) {
-  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
-  
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc <- nc_connection(x)
+  on.exit(nc_cleanup(nc), add = TRUE)
   nc_dim(nc, i)
 }
 
 #'@name nc_dim
 #'@export
 nc_dim.NetCDF <- function(x, i, ...) {
-  faster_as_tibble(RNetCDF::dim.inq.nc(x, i))
+  tibble::as_tibble(RNetCDF::dim.inq.nc(x, i))
 }
 #'@name nc_dim
 #'@export
 nc_dim.ncdf4 <- function(x, i, ...) {
-  nc_dim(x$filename, i, ...)
+  if (is.numeric(i)) i <- i + 1
+  tibble::tibble(id = x$dim[[i]]$id, name = x$dim[[i]]$name, length = x$dim[[i]]$len, unlim = x$dim[[i]]$unlim)
 }
 

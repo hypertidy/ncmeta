@@ -3,14 +3,14 @@
 \name{nc_vars}
 \alias{nc_vars}
 \alias{nc_vars.character}
-\alias{nc_vars.NetCDF}
+\alias{nc_vars.default}
 \title{NetCDF variables}
 \usage{
 nc_vars(x, ...)
 
 \method{nc_vars}{character}(x, ...)
 
-\method{nc_vars}{NetCDF}(x, ...)
+\method{nc_vars}{default}(x, ...)
 }
 \arguments{
 \item{x}{filename or handle}

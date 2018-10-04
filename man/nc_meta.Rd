@@ -3,19 +3,24 @@
 \name{nc_meta}
 \alias{nc_meta}
 \alias{nc_meta.NetCDF}
+\alias{nc_meta.ncdf4}
 \alias{nc_meta.character}
 \title{Top level NetCDF metadata.}
 \usage{
-nc_meta(x, ...)
+nc_meta(x, ..., group = NULL)
 
-\method{nc_meta}{NetCDF}(x, ...)
+\method{nc_meta}{NetCDF}(x, ..., group = NULL)
 
-\method{nc_meta}{character}(x, ...)
+\method{nc_meta}{ncdf4}(x, ..., group = NULL)
+
+\method{nc_meta}{character}(x, ..., group = NULL)
 }
 \arguments{
 \item{x}{data source address, file name or handle}
 
 \item{...}{ignored}
+
+\item{group}{specify the name of a group to treat as source}
 }
 \description{
 This function exists to maintain the open connection

@@ -3,14 +3,14 @@
 \name{nc_grids}
 \alias{nc_grids}
 \alias{nc_grids.character}
-\alias{nc_grids.NetCDF}
+\alias{nc_grids.default}
 \title{NetCDF grids}
 \usage{
 nc_grids(x, ...)
 
 \method{nc_grids}{character}(x, ...)
 
-\method{nc_grids}{NetCDF}(x, ...)
+\method{nc_grids}{default}(x, ...)
 }
 \arguments{
 \item{x}{NetCDF source}

@@ -4,6 +4,7 @@
 \alias{nc_var}
 \alias{nc_var.character}
 \alias{nc_var.NetCDF}
+\alias{nc_var.ncdf4}
 \title{NetCDF variable}
 \usage{
 nc_var(x, i)
@@ -11,6 +12,8 @@ nc_var(x, i)
 \method{nc_var}{character}(x, i)
 
 \method{nc_var}{NetCDF}(x, i)
+
+\method{nc_var}{ncdf4}(x, i)
 }
 \arguments{
 \item{x}{file name or handle}
