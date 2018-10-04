@@ -2,11 +2,17 @@
 % Please edit documentation in R/nc_att.R
 \name{nc_atts}
 \alias{nc_atts}
+\alias{nc_att.ncdf4}
+\alias{nc_atts.ncdf4}
 \alias{nc_atts.NetCDF}
 \alias{nc_atts.character}
 \title{NetCDF attributes}
 \usage{
+\method{nc_att}{ncdf4}(x, variable, attribute, ...)
+
 nc_atts(x, variable = NULL, ...)
+
+\method{nc_atts}{ncdf4}(x, variable = NULL, ...)
 
 \method{nc_atts}{NetCDF}(x, variable = NULL, ...)
 

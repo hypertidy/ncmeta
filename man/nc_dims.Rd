@@ -3,17 +3,14 @@
 \name{nc_dims}
 \alias{nc_dims}
 \alias{nc_dims.character}
-\alias{nc_dims.NetCDF}
-\alias{nc_dims.ncdf4}
+\alias{nc_dims.default}
 \title{NetCDF dimension}
 \usage{
 nc_dims(x, ...)
 
 \method{nc_dims}{character}(x, ...)
 
-\method{nc_dims}{NetCDF}(x, ...)
-
-\method{nc_dims}{ncdf4}(x, ...)
+\method{nc_dims}{default}(x, ...)
 }
 \arguments{
 \item{x}{file address or handle}

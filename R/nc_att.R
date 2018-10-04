@@ -21,13 +21,20 @@
 nc_att <- function(x, variable, attribute, ...) {
   UseMethod("nc_att")
 }
+
+#' @name nc_atts
+#' @export
+nc_att.ncdf4 <- function(x, variable, attribute,  ...) {
+  warning("ncdf4 not supported for nc_att")
+  tibble(id = integer(), name = character(), natts = integer())
+}
 #' @name nc_att
 #' @export 
 #' @importFrom rlang .data
 nc_att.NetCDF <- function(x, variable, attribute, ...) {
  att <- RNetCDF::att.get.nc(x, variable, attribute)
 
- faster_as_tibble(list(attribute = attribute, variable = variable, value = list(att)))
+ tibble::as_tibble(list(attribute = attribute, variable = variable, value = list(att)))
 # structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
  
 }
@@ -36,10 +43,8 @@ nc_att.NetCDF <- function(x, variable, attribute, ...) {
 #' @export 
 #' @importFrom tibble tibble
 nc_att.character <- function(x, variable, attribute, ...) {
-  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
-  
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc <- nc_connection(x)
+  on.exit(nc_cleanup(nc), add = TRUE)
   nc_att(nc, variable, attribute)
 }
 
@@ -64,10 +69,17 @@ nc_atts <- function(x, variable = NULL, ...) {
 
 #' @name nc_atts
 #' @export
+nc_atts.ncdf4 <- function(x, variable = NULL,  ...) {
+  warning("ncdf4 not supported for nc_atts")
+  tibble(id = integer(), name = character(), natts = integer())
+}
+
+#' @name nc_atts
+#' @export
 #' @importFrom dplyr distinct
-#' @importFrom tibble tibble
+#' @importFrom tibble tibble as_tibble
 nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
-    global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
+    global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts))
   
     #vars <- nc_axes(x)
@@ -99,10 +111,8 @@ nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
 #' @name nc_atts
 #' @export
 nc_atts.character <- function(x, variable = NULL, ...)  {
-  if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
-  
-  nc <- RNetCDF::open.nc(x)
-  on.exit(RNetCDF::close.nc(nc), add  = TRUE)
+  nc <- nc_connection(x)
+  on.exit(nc_cleanup(nc), add = TRUE)
   nc_atts(nc, variable = variable)
 }
 
@@ -127,13 +137,13 @@ nc_att_internal <- function(x, variable_id, attribute_id, variable_name) {
   #              attribute, as.integer(numflag), as.integer(globflag),
   #              PACKAGE = "RNetCDF")
   att <- RNetCDF::att.get.nc(x, variable_id, attribute_id)
-  faster_as_tibble(list(attribute = attribute, variable = variable_name, value = att))
+  tibble::as_tibble(list(attribute = attribute, variable = variable_name, value = att))
 }
 
 
 nc_atts_internal <- function(x, n_global_atts, variables = NULL, ...) {
 
-global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_",
+global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_",
                                   ndims = NA_real_, natts = n_global_atts,
                                 dim_coord = FALSE))
 

@@ -44,7 +44,7 @@ nc_grids_dimvar <- function(dimension, variable, axes) {
  #   split_fast_tibble(.$variable) %>% purrr::map(function(xa) xa$dimension)
   shape_classify_byvar <- factor(unlist(lapply(shape_instances_byvar, 
                                                function(xb) paste(paste0("D", xb), collapse = ","))))
-  out <- faster_as_tibble(list(variable  = names(shape_classify_byvar), 
+  out <- tibble::as_tibble(list(variable  = names(shape_classify_byvar), 
                 grid = levels(shape_classify_byvar)[shape_classify_byvar]))
   out <-   dplyr::arrange(out, dplyr::desc(nchar(.data$grid)), .data$grid, variable)
   ## catch the NA shapes (the scalars) and set to "-"
