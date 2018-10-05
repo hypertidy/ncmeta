@@ -91,10 +91,10 @@ is_group_multi_RNetCDF <- function(x) {
 #' @export
 #' @importFrom dplyr bind_rows
 nc_inq.character <- function(x, ..., group = NULL) {
-  nc <- nc_connection(x)
+  nc <- nc_connection(x, engine = "RNetCDF")
   if (is_group_multi_RNetCDF(nc)) {
     nc_cleanup(nc)
-    nc <- nc_connection(x, preference = "ncdf4")
+    nc <- nc_connection(x, engine = "ncdf4")
     on.exit(nc_cleanup(nc), add = TRUE)
   }
   out <- nc_inq(nc, group = group)

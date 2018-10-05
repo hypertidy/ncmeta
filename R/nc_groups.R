@@ -1,3 +1,27 @@
+#' NetCDF groups
+#' 
+#'  Groups in NetCDF behave much like a classic NetCDF source, but with multiple sources within
+#'  a single source. 
+#'  
+#'  'ncdf4' and 'RNetCDF' have different approaches to groups, in the first the top level variable names
+#'  are fully qualified group paths and in the latter the groups are obtained by recursively walking the
+#'  tree of groups. Presumably it's all the same under the hood. 
+#'  
+#'  
+#'
+#' @param x NetCDF source
+#' @param ... currently ignored
+#'
+#' @return data frame of groups
+#' @export
+#'
+#' @examples
+#' fng <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_groups(fng)  ## no group, or just one group ...
+#' 
+#' fg <- system.file("extdata/S2008001.L3b_DAY_CHL.nc", package= "ncmeta")
+#' nc_groups(fg)
+#' nc_inq(nc_connection(fg, engine = "ncdf4"), group = "/level-3_binned_data")
 nc_groups <- function(x, ...) {
   UseMethod("nc_groups")
 }

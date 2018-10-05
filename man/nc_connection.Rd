@@ -4,18 +4,41 @@
 \alias{nc_connection}
 \title{NetCDF connection}
 \usage{
-nc_connection(x, preference = NULL, ...)
+nc_connection(x, engine = NULL, ..., verbose = FALSE)
 }
 \arguments{
 \item{x}{character string source}
 
-\item{preference}{preferred engine}
+\item{engine}{preferred NetCDF interface}
 
 \item{...}{ignored currently}
+
+\item{verbose}{if \code{TRUE} print diagnostic messages}
 }
 \value{
 NetCDF connection object
 }
 \description{
-Currently ncdf4 or RNetCDF are available as preference, with default RNetCDF.
+Currently ncdf4 or RNetCDF are available as engine, with default RNetCDF.
+}
+\details{
+The preferred engine can be controlled by setting \code{options(ncmeta.engine = "RNetCDF")} or
+\code{options(ncmeta.engine = "ncdf4")}, or by the 'engine' argument to \code{nc_connection}. If the
+\code{engine} argument is set explicitly this will override the global setting.
+}
+\examples{
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+a <- nc_connection(f, verbose = TRUE)
+RNetCDF::close.nc(a)
+b <- nc_connection(f, engine = "ncdf4", verbose = TRUE)
+ncdf4::nc_close(b)
+
+## set for session
+options(ncmeta.engine = "ncdf4")
+nc <- nc_connection(f, verbose = TRUE)
+ncdf4::nc_close(nc)
+
+## argument overrides the option setting
+nc <- nc_connection(f, engine = "RNetCDF", verbose = TRUE)
+RNetCDF::close.nc(nc)
 }
