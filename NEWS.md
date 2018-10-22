@@ -1,6 +1,6 @@
 # ncmeta 0.0.2.9000
 
-# dev
+* Fix for grid organization providing variables out of native order. 
 
 * Added 'variable' argument to 'nc_atts', per #8. 
 
