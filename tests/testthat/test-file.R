@@ -6,13 +6,7 @@ f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "nc
 #), .Names = c("ndims", "nvars", "ngatts", "unlimdimid", "filename"
 #))
 
-test_that("file open works", {
-  rnc <- nc_connection(f, preference = "RNetCDF")  %>% expect_s3_class("NetCDF")
-  nc_cleanup(rnc) %>% expect_null()
-  nnc <- nc_connection(f, preference = "ncdf4")  %>% expect_s3_class("ncdf4")
-  nc_cleanup(nnc) %>% expect_is("list")
-}
-)
+
 test_that("file inquiry works", {
   inq <- nc_inq(f) %>% expect_s3_class("tbl_df")
   expect_that(nrow(inq), equals(1L))

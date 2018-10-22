@@ -26,7 +26,7 @@ nc_att <- function(x, variable, attribute, ...) {
 #' @export
 nc_att.ncdf4 <- function(x, variable, attribute,  ...) {
   warning("ncdf4 not supported for nc_att")
-  tibble(id = integer(), name = character(), natts = integer())
+  tibble(attribute = integer(), variable = character(), value = integer())
 }
 #' @name nc_att
 #' @export 
@@ -71,7 +71,7 @@ nc_atts <- function(x, variable = NULL, ...) {
 #' @export
 nc_atts.ncdf4 <- function(x, variable = NULL,  ...) {
   warning("ncdf4 not supported for nc_atts")
-  tibble(id = integer(), name = character(), natts = integer())
+  tibble(attribute = integer(), variable = character(), value = integer())
 }
 
 #' @name nc_atts
