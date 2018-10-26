@@ -1,4 +1,4 @@
-# ncmeta 0.0.2.9000
+# ncmeta 0.0.3
 
 * Fix for grid organization providing variables out of native order. 
 
