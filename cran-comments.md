@@ -19,5 +19,15 @@ Thanks!
 
 ## Reverse dependencies
 
-* stars: stars has no errors warnings or notes when used with this version
+* stars: one note about installed package size
 
+0 errors | 0 warnings | 1 note 
+
+
+checking installed package size ... NOTE
+  installed size is 10.5Mb
+  sub-directories of 1Mb or more:
+    doc   6.4Mb
+    nc    2.9Mb
+    
+    
