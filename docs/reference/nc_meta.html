@@ -18,13 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Top level NetCDF metadata. — nc_meta" />
+
+<meta property="og:description" content="This function exists to maintain the open connection
+while all dimension, variable, and attribute metadata is extracted." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">ncmeta</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">ncmeta</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -61,7 +78,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -73,6 +90,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -80,16 +98,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Top level NetCDF metadata.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hypertidy/ncmeta/blob/master/R/nc_meta.R'><code>R/nc_meta.R</code></a></small>
+    <div class="hidden name"><code>nc_meta.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function exists to maintain the open connection
 while all dimension, variable, and attribute metadata is extracted.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>nc_meta</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -99,7 +121,7 @@ while all dimension, variable, and attribute metadata is extracted.</p>
 <span class='co'># S3 method for character</span>
 <span class='fu'>nc_meta</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -124,12 +146,12 @@ obscure error messages from the underlying library.</p>
     <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
 <span class='fu'>nc_meta</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; $dimension
 #&gt; # A tibble: 4 x 5
-#&gt;      id name           length unlim coord_dim
-#&gt;   &lt;int&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;    
-#&gt; 1     0 lat           2160    FALSE TRUE     
-#&gt; 2     1 lon           4320    FALSE TRUE     
-#&gt; 3     2 rgb              3.00 FALSE FALSE    
-#&gt; 4     3 eightbitcolor  256    FALSE FALSE    
+#&gt;      id name          length unlim coord_dim
+#&gt;   &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;    
+#&gt; 1     0 lat             2160 FALSE TRUE     
+#&gt; 2     1 lon             4320 FALSE TRUE     
+#&gt; 3     2 rgb                3 FALSE FALSE    
+#&gt; 4     3 eightbitcolor    256 FALSE FALSE    
 #&gt; 
 #&gt; $variable
 #&gt; # A tibble: 4 x 6
@@ -180,7 +202,7 @@ obscure error messages from the underlying library.</p>
 #&gt; # A tibble: 1 x 2
 #&gt;   access              source                                                   
 #&gt;   &lt;dttm&gt;              &lt;chr&gt;                                                    
-#&gt; 1 2018-02-09 23:51:08 /perm_storage/home/mdsumner/Git/ncmeta/inst/extdata/S200…
+#&gt; 1 2018-10-26 19:55:12 /perm_storage/home/mdsumner/Git/ncmeta/inst/extdata/S200…
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "ncmeta"</div><div class='input'><span class='no'>u</span> <span class='kw'>&lt;-</span> <span class='st'>"https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"</span>
@@ -188,8 +210,8 @@ obscure error messages from the underlying library.</p>
 #&gt; # A tibble: 2 x 5
 #&gt;      id name        length unlim coord_dim
 #&gt;   &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;    
-#&gt; 1     0 maxStrlen64   64.0 FALSE FALSE    
-#&gt; 2     1 s             25.0 FALSE FALSE    
+#&gt; 1     0 maxStrlen64     64 FALSE FALSE    
+#&gt; 2     1 s               25 FALSE FALSE    
 #&gt; 
 #&gt; $variable
 #&gt; # A tibble: 18 x 6
@@ -250,30 +272,30 @@ obscure error messages from the underlying library.</p>
 #&gt; # A tibble: 18 x 2
 #&gt;    variable                 grid 
 #&gt;    &lt;chr&gt;                    &lt;chr&gt;
-#&gt;  1 s.scientific_name        D0,D1
-#&gt;  2 s.ship                   D0,D1
-#&gt;  3 s.surface_temp_method    D0,D1
-#&gt;  4 s.collection             D1   
-#&gt;  5 s.cruise                 D1   
-#&gt;  6 s.haul                   D1   
-#&gt;  7 s.haulback_time          D1   
-#&gt;  8 s.itis_tsn               D1   
-#&gt;  9 s.latitude               D1   
-#&gt; 10 s.longitude              D1   
-#&gt; 11 s.remaining_weight       D1   
-#&gt; 12 s.ship_spd_through_water D1   
-#&gt; 13 s.stop_latitude          D1   
-#&gt; 14 s.stop_longitude         D1   
-#&gt; 15 s.subsample_count        D1   
-#&gt; 16 s.subsample_weight       D1   
-#&gt; 17 s.surface_temp           D1   
-#&gt; 18 s.time                   D1   
+#&gt;  1 s.ship                   D0,D1
+#&gt;  2 s.surface_temp_method    D0,D1
+#&gt;  3 s.scientific_name        D0,D1
+#&gt;  4 s.cruise                 D1   
+#&gt;  5 s.haul                   D1   
+#&gt;  6 s.collection             D1   
+#&gt;  7 s.latitude               D1   
+#&gt;  8 s.longitude              D1   
+#&gt;  9 s.stop_latitude          D1   
+#&gt; 10 s.stop_longitude         D1   
+#&gt; 11 s.time                   D1   
+#&gt; 12 s.haulback_time          D1   
+#&gt; 13 s.surface_temp           D1   
+#&gt; 14 s.ship_spd_through_water D1   
+#&gt; 15 s.itis_tsn               D1   
+#&gt; 16 s.subsample_count        D1   
+#&gt; 17 s.subsample_weight       D1   
+#&gt; 18 s.remaining_weight       D1   
 #&gt; 
 #&gt; $source
 #&gt; # A tibble: 1 x 2
 #&gt;   access              source                                                   
 #&gt;   &lt;dttm&gt;              &lt;chr&gt;                                                    
-#&gt; 1 2018-02-09 23:51:17 https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawl…
+#&gt; 1 2018-10-26 19:55:17 https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawl…
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "ncmeta"</div></pre>
@@ -303,5 +325,8 @@ obscure error messages from the underlying library.</p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
