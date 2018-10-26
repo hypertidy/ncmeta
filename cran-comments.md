@@ -1,17 +1,16 @@
 ## Notes
 
-There is an error for solaris on CRAN, I don't know if this
-will fix it, but ncmeta is generally more robust. 
+There is an error for solaris on CRAN, but still I don't think I can
+affect that.  
 
 https://cran.rstudio.com/web/checks/check_results_ncmeta.html
 
 Thanks!
 
 ## Test environments
-* local debian 16.04 install, R 3.4.3
-* ubuntu 14.04 (on travis-ci), R 3.4.3
+* local debian 18.04 install, R 3.5.1
+* ubuntu 14.04 (on travis-ci), R 3.5.1
 * win-builder (devel and release)
-* mac-osx (on travis-ci), R 3.4.3
 
 ## R CMD check results
 
@@ -20,5 +19,5 @@ Thanks!
 
 ## Reverse dependencies
 
-None. 
+* stars: stars has no errors warnings or notes when used with this version
 
