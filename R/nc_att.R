@@ -10,7 +10,8 @@
 #' @param attribute name or index (zero based) of attribute
 #' @param ... ignored
 #'
-#' @return data frame of attribute 
+#' @return data frame of attribute with numeric id, character attribute name,
+#' character or numeric variable id or name depending on input, and attribute value. 
 #' @export
 #'
 #' @examples
@@ -27,7 +28,9 @@ nc_att <- function(x, variable, attribute, ...) {
 nc_att.NetCDF <- function(x, variable, attribute, ...) {
  att <- RNetCDF::att.get.nc(x, variable, attribute)
 
- faster_as_tibble(list(attribute = attribute, variable = variable, value = list(att)))
+ att_info <- RNetCDF::att.inq.nc(x, variable, attribute)
+ 
+ faster_as_tibble(list(id = att_info$id, name = att_info$name, variable = variable, value = list(att)))
 # structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
  
 }

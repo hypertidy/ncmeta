@@ -22,7 +22,8 @@ nc_att(x, variable, attribute, ...)
 \item{...}{ignored}
 }
 \value{
-data frame of attribute
+data frame of attribute with numeric id, character attribute name,
+character or numeric variable id or name depending on input, and attribute value.
 }
 \description{
 Variable attributes are number 0:(n-1). Global attributes are indexed

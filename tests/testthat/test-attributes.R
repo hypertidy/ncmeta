@@ -6,9 +6,12 @@ test_that("attributes works", {
   testthat::skip_on_cran()
   met <- nc_meta(f)
   da <- nc_atts(f) %>% expect_s3_class("tbl_df") %>% 
-    expect_named(c("attribute", "variable", "value")) 
+    expect_named(c("id", "name", "variable", "value")) 
   expect_that(nrow(da), equals(87L))
   expect_that(da$value, is_a("list"))
+  
+  da <- nc_atts(f, add_names = TRUE) %>% expect_s3_class("tbl_df") %>% 
+    expect_named(c("id", "name", "variable", "value")) 
  })
 test_that("attributes from Thredds works", {
   context("avoiding thredds tests for RNetCDF")
@@ -16,7 +19,7 @@ test_that("attributes from Thredds works", {
   skip_on_travis()
   
     du <- nc_atts(u) %>%  expect_s3_class("tbl_df") %>% 
-    expect_named(c("attribute", "variable", "value"))
+    expect_named(c("id", "name", "variable", "value"))
   expect_that(nrow(du), equals(119L))
   expect_that(du$value, is_a("list"))
   
@@ -26,10 +29,13 @@ test_that("individual attribute inquiry works", {
   testthat::skip_on_cran()
   
   nc_att(f, 0, 0) %>% expect_s3_class("tbl_df") %>% 
-    expect_named(c("attribute", "variable", "value")) 
+    expect_named(c("id", "name", "variable", "value")) 
   a3 <- nc_att(f, 0, 3)  
-  expect_that(a3$attribute, equals(3.0))
+  expect_that(a3$id, equals(3.0))
+  expect_that(a3$name, equals("_FillValue"))
   expect_that(a3$value, equals(list(-32767)))
+  
+  expect_identical(a3, nc_att(f, 0, "_FillValue"))
 })
 
 l3binfile <- system.file("extdata", "S2008001.L3b_DAY_CHL.nc", package = "ncmeta")
