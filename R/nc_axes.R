@@ -43,7 +43,7 @@ nc_axes.NetCDF <- function(x, variables = NULL, ...) {
 #  axes$id <- seq_len(nrow(axes)) ## row_number wtf
 
   #dplyr::transmute(axes, axis = row_number(), variable = .data$name, dimension = .data$dimids)
-    faster_as_tibble(list(axis = seq_len(nrow(axes)), variable = axes[["name"]], dimension = axes[["dimids"]]))
+    tibble::as_tibble(list(axis = seq_len(nrow(axes)), variable = axes[["name"]], dimension = axes[["dimids"]]))
 
 }
 
@@ -57,7 +57,7 @@ nc_axis_var <- function(x, i) {
   ## which is what we want here
   longest <- max(lengths(out))
   if (longest > 1L) out <- lapply(out, function(a) rep_len(a, length.out = longest))
-  faster_as_tibble(out)
+  tibble::as_tibble(out)
 }
 
 

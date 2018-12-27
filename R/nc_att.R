@@ -30,7 +30,7 @@ nc_att.NetCDF <- function(x, variable, attribute, ...) {
 
  att_info <- RNetCDF::att.inq.nc(x, variable, attribute)
  
- faster_as_tibble(list(id = att_info$id, name = att_info$name, variable = variable, value = list(att)))
+  tibble::as_tibble(list(id = att_info$id, name = att_info$name, variable = variable, value = list(att)))
 # structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
  
 }
@@ -70,7 +70,7 @@ nc_atts <- function(x, variable = NULL, ...) {
 #' @importFrom dplyr distinct
 #' @importFrom tibble tibble
 nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
-    global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
+    global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
                    ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts))
   
     #vars <- nc_axes(x)
@@ -89,7 +89,7 @@ nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
   var <- dplyr::bind_rows(var, global)
   #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 #bind_rows <- function(x) x
-   out <-  dplyr::bind_rows(lapply(split_fast_tibble(var, var$name), 
+   out <-  dplyr::bind_rows(lapply(split(var, var$name)[unique(var$name)], 
                      function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
    if (!is.null(variable) && !variable %in% out$variable) stop("specified variable not found")
    vv <- variable[1]
@@ -130,13 +130,13 @@ nc_att_internal <- function(x, variable_id, attribute_id, variable_name) {
   #              attribute, as.integer(numflag), as.integer(globflag),
   #              PACKAGE = "RNetCDF")
   att <- RNetCDF::att.get.nc(x, variable_id, attribute_id)
-  faster_as_tibble(list(attribute = attribute, variable = variable_name, value = att))
+  tibble::as_tibble(list(attribute = attribute, variable = variable_name, value = att))
 }
 
 
 nc_atts_internal <- function(x, n_global_atts, variables = NULL, ...) {
 
-global <- faster_as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_",
+global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_",
                                   ndims = NA_real_, natts = n_global_atts,
                                 dim_coord = FALSE))
 

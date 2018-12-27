@@ -26,7 +26,7 @@ nc_var.character <- function(x, i) {
 nc_var.NetCDF <- function(x, i) {
   out <- RNetCDF::var.inq.nc(x, i)
   out$dimids <- NULL
-  faster_as_tibble(out)
+  tibble::as_tibble(out)
 }
 
 
