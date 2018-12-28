@@ -21,7 +21,7 @@ nc_axes.character <- function(x, variables = NULL, ...) {
   
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-  nc_axes(nc)
+  nc_axes(nc, variables = variables, ...)
 }
 
 #'@name nc_axes
