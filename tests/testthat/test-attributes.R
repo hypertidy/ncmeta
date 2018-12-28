@@ -33,7 +33,8 @@ test_that("individual attribute inquiry works", {
   a3 <- nc_att(f, 0, 3)  
   expect_that(a3$id, equals(3.0))
   expect_that(a3$name, equals("_FillValue"))
-  expect_that(a3$value, equals(list(-32767)))
+  chk <- list(`_FillValue` = -32767)
+  expect_that(a3$value, equals(chk))
   
   expect_identical(a3, nc_att(f, 0, "_FillValue"))
 })

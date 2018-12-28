@@ -25,14 +25,15 @@ nc_att <- function(x, variable, attribute, ...) {
 #' @name nc_att
 #' @export 
 #' @importFrom rlang .data
+#' @importFrom stats setNames
 nc_att.NetCDF <- function(x, variable, attribute, ...) {
+  att_info <- RNetCDF::att.inq.nc(x, variable, attribute)
+  
+## att <- structure(RNetCDF::att.get.nc(x, variable, attribute), names = att_info$name)
  att <- RNetCDF::att.get.nc(x, variable, attribute)
+  tibble::as_tibble(list(id = att_info$id, name = att_info$name, variable = variable, 
+                         value = setNames(list(att), att_info$name)))
 
- att_info <- RNetCDF::att.inq.nc(x, variable, attribute)
- 
-  tibble::as_tibble(list(id = att_info$id, name = att_info$name, variable = variable, value = list(att)))
-# structure(list(attribute = attribute, variable = variable, value = list(boom = att)), class = "data.frame")
- 
 }
 
 #' @name nc_att
