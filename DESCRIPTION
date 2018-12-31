@@ -22,7 +22,8 @@ Imports:
     rlang,
     RNetCDF,
     tibble,
-    stats
+    stats,
+    tidyr
 Suggests: testthat,
     covr
 Roxygen: list(markdown = TRUE)
