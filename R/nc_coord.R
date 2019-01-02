@@ -64,6 +64,8 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
   v_atts <- att$variable == variable
   v_atts <- filter(att, v_atts)
   
+  aux = FALSE
+  
   if ("coordinates" %in% v_atts$name) {
     # NetCDF-CF introduces a "coordinates" attribute
     coordinates_atts <- filter(v_atts, name == "coordinates")
@@ -71,11 +73,14 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
     coord_vars <- coord_vars[nchar(coord_vars) > 0]
     
     if(!any(coord_vars %in% var$name)) {
-      stop("missing coordinate variables names in coordinates attribute")
+      warning(paste("missing coordinate variables names in coordinates attribute",
+                    "trying to find non-auxiliary coordinate variables."))
+    } else {
+      aux = TRUE
     }
+  }
     
-    aux = TRUE
-  } else {
+  if(!aux) {
     # COARDS style coordinate variables have the same name as a dimension.
     v_dims <- axe$dimension[axe$variable == variable]
     v_dims <- dim$name[dim$id %in% v_dims]
@@ -87,7 +92,6 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
     } else {
       return(NULL)
     }
-    aux = FALSE
   }
   
   coord_var <- sapply(coord_vars, divine_XYZT,
@@ -159,7 +163,11 @@ divine_XYZT <- function(var, atts) {
   if(!is.null(att_sub[["positive"]])) return("Z")
   
   if(grepl("since", att_sub[["units"]])) return("T")
+  
+  if(any(grepl("x coordinate of projection", att_sub)) | 
+     any(grepl("projection_x_coordinate", att_sub))) return("X")
+  
+  if(any(grepl("y coordinate of projection", att_sub)) | 
+     any(grepl("projection_y_coordinate", att_sub))) return("Y")
 }
-
-
                

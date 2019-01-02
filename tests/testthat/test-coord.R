@@ -59,3 +59,19 @@ test_that("nc_coord_vars brings back expected content for sample", {
   expect(all(is.na(coord_vars$Z)))
   expect(all(coord_vars$T == "Time"))
 })
+
+
+
+test_that("slightly broken projected coordinates work", {
+
+  f <- system.file("extdata", "daymet_sample.nc", package = "ncmeta")
+  
+  expect_warning(coord_vars <- nc_coord_var(f), 
+                 "missing coordinate variables names in coordinates attribute trying to find non-auxiliary coordinate variables.")
+  
+  expect_equal(as.character(coord_vars[coord_vars$variable == "prcp", ]),
+               c("prcp", "x", "y", NA, "time"))
+  
+  expect(nrow(coord_vars) == 4)
+  
+})

@@ -1,0 +1,52 @@
+netcdf daymet {
+dimensions:
+	time = 0 ;
+	y = 1 ;
+	x = 1 ;
+variables:
+	float prcp(time, y, x) ;
+		prcp:_CoordinateAxes = "lat lon time y x " ;
+		prcp:_FillValue = -9999.f ;
+		prcp:long_name = "daily total precipitation" ;
+		prcp:units = "mm/day" ;
+		prcp:missing_value = -9999.f ;
+		prcp:coordinates = "lat lon" ;
+		prcp:grid_mapping = "lambert_conformal_conic" ;
+		prcp:cell_methods = "area: mean time: sum" ;
+	double time(time) ;
+		time:long_name = "time" ;
+		time:calendar = "standard" ;
+		time:units = "days since 1980-01-01 00:00:00 UTC" ;
+		time:bounds = "time_bnds" ;
+		time:_CoordinateAxisType = "Time" ;
+	float y(y) ;
+		y:units = "km" ;
+		y:long_name = "y coordinate of projection" ;
+	float x(x) ;
+		x:units = "km" ;
+		x:long_name = "x coordinate of projection" ;
+	short lambert_conformal_conic ;
+		lambert_conformal_conic:grid_mapping_name = "lambert_conformal_conic" ;
+		lambert_conformal_conic:longitude_of_central_meridian = -100. ;
+		lambert_conformal_conic:latitude_of_projection_origin = 42.5 ;
+		lambert_conformal_conic:false_easting = 0. ;
+		lambert_conformal_conic:false_northing = 0. ;
+		lambert_conformal_conic:standard_parallel = 25., 60. ;
+		lambert_conformal_conic:semi_major_axis = 6378137. ;
+		lambert_conformal_conic:inverse_flattening = 298.257223563 ;
+		lambert_conformal_conic:longitude_of_prime_meridian = 0. ;
+		lambert_conformal_conic:_CoordinateTransformType = "Projection" ;
+		lambert_conformal_conic:_CoordinateAxisTypes = "GeoX GeoY" ;
+
+// global attributes:
+		:start_year = 1980s ;
+		:source = "Daymet Software Version 3.0" ;
+		:Version_software = "Daymet Software Version 3.0" ;
+		:Version_data = "Daymet Data Version 3.0" ;
+		:Conventions = "CF-1.6" ;
+		:citation = "Please see http://daymet.ornl.gov/ for current Daymet data citation information" ;
+		:references = "Please see http://daymet.ornl.gov/ for current information on Daymet references" ;
+		:title = "Daymet: Daily Surface Weather Data on a 1-km Grid for North America, Version 3 (Continental North America)" ;
+		:institution = "Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)" ;
+		:end_year = 2015s ;
+}
