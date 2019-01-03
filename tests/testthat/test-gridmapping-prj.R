@@ -33,9 +33,10 @@ test_that("nc_prj_to_gridmapping returns an empty list if no mapping exists", {
   p <- ""
 
   expect_warning(crs <- nc_prj_to_gridmapping(p), 
-                 "not a valid crs, returning an empty crs list")
+                 "not a valid crs, returning an empty tibble")
 
-  expect_equal(crs, list())
+  expect_equal(names(crs), c("name", "value"))
+  expect_equal(nrow(crs), 0)
 })
 
 test_that("wgs 84 lat lon", {
@@ -56,6 +57,8 @@ test_that("wgs 84 lat lon", {
 
   crs <- nc_prj_to_gridmapping(p)
 
+  crs <- stats::setNames(crs$value, crs$name)
+  
   expect_equal(crs, c[names(crs)])
 })
 
@@ -74,6 +77,8 @@ test_that("NAD27 lat lon", {
   expect_equal(prj, p2)
   
   crs <- nc_prj_to_gridmapping(p)
+  
+  crs <- stats::setNames(crs$value, crs$name)
   
   expect_equal(crs, c[names(crs)])
 })
@@ -96,7 +101,8 @@ test_that("albers equal area epsg:5070", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
-
+  crs <- stats::setNames(crs$value, crs$name)
+  
   expect_equal(crs, c[names(crs)])
 })
 
@@ -114,6 +120,7 @@ test_that("albers equal area epsg:5070 with datum instead of a b", {
             longitude_of_prime_meridian = 0)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs, c[names(crs)])
 })
@@ -135,6 +142,7 @@ test_that("Azimuthal Equidistant", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -158,6 +166,7 @@ test_that("lambert conformal conic daymet", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -180,6 +189,7 @@ test_that("lambert_azimuthal_equal_area", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   c <- list(grid_mapping_name = "lambert_azimuthal_equal_area",
               longitude_of_projection_origin = 0,
@@ -194,6 +204,7 @@ test_that("lambert_azimuthal_equal_area", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -217,6 +228,7 @@ test_that("lambert_cylindrical_equal_area", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -239,6 +251,7 @@ test_that("mercator", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -258,6 +271,7 @@ test_that("mercator", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -283,6 +297,7 @@ test_that("oblique_mercator", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -305,6 +320,7 @@ test_that("orthographic", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -328,6 +344,7 @@ test_that("polar_stereographic", {
   expect_equal(prj, p)
 
   # crs <- nc_prj_to_gridmapping(p)
+  # crs <- stats::setNames(crs$value, crs$name)
   #
   # expect_equal(crs[names(c)], c)
 
@@ -348,6 +365,7 @@ test_that("polar_stereographic", {
   expect_equal(prj, p)
 
   # crs <- nc_prj_to_gridmapping(p)
+  # crs <- stats::setNames(crs$value, crs$name)
   #
   # expect_equal(crs[names(c)], c)
 
@@ -388,6 +406,7 @@ test_that("stereographic", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -412,6 +431,7 @@ test_that("transverse_mercator", {
   expect_equal(prj, p)
 
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
 
   expect_equal(crs[names(c)], c)
 
@@ -437,5 +457,16 @@ test_that("spherical", {
   expect_equal(prj, p)
   
   crs <- nc_prj_to_gridmapping(p)
+  crs <- stats::setNames(crs$value, crs$name)
   
+  expect_equal(crs, 
+               list(grid_mapping_name = "lambert_conformal_conic", 
+                    standard_parallel = c(30, 60), 
+                    false_easting = 0, 
+                    false_northing = 0, 
+                    latitude_of_projection_origin = 40.0000076294, 
+                    longitude_of_central_meridian = -97, 
+                    semi_major_axis = 6370000, 
+                    inverse_flattening = 1.56985871271586e-07, 
+                    longitude_of_prime_meridian = 0))
 })

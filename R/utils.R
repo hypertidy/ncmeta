@@ -34,7 +34,6 @@ we_are_raady <- function() {
 #' attribute with the given value
 #' @param strict boolean if TRUE, only exact matches of value will be returned
 #'
-#' @importFrom RNetCDF open.nc close.nc
 #' @noRd
 #'
 #' @examples
@@ -54,7 +53,7 @@ find_var_by_att <- function(x, attribute, value = ".*", strict = TRUE) {
   
   open_nc <- FALSE
   if (is.character(x)) {
-    x <- open.nc(x)
+    x <- RNetCDF::open.nc(x)
     open_nc <- TRUE
   }
   
@@ -69,7 +68,7 @@ find_var_by_att <- function(x, attribute, value = ".*", strict = TRUE) {
   atts <- atts[atts$name == attribute, ]
   atts <- atts[grepl(value, atts$value), ]
   
-  if (open_nc) close.nc(x)
+  if (open_nc) RNetCDF::close.nc(x)
   
   return(atts$variable)
 }

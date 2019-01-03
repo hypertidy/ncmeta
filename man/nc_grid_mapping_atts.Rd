@@ -7,13 +7,13 @@
 \alias{nc_grid_mapping_atts.data.frame}
 \title{Get Grid Mapping}
 \usage{
-nc_grid_mapping_atts(x, ...)
+nc_grid_mapping_atts(x)
 
-\method{nc_grid_mapping_atts}{character}(x, ...)
+\method{nc_grid_mapping_atts}{character}(x)
 
-\method{nc_grid_mapping_atts}{NetCDF}(x, ...)
+\method{nc_grid_mapping_atts}{NetCDF}(x)
 
-\method{nc_grid_mapping_atts}{data.frame}(x, ...)
+\method{nc_grid_mapping_atts}{data.frame}(x)
 }
 \arguments{
 \item{x}{open NetCDF object, character file path or url to be

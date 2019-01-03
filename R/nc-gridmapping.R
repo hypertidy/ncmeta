@@ -10,29 +10,28 @@
 #' 
 #' nc_grid_mapping_atts(system.file("extdata/daymet_sample.nc", package = "ncmeta"))
 
-nc_grid_mapping_atts <- function(x, ...) UseMethod("nc_grid_mapping_atts")
+nc_grid_mapping_atts <- function(x) UseMethod("nc_grid_mapping_atts")
 
 #' @param x open NetCDF object, character file path or url to be 
 #' opened with RNetCDF::open.nc, or data.frame as returned from ncmeta::nc_atts
 #' 
 #' @name nc_grid_mapping_atts
 #' @export
-#' @importFrom RNetCDF open.nc
-nc_grid_mapping_atts.character <- function(x, ...) {
-  nc <- open.nc(x)
+nc_grid_mapping_atts.character <- function(x) {
+  nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE) 
   nc_grid_mapping_atts(nc)
 }
 
 #' @name nc_grid_mapping_atts
 #' @export
-nc_grid_mapping_atts.NetCDF <- function(x, ...) {
+nc_grid_mapping_atts.NetCDF <- function(x) {
   nc_grid_mapping_atts(nc_atts(x))
 }
 
 #' @name nc_grid_mapping_atts
 #' @export
-nc_grid_mapping_atts.data.frame <- function(x, ...) {
+nc_grid_mapping_atts.data.frame <- function(x) {
   
   gm_att <- "grid_mapping"
   grid_mapping_vars <- find_var_by_att(x, gm_att)
@@ -91,10 +90,17 @@ nc_grid_mapping_atts.data.frame <- function(x, ...) {
 #' nc_prj_to_gridmapping("+proj=longlat +a=6378137 +f=0.00335281066474748 +pm=0 +no_defs")
 #' 
 nc_prj_to_gridmapping <- function(prj) {
+  
   al <- prepCRS(prj)
+  
   if(is.null(al)) {
-    return(list()) } else {
-    return(GGFP(al)) }
+    return(tibble::as_tibble(list(name = character(0), value = list()))) 
+  } else {
+    
+    gm <- GGFP(al)
+    
+    return(tibble::as_tibble(list(name = names(gm), value = unname(gm))))
+  }
 }
 
 GGFP <- function(al) UseMethod("GGFP")
@@ -304,7 +310,7 @@ prepCRS <- function(prj) {
   if(class(prj) == "CRS") prj <- CRSargs(prj)
 
   if(!checkCRSArgs(prj)[1][[1]]) {
-    warning("not a valid crs, returning an empty crs list")
+    warning("not a valid crs, returning an empty tibble")
     return(NULL)
   }
 
