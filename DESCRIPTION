@@ -23,9 +23,11 @@ Imports:
     RNetCDF,
     tibble,
     stats,
-    tidyr
+    tidyr,
+    rgdal
 Suggests: testthat,
-    covr
+    covr,
+    sf
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/hypertidy/ncmeta
 BugReports: https://github.com/hypertidy/ncmeta/issues
