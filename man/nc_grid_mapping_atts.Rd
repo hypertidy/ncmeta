@@ -7,20 +7,24 @@
 \alias{nc_grid_mapping_atts.data.frame}
 \title{Get Grid Mapping}
 \usage{
-nc_grid_mapping_atts(x)
+nc_grid_mapping_atts(x, data_variable = NULL)
 
-\method{nc_grid_mapping_atts}{character}(x)
+\method{nc_grid_mapping_atts}{character}(x, data_variable = NULL)
 
-\method{nc_grid_mapping_atts}{NetCDF}(x)
+\method{nc_grid_mapping_atts}{NetCDF}(x, data_variable = NULL)
 
-\method{nc_grid_mapping_atts}{data.frame}(x)
+\method{nc_grid_mapping_atts}{data.frame}(x, data_variable = NULL)
 }
 \arguments{
 \item{x}{open NetCDF object, character file path or url to be
 opened with RNetCDF::open.nc, or data.frame as returned from ncmeta::nc_atts}
+
+\item{data_variable}{character variable of interest}
 }
 \value{
-tibble containing attributes that make up the file's grid_mapping
+tibble containing attributes that make up the file's grid_mapping.
+A data_variable column is included to indicate which data variable the grid
+mapping belongs to.
 }
 \description{
 Get the grid mapping from a NetCDF file
