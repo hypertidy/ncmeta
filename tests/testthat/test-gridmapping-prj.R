@@ -27,6 +27,13 @@ test_that("nc_grid_mapping_atts", {
   expect_is(nc_grid_mapping_atts(ncmeta::nc_atts(nc)), "data.frame")
   
   expect_is(nc_grid_mapping_atts(RNetCDF::open.nc(nc)), "data.frame")
+  
+  gm2 <- nc_grid_mapping_atts(nc, data_variable = "prcp")
+  
+  expect_equal(nrow(gm), nrow(gm2))
+  
+  expect_warning(nc_grid_mapping_atts(nc, data_variable = "borked"),
+                 "no grid_mapping attribute found for this variable")
 })
 
 test_that("nc_prj_to_gridmapping returns an empty list if no mapping exists", {

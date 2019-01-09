@@ -2,7 +2,9 @@
 #'
 #' @description Get the grid mapping from a NetCDF file
 #'
-#' @return tibble containing attributes that make up the file's grid_mapping
+#' @return tibble containing attributes that make up the file's grid_mapping.
+#' A data_variable column is included to indicate which data variable the grid
+#' mapping belongs to.
 #' @export
 #' 
 #' @name nc_grid_mapping_atts
@@ -10,33 +12,41 @@
 #' 
 #' nc_grid_mapping_atts(system.file("extdata/daymet_sample.nc", package = "ncmeta"))
 
-nc_grid_mapping_atts <- function(x) UseMethod("nc_grid_mapping_atts")
+nc_grid_mapping_atts <- function(x, data_variable = NULL) UseMethod("nc_grid_mapping_atts")
 
 #' @param x open NetCDF object, character file path or url to be 
 #' opened with RNetCDF::open.nc, or data.frame as returned from ncmeta::nc_atts
 #' 
+#' @param data_variable character variable of interest
+#' 
 #' @name nc_grid_mapping_atts
 #' @export
-nc_grid_mapping_atts.character <- function(x) {
+nc_grid_mapping_atts.character <- function(x, data_variable = NULL) {
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE) 
-  nc_grid_mapping_atts(nc)
+  nc_grid_mapping_atts(nc, data_variable)
 }
 
 #' @name nc_grid_mapping_atts
 #' @export
-nc_grid_mapping_atts.NetCDF <- function(x) {
-  nc_grid_mapping_atts(nc_atts(x))
+nc_grid_mapping_atts.NetCDF <- function(x, data_variable = NULL) {
+  nc_grid_mapping_atts(nc_atts(x), data_variable)
 }
 
 #' @name nc_grid_mapping_atts
 #' @export
-nc_grid_mapping_atts.data.frame <- function(x) {
+nc_grid_mapping_atts.data.frame <- function(x, data_variable = NULL) {
   
   gm_att <- "grid_mapping"
-  grid_mapping_vars <- find_var_by_att(x, gm_att)
   
-  if (length(grid_mapping_vars) == 0) {
+  if(is.null(data_variable)) {
+    data_variable <- find_var_by_att(x, gm_att)
+  } else if(!gm_att %in% dplyr::filter(x, variable == data_variable)$name) {
+    warning(paste("no grid_mapping attribute found for this variable"))
+    return(tibble::tibble())
+  }
+  
+  if (length(data_variable) == 0 ) {
     warning(paste("No variables with a grid mapping found.\n",
                   "Defaulting to WGS84 Lon/Lat"))
     
@@ -50,13 +60,18 @@ nc_grid_mapping_atts.data.frame <- function(x) {
                                                0))))
   }
   
-  grid_mapping_var <- unique(x$variable[x$name == "grid_mapping_name"])
+  grid_mapping_vars <- dplyr::filter(x, variable == data_variable & 
+                                      name == gm_att) %>%
+    dplyr::mutate(value = as.character(value))
   
-  if (length(grid_mapping_var) > 1) {
-    stop("Found more than one grid mapping variable. Only one is supported.")
-  }
+  grid_mapping_atts <- dplyr::filter(x, variable %in% grid_mapping_vars$value)
   
-  return(x[x$variable == grid_mapping_var, ])
+  grid_mapping_atts <- 
+    dplyr::left_join(grid_mapping_atts, 
+                     select(grid_mapping_vars, data_variable = variable, value = value),
+                     by = c("variable" = "value"))
+  
+  return(grid_mapping_atts)
 }
 
 #' Get NetCDF-CF grid mapping from projection
