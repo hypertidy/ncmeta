@@ -80,6 +80,33 @@ test_that("degen z", {
   f <- system.file("extdata/avhrr-only-v2.19810901_header.nc", package = "ncmeta")
   
   coord_vars <- nc_coord_var(f)
+
+  expect(all(is.na(coord_vars$Z)))
+})
+
+test_that("timeseries", {
+  f <- system.file("extdata/rasterwise-timeseries.nc", package = "ncmeta")
   
-  expect("unknown" %in% names(coord_vars))
+  coord_vars <- nc_coord_var(f)
+  
+  expect_equal(as.character(coord_vars[coord_vars$variable == "pr",]), 
+               c("pr", "lon", "lat", NA, "time"))
+  expect(nrow(coord_vars) == 2)
+})
+
+test_that("high dim", {
+  f <- system.file("extdata/rasterwise-high-dim-test-1.nc", package = "ncmeta")
+  
+  coord_vars <- nc_coord_var(f)
+  
+  expect(nrow(coord_vars) == 0)
+})
+
+test_that("all the things", {
+  f <- system.file("extdata/rasterwise-bad_examples_62-example3.nc", package = "ncmeta")
+  
+  coord_vars <- nc_coord_var(f)
+  
+  expect(sum(coord_vars$variable == "pr") == 2)
+  
 })
