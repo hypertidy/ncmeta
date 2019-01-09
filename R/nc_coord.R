@@ -98,6 +98,8 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
                       atts = filter(att, variable %in% coord_vars), 
                       simplify = FALSE)
   
+  coord_var <- replace(coord_var, sapply(coord_var, is.null), "unknown")
+  
   coord_var_base <- tibble::as_tibble(list(coord_var = names(coord_var),
                                       axis = unlist(coord_var)))
   
