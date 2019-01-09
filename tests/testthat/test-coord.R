@@ -75,3 +75,11 @@ test_that("slightly broken projected coordinates work", {
   expect(nrow(coord_vars) == 4)
   
 })
+
+test_that("degen z", {
+  f <- system.file("extdata/avhrr-only-v2.19810901_header.nc", package = "ncmeta")
+  
+  coord_vars <- nc_coord_var(f)
+  
+  expect("unknown" %in% names(coord_vars))
+})
