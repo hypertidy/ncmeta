@@ -79,12 +79,10 @@ nc_grid_mapping_atts.data.frame <- function(x, data_variable = NULL) {
 #' Takes a proj4 string and returns a NetCDF-CF projection as
 #' a named list of attributes.
 #'
-#' @param prj character proj.4 string as returned from rgdal::CRSargs() or
-#' sf::st_crs() or in the @proj4string slot of a sp object.
+#' @param prj character PROJ string as used in raster, sf, sp, proj4, and rgdal packages.
 #'
 #' @return A named list containing attributes required for that grid_mapping.
 #'
-#' @importFrom rgdal CRSargs checkCRSArgs
 #' 
 #' @references 
 #' \enumerate{
@@ -96,12 +94,13 @@ nc_grid_mapping_atts.data.frame <- function(x, data_variable = NULL) {
 #' @export
 #' 
 #' @examples
-#' sample_data <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
-#' nc_prj_to_gridmapping(sf::st_crs(sample_data)$proj4string)
-#' nc_prj_to_gridmapping(sf::st_crs("+init=epsg:5070")$proj4string)
+#' prj <- "+proj=longlat +datum=NAD27 +no_defs"
+#' nc_prj_to_gridmapping(prj)
+#' p1 <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96"
+#' p2 <- "+x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+#' prj2 <- sprintf("%s %s", p1, p2) 
+#' nc_prj_to_gridmapping(prj2)
 #' 
-#' sample_data <- sf::as_Spatial(sample_data)
-#' nc_prj_to_gridmapping(sample_data@proj4string)
 #' nc_prj_to_gridmapping("+proj=longlat +a=6378137 +f=0.00335281066474748 +pm=0 +no_defs")
 #' 
 nc_prj_to_gridmapping <- function(prj) {
@@ -321,10 +320,23 @@ lonProjCent_gm <- function(al) {
   list(longitude_of_projection_origin = as.numeric(al$lonc))
 }
 
-prepCRS <- function(prj) {
-  if(class(prj) == "CRS") prj <- CRSargs(prj)
+check_args <- function (x) 
+{
+  ## FIXME: checks as in reproj stop("cannot convert from digits, did you enter an EPSG code?")
+  if (is.numeric(x) || (nchar(x) %in% c(4, 5) && grepl("^[0-9]{1,5}$", 
+                                                       x))) {
+    return(FALSE)
+  }
+  if (!substr(x, 1, 1) == "+") 
+    return(FALSE)
+  TRUE
+}
 
-  if(!checkCRSArgs(prj)[1][[1]]) {
+prepCRS <- function(prj) {
+  if(class(prj) == "CRS") prj <- prj@projargs
+
+  if(!check_args(prj)[1][[1]]) {
+ 
     warning("not a valid crs, returning an empty tibble")
     return(NULL)
   }
