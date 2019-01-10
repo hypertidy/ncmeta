@@ -7,7 +7,8 @@ nc <- RNetCDF::open.nc(f)
 test_that("nc_coord_var brings back expected content for one variable", {
   expect_equal(nc_coord_var(f, "chlor_a"), 
                data.frame(variable = "chlor_a", X = "lon", Y = "lat", 
-                          Z = NA_character_, T = NA_character_, 
+                          Z = NA_character_, T = NA_character_,
+                          bounds = NA_character_, 
                           stringsAsFactors = FALSE))
   
   expect_equal(nc_coord_var(f, "pallete"), 
@@ -25,6 +26,7 @@ test_that("nc_coord_vars brings back expected content for sample", {
                data.frame(variable = "chlor_a", 
                           X = "lon", Y = "lat", 
                           Z = NA_character_, T = NA_character_, 
+                          bounds = NA_character_, 
                           stringsAsFactors = FALSE))
 })
   
@@ -35,7 +37,8 @@ nc <- RNetCDF::open.nc(f)
 test_that("nc_coord_var brings back expected content for one variable", {
   expect_equal(nc_coord_var(f, "RAINNC_present"), 
                data.frame(variable = "RAINNC_present", X = "XLONG", Y = "XLAT", 
-                          Z = NA_character_, T = "Time", stringsAsFactors = FALSE))
+                          Z = NA_character_, T = "Time",
+                          bounds = NA_character_, stringsAsFactors = FALSE))
   
   expect_equal(nc_coord_var(f, "XLAT"), 
                NULL)  
@@ -70,9 +73,12 @@ test_that("slightly broken projected coordinates work", {
                  "missing coordinate variables names in coordinates attribute trying to find non-auxiliary coordinate variables.")
   
   expect_equal(as.character(coord_vars[coord_vars$variable == "prcp", ]),
-               c("prcp", "x", "y", NA, "time"))
+               c("prcp", "x", "y", NA, "time", NA))
   
   expect(nrow(coord_vars) == 4)
+  
+  expect_equal(as.character(coord_vars[coord_vars$variable == "time", ]), 
+               c("time", NA, NA, NA, "time", "time_bnds"))
   
 })
 
@@ -90,7 +96,7 @@ test_that("timeseries", {
   coord_vars <- nc_coord_var(f)
   
   expect_equal(as.character(coord_vars[coord_vars$variable == "pr",]), 
-               c("pr", "lon", "lat", NA, "time"))
+               c("pr", "lon", "lat", NA, "time", NA))
   expect(nrow(coord_vars) == 2)
 })
 

@@ -21,17 +21,21 @@ If not included, all variables will be returned.}
 \item{...}{ignored}
 }
 \value{
-tibble with "variable", "X", "Y", "Z", and "T" columns that reference
+tibble with "variable", "X", "Y", "Z", "T", and "bounds" columns that reference
 variables by name.
 }
 \description{
 In NetCDF, variables are defined along dimensions and are said to have "coordinate
-variables" that define the typically spatio-temporal positions of the data's cells.
+variables" that define the (typically spatio-temporal) positions of the data's cells.
 }
 \details{
 This function attempts to identify the X, Y, Z, and T coordinate variables for each
 data variable in the provided NetCDF source. The NetCDF-CF attribute conventions are
 used to make this determination.
+
+All variables that can be related to a spatio-temporal axis, including coordinate
+variables are returned. For coordinate variables, a "bounds" column is included in
+the response indicating which variable contains bounds information.
 
 See \url{http://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html#coordinate-system}
 for more.
