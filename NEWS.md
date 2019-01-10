@@ -1,3 +1,9 @@
+# ncmeta dev
+
+* New functions `nc_coord_var` to find coordinate variables (if any), 
+ `gm_to_prj` to determine PROJ string in use, and `nc_grid_mapping_atts` to 
+  determine grid mapping parameters; #19, #14, #12, #9. 
+
 # ncmeta 0.0.3
 
 * Fix for grid organization providing variables out of native order. 
