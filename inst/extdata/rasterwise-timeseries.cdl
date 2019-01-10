@@ -1,0 +1,35 @@
+netcdf timeseries {
+dimensions:
+	station = 1 ;
+	time = 1 ;
+variables:
+	int num(station) ;
+		num:long_name = "Station number" ;
+		num:cf_role = "timeseries_id" ;
+	int time(time) ;
+		time:units = "days since 1970-01-01 00:00:00 UTC" ;
+		time:long_name = "time" ;
+		time:calendar = "gregorian" ;
+	float pr(station, time) ;
+		pr:units = "kg m-2 s-1" ;
+		pr:_FillValue = -10.f ;
+		pr:long_name = "Total precipitation flux" ;
+		pr:coordinates = "lat lon alt num" ;
+		pr:standard_name = "precipitation_flux" ;
+	float lat(station) ;
+		lat:units = "degrees_north" ;
+		lat:long_name = "Station latitude" ;
+		lat:standard_name = "latitude" ;
+	float lon(station) ;
+		lon:units = "degrees_east" ;
+		lon:long_name = "Station longitude" ;
+		lon:standard_name = "longitude" ;
+	float alt(station) ;
+		alt:units = "m" ;
+		alt:long_name = "Vertical distance above the surface" ;
+		alt:standard_name = "height" ;
+
+// global attributes:
+		:featureType = "timeSeries" ;
+		:Conventions = "CF-1.7" ;
+}

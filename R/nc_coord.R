@@ -58,8 +58,10 @@ nc_coord_var_call <- function(dim, var, att, axe, variable) {
   }
 }
 
-#' @importFrom dplyr bind_rows filter select left_join group_by arrange mutate ungroup
+#' @importFrom dplyr bind_rows filter select left_join group_by arrange mutate ungroup distinct
 nc_coord_var_finder <- function(dim, var, att, axe, variable) {
+  
+  if(nrow(att) == 0) return(NULL)
   
   v_atts <- att$variable == variable
   v_atts <- filter(att, v_atts)
@@ -79,18 +81,22 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
       aux = TRUE
     }
   }
-    
+  
+  # COARDS style coordinate variables have the same name as a dimension.
+  v_dims <- axe$dimension[axe$variable == variable]
+  v_dims <- dim$name[dim$id %in% v_dims]
+  
   if(!aux) {
-    # COARDS style coordinate variables have the same name as a dimension.
-    v_dims <- axe$dimension[axe$variable == variable]
-    v_dims <- dim$name[dim$id %in% v_dims]
-    
     if(length(v_dims) == 0) return(NULL)
     
-    if(all(v_dims %in% var$name)) { 
-      coord_vars <- v_dims
+    if(any(v_dims %in% var$name)) { 
+      coord_vars <- v_dims[v_dims %in% var$name]
     } else {
       return(NULL)
+    }
+  } else {
+    if(any(v_dims %in% var$name)) {
+      coord_vars <- unique(c(coord_vars, v_dims[v_dims %in% var$name]))
     }
   }
   
@@ -98,18 +104,20 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
                       atts = filter(att, variable %in% coord_vars), 
                       simplify = FALSE)
   
-  coord_var <- replace(coord_var, sapply(coord_var, is.null), "unknown")
+  coord_var <- coord_var[!sapply(coord_var, is.null)]
   
-  coord_var_base <- tibble::as_tibble(list(coord_var = names(coord_var),
-                                      axis = unlist(coord_var)))
-  
-  out <- tibble::tibble(variable = character(0), 
-                        X = character(0),
-                        Y = character(0),
-                        Z = character(0),
-                        T = character(0))
-  
-  if(!aux) {
+  if(length(coord_var) == 0) {
+    return(NULL)
+  } else {
+    coord_var_base <- tibble::as_tibble(list(coord_var = names(coord_var),
+                                             axis = unlist(coord_var)))
+    
+    out <- tibble::tibble(variable = character(0), 
+                          X = character(0),
+                          Y = character(0),
+                          Z = character(0),
+                          T = character(0))
+    
     # coordinate variables not named in a coordinates attribute relate 
     # by a shared dimension. First we need to get their dimension joined in.
     coord_var <- coord_var_base %>%
@@ -117,22 +125,23 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
     
     # Now we can build up a table that relates data variables to 
     # coordinate variables.
-    bind_rows(out, tibble::as_tibble(list(variable = variable)) %>%
-                left_join(select(axe, -axis), by = "variable") %>%
-                left_join(coord_var, by = "dimension") %>%
-                filter(!is.na(coord_var)) %>%
-                select(variable, axis, coord_var) %>%
-                tidyr::spread(key = axis, value = coord_var)
-    )
-  } else {
-    bind_rows(out, coordinates_atts %>%
-                select(variable, value) %>%
-                mutate(value = as.character(value)) %>%
-                mutate(value = strsplit(value, " ")) %>%
-                tidyr::unnest() %>%
-                left_join(coord_var_base, by = c("value" = "coord_var")) %>%
-                tidyr::spread(key = axis, value = value)
-    )
+    coord_var <- tibble::as_tibble(list(variable = variable)) %>%
+      left_join(select(axe, -axis), by = "variable") %>%
+      left_join(coord_var, by = "dimension") %>%
+      filter(!is.na(coord_var)) %>%
+      select(variable, axis, coord_var) %>%
+      distinct()
+    
+    tryCatch({
+      return(bind_rows(out, coord_var %>%
+                         tidyr::spread(key = axis, value = coord_var)))
+    }, error = function(e) { 
+      # Takes care of the case where there are both normal and auxiliary coordinate variables.
+      return(bind_rows(out, filter(coord_var, !coord_var %in% dim$name) %>%
+                         tidyr::spread(key = axis, value = coord_var),
+                       filter(coord_var, coord_var %in% dim$name)  %>%
+                         tidyr::spread(key = axis, value = coord_var)))
+    })
   }
 }
 
@@ -144,10 +153,12 @@ divine_XYZT <- function(var, atts) {
   
   # By units is preferred by COARDS
   lon_units <- c("degrees_east|degree_east|degree_E|degrees_E|degreeE|degreesE")
-  if(grepl(lon_units, att_sub[["units"]], ignore.case = TRUE)) return("X")
+  if(!is.null(att_sub[["units"]]) &&
+     grepl(lon_units, att_sub[["units"]], ignore.case = TRUE)) return("X")
   
   lat_units <- "degrees_north|degree_north|degree_N|degrees_N|degreeN|degreesN"
-  if(grepl(lat_units, att_sub[["units"]], ignore.case = TRUE)) return("Y")
+  if(!is.null(att_sub[["units"]]) &&
+     grepl(lat_units, att_sub[["units"]], ignore.case = TRUE)) return("Y")
   
   # lat/lon by standard name
   if(!is.null(att_sub[["standard_name"]]) && 
@@ -164,7 +175,8 @@ divine_XYZT <- function(var, atts) {
   
   if(!is.null(att_sub[["positive"]])) return("Z")
   
-  if(grepl("since", att_sub[["units"]])) return("T")
+  if(!is.null(att_sub[["units"]]) &&
+     grepl("since", att_sub[["units"]])) return("T")
   
   if(any(grepl("x coordinate of projection", att_sub)) | 
      any(grepl("projection_x_coordinate", att_sub))) return("X")
@@ -172,4 +184,3 @@ divine_XYZT <- function(var, atts) {
   if(any(grepl("y coordinate of projection", att_sub)) | 
      any(grepl("projection_y_coordinate", att_sub))) return("Y")
 }
-               
