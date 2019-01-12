@@ -207,6 +207,11 @@ getGeoDatum <- function(gm) {
       }
     }
   }
+  
+  if(!is.null(gm$inverse_flattening) && gm$inverse_flattening == 0) {
+    gm$inverse_flattening <- NULL
+    gm$semi_minor_axis <- gm$semi_major_axis
+  }
 
   if(!is.null(gm$inverse_flattening)) {
     geoDatum <- paste0("+a=", gm$semi_major_axis,

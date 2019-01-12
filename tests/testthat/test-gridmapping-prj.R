@@ -477,3 +477,39 @@ test_that("spherical", {
                     inverse_flattening = 1.56985871271586e-07, 
                     longitude_of_prime_meridian = 0))
 })
+
+test_that("more spherical", {
+  p <- "+proj=lcc +lat_1=30 +lat_2=65 +x_0=-6000 +y_0=-6000 +units=m +lat_0=48 +lon_0=9.75 +a=6371229 +b=6371229 +pm=0 +no_defs"
+  
+  # from "https://github.com/mdsumner//rasterwise/extdata/EURO-CORDEX_81_DOMAIN000_54/EURO-CORDEX_81_DOMAIN000.nc"
+  c <- list(proj4_params = "+proj=lcc +lat_1=30.00 +lat_2=65.00 +lat_0=48.00 +lon_0=9.75 +x_0=-6000. +y_0=-6000. +ellps=sphere +a=6371229. +b=6371229. +units=m +no_defs", 
+             grid_mapping_name = "lambert_conformal_conic", 
+             standard_parallel = c(30, 65), 
+             longitude_of_central_meridian = 9.75, 
+             latitude_of_projection_origin = 48, 
+             semi_major_axis = 6371229, 
+             inverse_flattening = 0, # This is the BS that caused an Inf!
+             false_easting = -6000, 
+             false_northing = -6000, 
+             `_CoordinateTransformType` = "Projection", 
+             `_CoordinateAxisTypes` = "GeoX GeoY")
+  
+
+   prj <- suppressWarnings(nc_gm_to_prj(c))
+   
+   expect_equal(prj, p)
+   
+   crs <- nc_prj_to_gridmapping(p)
+   crs <- stats::setNames(crs$value, crs$name)
+  
+   expect_equal(crs, 
+                list(grid_mapping_name = "lambert_conformal_conic", 
+                     standard_parallel = c(30, 65), 
+                     false_easting = -6000, 
+                     false_northing = -6000, 
+                     latitude_of_projection_origin = 48, 
+                     longitude_of_central_meridian = 9.75, 
+                     semi_major_axis = 6371229, 
+                     semi_minor_axis = 6371229, 
+                     longitude_of_prime_meridian = 0))
+})

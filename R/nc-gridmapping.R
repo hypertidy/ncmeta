@@ -60,8 +60,8 @@ nc_grid_mapping_atts.data.frame <- function(x, data_variable = NULL) {
                                                0))))
   }
   
-  grid_mapping_vars <- dplyr::filter(x, variable == data_variable & 
-                                      name == gm_att) %>%
+  grid_mapping_vars <- dplyr::filter(x, variable %in% data_variable & 
+                                      name %in% gm_att) %>%
     dplyr::mutate(value = as.character(value))
   
   grid_mapping_atts <- dplyr::filter(x, variable %in% grid_mapping_vars$value)
@@ -298,7 +298,7 @@ getGeoDatum_gm <- function(al) {
         longitude_of_prime_meridian = as.numeric(al$pm))
   } else if(!is.null(al$a) && !is.null(al$b) && !is.null(al$pm)) {
   	list(semi_major_axis = as.numeric(al$a),
-  			 inverse_flattening = (1/as.numeric(al$b)),
+  			 semi_minor_axis = as.numeric(al$b),
   			 longitude_of_prime_meridian = as.numeric(al$pm))
   } else {
   	warning("no datum information found assuming WGS84")

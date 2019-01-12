@@ -1,17 +1,21 @@
 #' Get Coordinate Variables for Given Variable
 #' 
 #' In NetCDF, variables are defined along dimensions and are said to have "coordinate 
-#' variables" that define the typically spatio-temporal positions of the data's cells.
+#' variables" that define the (typically spatio-temporal) positions of the data's cells.
 #' 
 #' This function attempts to identify the X, Y, Z, and T coordinate variables for each
 #' data variable in the provided NetCDF source. The NetCDF-CF attribute conventions are
 #' used to make this determination.
 #' 
+#' All variables that can be related to a spatio-temporal axis, including coordinate 
+#' variables are returned. For coordinate variables, a "bounds" column is included in 
+#' the response indicating which variable contains bounds information.
+#' 
 #' See \url{http://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html#coordinate-system}
 #' for more.
 #' 
-#' @return tibble with "variable", "X", "Y", "Z", and "T" columns that reference 
-#' variables by name.
+#' @return tibble with "variable", "X", "Y", "Z", "T", and "bounds" columns that reference 
+#' variables by name. 
 #' 
 #' @name nc_coord_var
 #' @export
@@ -132,16 +136,28 @@ nc_coord_var_finder <- function(dim, var, att, axe, variable) {
       select(variable, axis, coord_var) %>%
       distinct()
     
-    tryCatch({
-      return(bind_rows(out, coord_var %>%
-                         tidyr::spread(key = axis, value = coord_var)))
+    out <-tryCatch({
+      bind_rows(out, coord_var %>%
+                  tidyr::spread(key = axis, value = coord_var))
     }, error = function(e) { 
       # Takes care of the case where there are both normal and auxiliary coordinate variables.
-      return(bind_rows(out, filter(coord_var, !coord_var %in% dim$name) %>%
-                         tidyr::spread(key = axis, value = coord_var),
-                       filter(coord_var, coord_var %in% dim$name)  %>%
-                         tidyr::spread(key = axis, value = coord_var)))
+      bind_rows(out, filter(coord_var, !coord_var %in% dim$name) %>%
+                  tidyr::spread(key = axis, value = coord_var),
+                filter(coord_var, coord_var %in% dim$name)  %>%
+                  tidyr::spread(key = axis, value = coord_var))
     })
+    
+    bounds <- get_bounds(att)
+    if(nrow(bounds) > 0) {
+      out <- left_join(out, bounds, by = "variable")
+    } else {
+      if(nrow(out) > 0) {
+        out$bounds <- NA_character_
+      } else {
+        out$bounds <- character(0)
+      }
+    }
+    return(out)
   }
 }
 
@@ -183,4 +199,10 @@ divine_XYZT <- function(var, atts) {
   
   if(any(grepl("y coordinate of projection", att_sub)) | 
      any(grepl("projection_y_coordinate", att_sub))) return("Y")
+}
+
+get_bounds <- function(atts) {
+  filter(atts, grepl("bounds", atts$name, ignore.case = TRUE)) %>%
+    select(variable, bounds = value) %>%
+    mutate(bounds = as.character(bounds))
 }
