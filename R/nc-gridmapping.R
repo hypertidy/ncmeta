@@ -122,6 +122,7 @@ GGFP <- function(al) UseMethod("GGFP")
 GGFP.latitude_longitude <- function(al) {
   gm <- c(list(grid_mapping_name = "latitude_longitude"),
           getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.albers_conical_equal_area <- function(al) {
@@ -131,6 +132,7 @@ GGFP.albers_conical_equal_area <- function(al) {
        falseEastNorth_gm(al),
        standPar_gm(al),
        getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.azimuthal_equidistant <- function(al) {
@@ -139,6 +141,7 @@ GGFP.azimuthal_equidistant <- function(al) {
           latProjOrig_gm(al),
           falseEastNorth_gm(al),
           getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.lambert_azimuthal_equal_area <- function(al) {
@@ -147,6 +150,7 @@ GGFP.lambert_azimuthal_equal_area <- function(al) {
           lonProjOrig_gm(al),
           falseEastNorth_gm(al),
           getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.lambert_conformal_conic <- function(al) {
@@ -156,6 +160,7 @@ GGFP.lambert_conformal_conic <- function(al) {
                     latProjOrig_gm(al),
                     lonCentMer_gm(al),
                     getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.lambert_cylindrical_equal_area <- function(al) {
@@ -164,6 +169,7 @@ GGFP.lambert_cylindrical_equal_area <- function(al) {
                     oneStandPar_gm(al),
                     falseEastNorth_gm(al),
                     getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.mercator <- function(al) {
@@ -180,6 +186,7 @@ GGFP.mercator <- function(al) {
                       falseEastNorth_gm(al),
                       getGeoDatum_gm(al))
   }
+  gm
 }
 
 GGFP.oblique_mercator <- function(al) {
@@ -191,6 +198,7 @@ GGFP.oblique_mercator <- function(al) {
                     oMerc_gm(al),
                     falseEastNorth_gm(al),
                     getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.orthographic <- function(al) {
@@ -199,6 +207,7 @@ GGFP.orthographic <- function(al) {
                     lonProjOrig_gm(al),
                     falseEastNorth_gm(al),
                     getGeoDatum_gm(al))
+  gm
 }
 
 # GGFP.polar_stereographic <- function(al) {
@@ -217,6 +226,7 @@ GGFP.orthographic <- function(al) {
 #                       falseEastNorth_gm(al),
 #                       getGeoDatum_gm(al))
 #   }
+#  gm
 # }
 
 # GGFP.sinusoidal <- function(al) {
@@ -224,6 +234,7 @@ GGFP.orthographic <- function(al) {
 #                     lonProjOrig_gm(al),
 #                     falseEastNorth_gm(al),
 #                     getGeoDatum_gm(al))
+# gm
 # }
 
 GGFP.stereographic <- function(al) {
@@ -233,6 +244,7 @@ GGFP.stereographic <- function(al) {
                     scaleFactor_gm(al),
                     falseEastNorth_gm(al),
                     getGeoDatum_gm(al))
+  gm
 }
 
 GGFP.transverse_mercator <- function(al) {
@@ -242,6 +254,7 @@ GGFP.transverse_mercator <- function(al) {
                     scaleFactor_gm(al),
                     falseEastNorth_gm(al),
                     getGeoDatum_gm(al))
+  gm
 }
 
 lonCentMer_gm <- function(al) {
