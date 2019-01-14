@@ -200,9 +200,9 @@ divine_XYZT <- function(var, atts) {
   if(any(grepl("y coordinate of projection", att_sub)) | 
      any(grepl("projection_y_coordinate", att_sub))) return("Y")
 }
-
+#' @importFrom rlang .data
 get_bounds <- function(atts) {
-  filter(atts, grepl("bounds", atts$name, ignore.case = TRUE)) %>%
-    select(variable, bounds = value) %>%
-    mutate(bounds = as.character(bounds))
+  dplyr::filter(atts, grepl("bounds", atts$name, ignore.case = TRUE)) %>%
+    dplyr::select(variable, bounds = value) %>%
+    dplyr::mutate(bounds = as.character(.data$bounds))
 }
