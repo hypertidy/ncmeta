@@ -465,26 +465,17 @@ test_that("spherical", {
   
   crs <- nc_prj_to_gridmapping(p)
   crs <- stats::setNames(crs$value, crs$name)
- on_windows <-                list(grid_mapping_name = "lambert_conformal_conic", 
-                                  standard_parallel = c(30, 60), 
-                                  false_easting = 0, 
-                                  false_northing = 0, 
-                                  latitude_of_projection_origin = 40.0000076294, 
-                                  longitude_of_central_meridian = -97, 
-                                  semi_major_axis = 6370000, 
-                                  inverse_flattening = 1.56985871271586e-07, 
-                                  longitude_of_prime_meridian = 0)
- #on_linux <- on_windows
- #on_linux$inverse_flattening <- NULL
- #on_linux$semi_minor_axis <- NULL
- if (.Platform$OS.type == "windows") {
-   ## FIXME: seems different on different systems? (not able to explore rn)
-  ##expect_equal(crs, on_windows)
- }
- if (.Platform$OS.type == "unix") {
-   ## FIXME
-   ## expect_equal(crs, on_linux)
- }
+  
+  expect_equal(crs, 
+               list(grid_mapping_name = "lambert_conformal_conic", 
+                    standard_parallel = c(30, 60), 
+                    false_easting = 0, 
+                    false_northing = 0, 
+                    latitude_of_projection_origin = 40.0000076294, 
+                    longitude_of_central_meridian = -97, 
+                    semi_major_axis = 6370000, 
+                    semi_minor_axis = 6370000,
+                    longitude_of_prime_meridian = 0))
  
 })
 
