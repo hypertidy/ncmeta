@@ -57,6 +57,10 @@ nc_grids_dimvar <- function(dimension, variable, axes) {
   out <-   dplyr::arrange(out, dplyr::desc(nchar(.data$grid)), .data$grid)
   ## catch the NA shapes (the scalars) and set to "-"
   out[["grid"]][is.na(out[["grid"]]) | out[["grid"]] == "DNA"] <- "S"
-  out  
+  out[["ndims"]] <- unlist(lapply(strsplit(out$grid, ","), length))
+  out  %>% 
+    dplyr::group_by(.data$grid, .data$ndims) %>% 
+    dplyr::summarize(nvars = dplyr::n()) %>% 
+    dplyr::ungroup()
 }
 
