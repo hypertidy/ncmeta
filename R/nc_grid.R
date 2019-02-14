@@ -42,6 +42,11 @@ nc_grids.NetCDF <- function(x, ...) {
 # nc_axes(f, var) ## just these ones
 # nc_axis(i)  ## just one, of all ??
 
+expand_var <- function(x) {
+  nc_axes(x) %>% 
+    dplyr::inner_join(nc_dims(x), c("dimension" = "id")) %>% 
+    dplyr::inner_join(nc_vars(x), c("variable" = "name"))
+}
 
 #' @importFrom dplyr desc arrange
 #' @importFrom rlang .data
@@ -58,9 +63,12 @@ nc_grids_dimvar <- function(dimension, variable, axes) {
   ## catch the NA shapes (the scalars) and set to "-"
   out[["grid"]][is.na(out[["grid"]]) | out[["grid"]] == "DNA"] <- "S"
   out[["ndims"]] <- unlist(lapply(strsplit(out$grid, ","), length))
-  out  %>% 
-    dplyr::group_by(.data$grid, .data$ndims) %>% 
-    dplyr::summarize(nvars = dplyr::n()) %>% 
-    dplyr::ungroup()
+  # out  %>% 
+  #   dplyr::group_by(.data$grid, .data$ndims) %>% 
+  #   dplyr::summarize(nvars = dplyr::n()) %>% 
+  #   dplyr::ungroup()
+  out <- tidyr::nest(out, .data$variable, .key = "variables") 
+  out$nvars <- unlist(lapply(out$variables, nrow))
+  out
 }
 

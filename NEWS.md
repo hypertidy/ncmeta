@@ -1,5 +1,7 @@
 # ncmeta dev
 
+* `nc_grids()` now normal form, with nested variables so we can easily link grids to variables. 
+
 * New functions `nc_coord_var` to find coordinate variables (if any), 
  `gm_to_prj` to determine PROJ string in use, and `nc_grid_mapping_atts` to 
   determine grid mapping parameters; #19, #14, #12, #9. 
