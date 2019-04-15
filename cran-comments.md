@@ -8,8 +8,8 @@ https://cran.rstudio.com/web/checks/check_results_ncmeta.html
 Thanks!
 
 ## Test environments
-* local debian 18.04 install, R 3.5.1
-* ubuntu 14.04 (on travis-ci), R 3.5.1
+* local debian 18.04 install, R 3.5.3
+* ubuntu 14.04 (on travis-ci), R 3.5.3
 * win-builder (devel and release)
 
 ## R CMD check results
