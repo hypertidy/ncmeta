@@ -1,4 +1,4 @@
-# ncmeta dev
+# ncmeta 0.0.4
 
 * `nc_grids()` now normal form, with nested variables so we can easily link grids to variables. 
 
