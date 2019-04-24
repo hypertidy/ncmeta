@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NetCDF variable — nc_var • ncmeta</title>
+<title>Get projection from NetCDF-CF Grid Mapping — nc_gm_to_prj • ncmeta</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="NetCDF variable — nc_var" />
+<meta property="og:title" content="Get projection from NetCDF-CF Grid Mapping — nc_gm_to_prj" />
 
-<meta property="og:description" content="Return a data frame about the variable at index i." />
+<meta property="og:description" content="Takes NetCDF-CF grid mapping attributes and returns
+a proj4 string." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,48 +103,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>NetCDF variable</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hypertidy/ncmeta/blob/master/R/nc_var.R'><code>R/nc_var.R</code></a></small>
-    <div class="hidden name"><code>nc_var.Rd</code></div>
+    <h1>Get projection from NetCDF-CF Grid Mapping</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hypertidy/ncmeta/blob/master/R/nc-prj.R'><code>R/nc-prj.R</code></a></small>
+    <div class="hidden name"><code>nc_gm_to_prj.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return a data frame about the variable at index <code>i</code>.</p>
+    <p>Takes NetCDF-CF grid mapping attributes and returns
+a proj4 string.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>nc_var</span>(<span class='no'>x</span>, <span class='no'>i</span>)
+    <pre class="usage"><span class='fu'>nc_gm_to_prj</span>(<span class='no'>x</span>)
 
-<span class='co'># S3 method for character</span>
-<span class='fu'>nc_var</span>(<span class='no'>x</span>, <span class='no'>i</span>)
+<span class='co'># S3 method for data.frame</span>
+<span class='fu'>nc_gm_to_prj</span>(<span class='no'>x</span>)
 
-<span class='co'># S3 method for NetCDF</span>
-<span class='fu'>nc_var</span>(<span class='no'>x</span>, <span class='no'>i</span>)</pre>
+<span class='co'># S3 method for list</span>
+<span class='fu'>nc_gm_to_prj</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>file name or handle</p></td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td><p>variable index (zero based)</p></td>
+      <td><p>list or data.frame of attributes of the grid mapping variable
+as returned by ncdf or ncdf4's get attributes functions or ncmeta's nc_grid_mapping_atts.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data frame of variable information</p>
+    <p>A proj4 string.</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <div class='dont-index'><p><code>nc_vars</code> to obtain information about all variables, <code>nc_inq</code> for an
-overview of the file</p></div>
+    <p>The WGS84 datum is used as a default if one os not provided
+in the grid mapping.</p>
+<p>If only a semi_major axis is provided, a sperical earth is assumed.</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <ol>
+<li><p><a href='https://en.wikibooks.org/wiki/PROJ.4'>https://en.wikibooks.org/wiki/PROJ.4</a></p></li>
+<li><p><a href='https://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus'>https://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus</a></p></li>
+<li><p><a href='http://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings'>http://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings</a></p></li>
+</ol>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='no'>crs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>grid_mapping_name</span><span class='kw'>=</span><span class='st'>"latitude_longitude"</span>,
+            <span class='kw'>longitude_of_prime_meridian</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+            <span class='kw'>semi_major_axis</span> <span class='kw'>=</span> <span class='fl'>6378137</span>,
+            <span class='kw'>inverse_flattening</span> <span class='kw'>=</span> <span class='fl'>298</span>)
+<span class='fu'>nc_gm_to_prj</span>(<span class='no'>crs</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -152,8 +167,12 @@ overview of the file</p></div>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
