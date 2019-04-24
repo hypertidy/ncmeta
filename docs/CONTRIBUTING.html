@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NetCDF variable — nc_var • ncmeta</title>
+<title>Contributing to the ncmeta R package • ncmeta</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -25,15 +25,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="NetCDF variable — nc_var" />
-
-<meta property="og:description" content="Return a data frame about the variable at index i." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Contributing to the ncmeta R package" />
 
 
 
@@ -50,7 +47,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -62,7 +59,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ncmeta</a>
+        <a class="navbar-link" href="index.html">ncmeta</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9002</span>
       </span>
     </div>
@@ -70,16 +67,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -100,63 +97,31 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>NetCDF variable</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hypertidy/ncmeta/blob/master/R/nc_var.R'><code>R/nc_var.R</code></a></small>
-    <div class="hidden name"><code>nc_var.Rd</code></div>
+      <h1>Contributing to the ncmeta R package</h1>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Return a data frame about the variable at index <code>i</code>.</p>
-    
-    </div>
+<div id="contributing-to-the-ncmeta-r-package" class="section level1">
 
-    <pre class="usage"><span class='fu'>nc_var</span>(<span class='no'>x</span>, <span class='no'>i</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>nc_var</span>(<span class='no'>x</span>, <span class='no'>i</span>)
-
-<span class='co'># S3 method for NetCDF</span>
-<span class='fu'>nc_var</span>(<span class='no'>x</span>, <span class='no'>i</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>file name or handle</p></td>
-    </tr>
-    <tr>
-      <th>i</th>
-      <td><p>variable index (zero based)</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>data frame of variable information</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code>nc_vars</code> to obtain information about all variables, <code>nc_inq</code> for an
-overview of the file</p></div>
-    
-
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-  </div>
+<p>You want to contribute to <strong>ncmeta</strong>? Great!</p>
+<p>Please submit questions, bug reports, and requests in the <a href="https://github.com/hypertidy/ncmeta/issues">issues tracker</a>. Please submit bug reports with a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
+<p>If you plan to contribute code, go ahead and fork the repo and submit a pull request. A few notes:</p>
+<ul>
+<li>This package is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms. Why? We want contribution to be enjoyable and rewarding for everyone!</li>
+<li>I’m avoiding dependencies on unrelated libs, such as <a href="https://gdal.org/">GDAL</a> which means no use of rgdal, sf, or vapour. This is a package for <a href="https://www.unidata.ucar.edu/software/netcdf/">NetCDF sources</a> and GDAL has its own support for this format that is completely independent.</li>
+<li>If you have a large change, please open an issue first to discuss.</li>
+<li>I’ll generally include contributors as authors in the DESCRIPTION file for most contributions that go beyond small typos in code or documentation. Please let me know if you <strong>do not</strong> want your contribution included that way.</li>
+<li>This package generally uses the <a href="https://ropensci.github.io/dev_guide/">rOpenSci packaging guidelines</a> for style and structure.</li>
+<li>Documentation is generated by <strong>roxygen2</strong>. Please write documentation in code files and let it auto-generate documentation files. We use a recent version so documentation my be <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">written in markdown</a>
+</li>
+</ul>
 </div>
+
+  </div>
+
+</div>
+
 
       <footer>
       <div class="copyright">
