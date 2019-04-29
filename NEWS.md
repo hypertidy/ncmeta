@@ -1,3 +1,10 @@
+# ncmeta 0.0.4.9001
+
+* The output of `nc_atts()` is now more consistent, with the same structure given for only global attributes, or
+ a mix of variable attributes and global attributes. If there are no attributes at all the output has zero rows, 
+ but now has the correct column types. 
+
+
 # ncmeta 0.0.4
 
 * `nc_grids()` now normal form, with nested variables so we can easily link grids to variables. 
