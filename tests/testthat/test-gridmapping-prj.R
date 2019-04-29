@@ -14,7 +14,7 @@ test_that("nc_grid_mapping_atts", {
   nc <- system.file("extdata/daymet_sample.nc", package = "ncmeta")
   gm <- nc_grid_mapping_atts(nc)
   
-  expect(all(list(grid_mapping_name = "lambert_conformal_conic",
+  expect_true(all(list(grid_mapping_name = "lambert_conformal_conic",
                   longitude_of_central_meridian = -100,
                   latitude_of_projection_origin = 42.5,
                   false_easting = 0,

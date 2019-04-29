@@ -45,11 +45,23 @@ test_that("failure is graceful", {
   expect_warning(abin <- nc_atts(l3binfile), "no variables recognizable")
   
   abin %>%  expect_s3_class("tbl_df") %>% 
-    expect_named(c("id", "name", "type", "ndims", "dimids", "natts")) 
-  expect_that(nrow(abin), equals(1L))
-  expect_that(abin$name, equals("NC_GLOBAL"))
-  expect_that(abin$id, equals(-1))
-  expect_true(all(is.na(c(abin$dimids, abin$ndims))))
-  expect_that(abin$natts, equals(49))
+    expect_named(c("id", "name", "variable", "value")) 
+  expect_that(nrow(abin), equals(49L))
+  expect_that(abin$variable, equals(rep("NC_GLOBAL",49L)))
+  expect_that(abin$name, equals(c("product_name", "title", "instrument", "platform", "temporal_range", 
+                                  "start_orbit_number", "end_orbit_number", "date_created", "processing_version", 
+                                  "history", "time_coverage_start", "time_coverage_end", "northernmost_latitude", 
+                                  "southernmost_latitude", "easternmost_longitude", "westernmost_longitude", 
+                                  "geospatial_lat_max", "geospatial_lat_min", "geospatial_lon_max", 
+                                  "geospatial_lon_min", "geospatial_lat_units", "geospatial_lon_units", 
+                                  "geospatial_lon_resolution", "geospatial_lat_resolution", "spatialResolution", 
+                                  "data_bins", "percent_data_bins", "units", "binning_scheme", 
+                                  "project", "institution", "standard_name_vocabulary", "Metadata_Conventions", 
+                                  "Conventions", "naming_authority", "id", "license", "creator_name", 
+                                  "publisher_name", "creator_email", "publisher_email", "creator_url", 
+                                  "publisher_url", "processing_level", "cdm_data_type", "identifier_product_doi_authority", 
+                                  "identifier_product_doi", "keywords", "keywords_vocabulary")))
+  expect_that(unique(abin$id), equals(-1))
+
 })
 

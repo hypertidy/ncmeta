@@ -71,8 +71,8 @@ nc_atts <- function(x, variable = NULL, ...) {
 #' @importFrom dplyr distinct
 #' @importFrom tibble tibble
 nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
-    global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_", 
-                   ndims = NA_real_, dimids = NA_real_, natts = nc_inq(x)$ngatts))
+    global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", 
+                    natts = nc_inq(x)$ngatts))
   
     #vars <- nc_axes(x)
     vars <- try(nc_vars(x), silent = TRUE)
@@ -80,21 +80,32 @@ nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
   ## bomb out if ndims is NA
   if (inherits(vars, "try-error") || nrow(vars) < 1L) {
     warning("no variables recognizable")
+    atts <- lapply(seq_len(global$natts), function(a) nc_att(x, "NC_GLOBAL", a - 1))
+    if (length(atts) > 0) {
+      value <- unlist(lapply(atts, function(b) b$value), recursive = FALSE)
+      name <- unlist(lapply(atts, function(b) b$name))
+    } else {
+      value <- list()
+      name <- character(0)
+    }
+    global <- tibble::tibble(id = -1, name = name, variable = "NC_GLOBAL", value = value)
     return(global)
   } else {
     #var <- dplyr::distinct(vars, .data$id, .data$name, .data$natts)
     var <- vars[, c("id", "name", "natts")]
     var <- var[!duplicated(var), ]
+    if (!is.null(variable)) out <- dplyr::filter(out, .data$variable == variable[1])
   }
-  
+    if (!is.null(variable) && !variable %in% var$variable) stop("specified variable not found")
   var <- dplyr::bind_rows(var, global)
   #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 #bind_rows <- function(x) x
+  if (any(var$natts > 0)) {
    out <-  dplyr::bind_rows(lapply(split(var, var$name)[unique(var$name)], 
                      function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
-   if (!is.null(variable) && !variable %in% out$variable) stop("specified variable not found")
-   vv <- variable[1]
-   if (!is.null(variable)) out <- dplyr::filter(out, .data$variable == vv)
+   } else {
+     out <- tibble::tibble(id = double(0), name = character(0), variable = character(0), value = list())
+   }
    out
 }
 
@@ -111,60 +122,3 @@ nc_atts.character <- function(x, variable = NULL, ...)  {
 }
 
 
-## TODO: these functions aren't being used? except by nc_meta itself
-## there are some internal functions that are used in different places
-## but not others ...
-nc_att_internal <- function(x, variable_id, attribute_id, variable_name) {
-  #attinfo <- att.inq.nc(x, variable_id, attribute_id)
-  nameflag <- 0
-  globflag <- if (variable_id < 0) 1 else 0
-
-  # attinfo <- .Call("R_nc_inq_att", as.integer(x), as.integer(variable_id),
-  #       as.character(""), as.integer(attribute_id), as.integer(nameflag),
-  #       as.integer(globflag), PACKAGE = "RNetCDF")
-  #
-  attinfo <- RNetCDF::att.inq.nc(x, variable_id, attribute_id)
-  attribute <- attinfo[["name"]]
-  numflag <- if(attinfo[["type"]] == "NC_CHAR") 0 else 1
-
-  # att <- .Call("R_nc_get_att", as.integer(x), as.integer(variable_id),
-  #              attribute, as.integer(numflag), as.integer(globflag),
-  #              PACKAGE = "RNetCDF")
-  att <- RNetCDF::att.get.nc(x, variable_id, attribute_id)
-  tibble::as_tibble(list(attribute = attribute, variable = variable_name, value = att))
-}
-
-
-nc_atts_internal <- function(x, n_global_atts, variables = NULL, ...) {
-
-global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", type = "NA_character_",
-                                  ndims = NA_real_, natts = n_global_atts,
-                                dim_coord = FALSE))
-
-
-
-
-  ## bomb out if ndims is NA
-  if (is.null(variables) || nrow(variables) < 1L) {
-    warning("no variables recognizable")
-    return(global)
-  }
-
- variables <- rbind(variables, global)
-
-  iatt_vector <- unlist(lapply(variables[["natts"]], seq_len)) - 1
-
-  var_names <- rep(variables[["name"]], variables[["natts"]])
-
-  var_ids <- rep(variables[["id"]], variables[["natts"]])
-
-  l <- vector('list', length(var_names))
-
-  for (iatt in seq_along(var_names)) {
-    l[[iatt]] <- nc_att_internal(x, var_ids[iatt], iatt_vector[iatt], var_names[iatt])
-    l[[iatt]][["value"]] <- list(l[[iatt]][["value"]])
-}
-
-
-do.call(rbind, l)
-}

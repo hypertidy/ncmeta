@@ -44,7 +44,7 @@ nc_meta.NetCDF <- function(x, ...) {
   
   structure(list(dimension = dims, 
        variable = vars, 
-       attribute = nc_atts_internal(x, inq$ngatts, vars), 
+       attribute = nc_atts(x), 
        axis = axis,
        grid = nc_grids_dimvar(dims, vars, axis)),
        class = "ncmeta")

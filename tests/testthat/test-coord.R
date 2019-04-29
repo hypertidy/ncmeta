@@ -51,16 +51,16 @@ test_that("nc_coord_vars brings back expected content for sample", {
   
   coord_vars <- nc_coord_var(f)
   
-  expect(nrow(coord_vars) == 5)
+  expect_true(nrow(coord_vars) == 5)
   
   coord_vars <- coord_vars[coord_vars$variable != "Time", ]
   
-  expect(nrow(coord_vars) == 4)
+  expect_true(nrow(coord_vars) == 4)
   
-  expect(all(coord_vars$X == "XLONG"))
-  expect(all(coord_vars$Y == "XLAT"))
-  expect(all(is.na(coord_vars$Z)))
-  expect(all(coord_vars$T == "Time"))
+  expect_true(all(coord_vars$X == "XLONG"))
+  expect_true(all(coord_vars$Y == "XLAT"))
+  expect_true(all(is.na(coord_vars$Z)))
+  expect_true(all(coord_vars$T == "Time"))
 })
 
 
@@ -75,7 +75,7 @@ test_that("slightly broken projected coordinates work", {
   expect_equal(as.character(coord_vars[coord_vars$variable == "prcp", ]),
                c("prcp", "x", "y", NA, "time", NA))
   
-  expect(nrow(coord_vars) == 4)
+  expect_true(nrow(coord_vars) == 4)
   
   expect_equal(as.character(coord_vars[coord_vars$variable == "time", ]), 
                c("time", NA, NA, NA, "time", "time_bnds"))
@@ -87,7 +87,7 @@ test_that("degen z", {
   
   coord_vars <- nc_coord_var(f)
 
-  expect(all(is.na(coord_vars$Z)))
+  expect_true(all(is.na(coord_vars$Z)))
 })
 
 test_that("timeseries", {
@@ -97,7 +97,7 @@ test_that("timeseries", {
   
   expect_equal(as.character(coord_vars[coord_vars$variable == "pr",]), 
                c("pr", "lon", "lat", NA, "time", NA))
-  expect(nrow(coord_vars) == 2)
+  expect_true(nrow(coord_vars) == 2)
 })
 
 test_that("high dim", {
@@ -105,7 +105,7 @@ test_that("high dim", {
   
   coord_vars <- nc_coord_var(f)
   
-  expect(nrow(coord_vars) == 0)
+  expect_true(nrow(coord_vars) == 0)
 })
 
 test_that("all the things", {
@@ -113,6 +113,7 @@ test_that("all the things", {
   
   coord_vars <- nc_coord_var(f)
   
-  expect(sum(coord_vars$variable == "pr") == 2)
+  expect_true(sum(coord_vars$variable == "pr") == 2)
   
 })
+
