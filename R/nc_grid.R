@@ -51,7 +51,7 @@ expand_var <- function(x) {
 #' @importFrom dplyr desc arrange
 #' @importFrom rlang .data
 nc_grids_dimvar <- function(dimension, variable, axes) {
-  
+  browser()
   if (is.null(variable) || (nrow(variable) < 1 & nrow(dimension) < 1)) return(tibble::tibble())
   native_var <- unique(axes$variable)
   shape_instances_byvar <- split(axes$dimension, axes$variable)[native_var]
@@ -67,8 +67,12 @@ nc_grids_dimvar <- function(dimension, variable, axes) {
   #   dplyr::group_by(.data$grid, .data$ndims) %>% 
   #   dplyr::summarize(nvars = dplyr::n()) %>% 
   #   dplyr::ungroup()
-  out <- tidyr::nest(out, .data$variable, .key = "variables") 
-  out$nvars <- unlist(lapply(out$variables, nrow))
-  out
+  if (utils::packageVersion("tidyr") > "0.8.3" ) {
+    nout <- tidyr::nest(out, variables = c(variable)) 
+  } else {
+    nout <- tidyr::nest(out, .data$variable, .key = "variables") 
+  }
+  nout$nvars <- unlist(lapply(nout$variables, nrow))
+  nout
 }
 
