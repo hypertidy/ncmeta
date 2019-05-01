@@ -51,7 +51,6 @@ expand_var <- function(x) {
 #' @importFrom dplyr desc arrange
 #' @importFrom rlang .data
 nc_grids_dimvar <- function(dimension, variable, axes) {
-  browser()
   if (is.null(variable) || (nrow(variable) < 1 & nrow(dimension) < 1)) return(tibble::tibble())
   native_var <- unique(axes$variable)
   shape_instances_byvar <- split(axes$dimension, axes$variable)[native_var]
