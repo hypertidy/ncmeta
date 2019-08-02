@@ -26,3 +26,11 @@ test_that('grids works', {
   v %>% expect_s3_class("tbl_df") %>% expect_named(c("id", "name", "type", "ndims", "natts"))
   expect_that(g[["variable"]], equals(c("chlor_a", "palette", "lat", "lon")))
 })
+
+test_that("nc4 bug", {
+  f <- system.file("extdata/gridmet_sample.nc", package = "ncmeta")
+  
+  vars <- nc_vars(f)
+  
+  expect_equal(nrow(vars), 5)
+})
