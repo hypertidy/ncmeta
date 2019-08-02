@@ -57,6 +57,7 @@ nc_axis_var <- function(x, i) {
   ## which is what we want here
   longest <- max(lengths(out))
   if (longest > 1L) out <- lapply(out, function(a) rep_len(a, length.out = longest))
+  out <- out[lengths(out) > 0]
   tibble::as_tibble(out)
 }
 
