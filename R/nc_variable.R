@@ -30,8 +30,7 @@ nc_vars.NetCDF <- function(x, ...) {
   nc_vars_internal(x, nvars)
 }
 nc_vars_internal <- function(x, nvars) {
-  dplyr::bind_rows(lapply(seq_len(nvars), function(i) nc_var(x, i-1))) 
-  #%>% 
-  #  dplyr::distinct(.data$id, .data$name, .data$type, .data$ndims, .data$natts)
+  dplyr::bind_rows(lapply(seq_len(nvars), function(i) nc_var(x, i-1))) %>% 
+    dplyr::distinct(.data$id, .data$name, .data$type, .data$ndims, .data$natts)
   
 }

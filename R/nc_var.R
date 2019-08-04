@@ -27,7 +27,7 @@ nc_var.NetCDF <- function(x, i) {
   out <- RNetCDF::var.inq.nc(x, i)
   out$dimids <- NULL
   out <- out[lengths(out) > 0]
-  tibble::as_tibble(out)
+  dplyr::distinct(tibble::as_tibble(out))
 }
 
 

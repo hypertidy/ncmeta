@@ -53,6 +53,8 @@ nc_axis_var <- function(x, i) {
   out <- RNetCDF::var.inq.nc(x, i)
   #dimids <- out$dimids
   
+  out[sapply(out, is.null)] <- NA
+  
   ## as_tibble expands each vector to the length of the longest one
   ## which is what we want here
   longest <- max(lengths(out))
