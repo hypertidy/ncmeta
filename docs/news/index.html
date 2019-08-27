@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ncmeta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -103,27 +103,46 @@
       <small>Source: <a href='https://github.com/hypertidy/ncmeta/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="ncmeta-003" class="section level1">
+    <div id="ncmeta-0-1-0" class="section level1">
 <h1 class="page-header">
-<a href="#ncmeta-003" class="anchor"></a>ncmeta 0.0.3<small> 2018-10-26 </small>
+<a href="#ncmeta-0-1-0" class="anchor"></a>ncmeta 0.1.0<small> Unreleased </small>
+</h1>
+<ul>
+<li><p>Extra checks and fixes to align with stars, and a future release of RNetCDF.</p></li>
+<li><p>Condition on version of tidyr for new <code>nest()</code> syntax &gt; 0.8.3.</p></li>
+<li><p>The output of <code><a href="../reference/nc_atts.html">nc_atts()</a></code> is now more consistent, with the same structure given for only global attributes, or a mix of variable attributes and global attributes. If there are no attributes at all the output has zero rows, but now has the correct column types.</p></li>
+</ul>
+</div>
+    <div id="ncmeta-0-0-4" class="section level1">
+<h1 class="page-header">
+<a href="#ncmeta-0-0-4" class="anchor"></a>ncmeta 0.0.4<small> 2019-04-19 </small>
+</h1>
+<ul>
+<li><p><code><a href="../reference/nc_grids.html">nc_grids()</a></code> now normal form, with nested variables so we can easily link grids to variables.</p></li>
+<li><p>New functions <code>nc_coord_var</code> to find coordinate variables (if any), <code>gm_to_prj</code> to determine PROJ string in use, and <code>nc_grid_mapping_atts</code> to determine grid mapping parameters; <a href='https://github.com/hypertidy/ncmeta/issues/19'>#19</a>, <a href='https://github.com/hypertidy/ncmeta/issues/14'>#14</a>, <a href='https://github.com/hypertidy/ncmeta/issues/12'>#12</a>, <a href='https://github.com/hypertidy/ncmeta/issues/9'>#9</a>.</p></li>
+</ul>
+</div>
+    <div id="ncmeta-0-0-3" class="section level1">
+<h1 class="page-header">
+<a href="#ncmeta-0-0-3" class="anchor"></a>ncmeta 0.0.3<small> 2018-10-26 </small>
 </h1>
 <ul>
 <li><p>Fix for grid organization providing variables out of native order.</p></li>
 <li><p>Added ‘variable’ argument to ‘nc_atts’, per <a href='https://github.com/hypertidy/ncmeta/issues/8'>#8</a>.</p></li>
 </ul>
 </div>
-    <div id="ncmeta-002" class="section level1">
+    <div id="ncmeta-0-0-2" class="section level1">
 <h1 class="page-header">
-<a href="#ncmeta-002" class="anchor"></a>ncmeta 0.0.2<small> 2018-02-13 </small>
+<a href="#ncmeta-0-0-2" class="anchor"></a>ncmeta 0.0.2<small> 2018-02-13 </small>
 </h1>
 <ul>
 <li>added some extra checks for bad source strings, particularly the empty string to prevent crashing (this happens with <code><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file()</a></code> where the file does not exist)</li>
 <li>fix attribute types problem</li>
 </ul>
 </div>
-    <div id="ncmeta-001" class="section level1">
+    <div id="ncmeta-0-0-1" class="section level1">
 <h1 class="page-header">
-<a href="#ncmeta-001" class="anchor"></a>ncmeta 0.0.1<small> 2017-12-01 </small>
+<a href="#ncmeta-0-0-1" class="anchor"></a>ncmeta 0.0.1<small> 2017-12-01 </small>
 </h1>
 <p>*updates from CRAN feedback</p>
 <ul>
@@ -140,9 +159,11 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#ncmeta-003">0.0.3</a></li>
-        <li><a href="#ncmeta-002">0.0.2</a></li>
-        <li><a href="#ncmeta-001">0.0.1</a></li>
+        <li><a href="#ncmeta-0-1-0">0.1.0</a></li>
+        <li><a href="#ncmeta-0-0-4">0.0.4</a></li>
+        <li><a href="#ncmeta-0-0-3">0.0.3</a></li>
+        <li><a href="#ncmeta-0-0-2">0.0.2</a></li>
+        <li><a href="#ncmeta-0-0-1">0.0.1</a></li>
       </ul>
     </div>
   </div>
