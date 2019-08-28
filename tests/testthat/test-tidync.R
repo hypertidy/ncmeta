@@ -1,7 +1,6 @@
 context("test-tidync.R")
 context("filter")
 
-f1 <- system.file("extdata/madishydro.nc", package = "ncmeta")
 # x1 <- tidync(f1) %>% activate("D5,D12") %>% hyper_filter(QCcheckNum  = index < 2)
 # x2 <- tidync(f1) %>% activate("D5,D12") %>% hyper_filter()
 # 
@@ -11,6 +10,10 @@ f1 <- system.file("extdata/madishydro.nc", package = "ncmeta")
 # x2 %>% expect_s3_class("tidync")
 
 test_that("file open and metadata is ok", {
+  skip_on_cran()
+  
+  f1 <- system.file("extdata/madishydro.nc", package = "ncmeta")
+  
   skip_if_not(file.exists(f1))
   nc_axes(f1)   %>% expect_s3_class("tbl_df") %>% 
     expect_named(c("axis", "variable", "dimension"))

@@ -26,7 +26,8 @@ nc_var.character <- function(x, i) {
 nc_var.NetCDF <- function(x, i) {
   out <- RNetCDF::var.inq.nc(x, i)
   out$dimids <- NULL
-  tibble::as_tibble(out)
+  out <- out[lengths(out) > 0]
+  dplyr::distinct(tibble::as_tibble(out))
 }
 
 

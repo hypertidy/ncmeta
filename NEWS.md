@@ -1,10 +1,13 @@
-# ncmeta 0.0.4.9002
+# ncmeta 0.1.0
 
-* Condition on version of tidy for new `nest()` syntax > 0.8.3. 
+* Extra checks and fixes to align with stars, and a future release of RNetCDF. 
 
-* The output of `nc_atts()` is now more consistent, with the same structure given for only global attributes, or
- a mix of variable attributes and global attributes. If there are no attributes at all the output has zero rows, 
- but now has the correct column types. 
+* Condition on version of tidyr for new `nest()` syntax > 0.8.3. 
+
+* The output of `nc_atts()` is now more consistent, with the same structure given for 
+ only global attributes, or a mix of variable attributes and global attributes. If 
+ there are no attributes at all the output has zero rows, but now has the correct 
+ column types. 
 
 
 # ncmeta 0.0.4
