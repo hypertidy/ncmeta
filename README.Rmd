@@ -76,5 +76,5 @@ Please let us know if you have any feedback, see the [Issues tab](https://github
 ## Community
 
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+Please note that this project is released with a [Contributor Code of Conduct](https://github.com/hypertidy/ncmeta/blob/master/CODE_OF_CONDUCT.md#contributor-code-of-conduct).
   By participating in this project you agree to abide by its terms.

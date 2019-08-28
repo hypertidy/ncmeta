@@ -91,5 +91,5 @@ questions.
 ## Community
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+Conduct](https://github.com/hypertidy/ncmeta/blob/master/CODE_OF_CONDUCT.md#contributor-code-of-conduct).
+By participating in this project you agree to abide by its terms.
