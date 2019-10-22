@@ -14,10 +14,10 @@
 
 # Dependencies
 
-|package |old   |new        |Δ  |
-|:-------|:-----|:----------|:--|
-|ncmeta  |0.1.0 |0.1.0.9001 |*  |
-|digest  |NA    |0.6.22     |*  |
+|package |old   |new    |Δ  |
+|:-------|:-----|:------|:--|
+|ncmeta  |0.1.0 |0.2.0  |*  |
+|digest  |NA    |0.6.22 |*  |
 
 # Revdeps
 
