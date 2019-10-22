@@ -1,0 +1,3093 @@
+
+R version 3.4.1 (2017-06-30) -- "Single Candle"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(RNetCDF)
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> files <- raadfiles:::get_raw_raad_filenames() %>% 
++   dplyr::filter(grepl("\\.nc$", file) | grepl("\\.netcdf$", file) | grepl("\\.nc4$", file) | grepl("\\.h5", file)) %>% 
++   dplyr::transmute(fullname = file.path(root, file))
+> # files %>% mutate(ex = substr(fullname, nchar(fullname) - 2, nchar(fullname))) %>% distinct(ex)
+> # # A tibble: 4 x 1
+> # ex
+> # <chr>
+> #   1   .nc
+> # 2   cdf
+> # 3   .h5
+> # 4   nc4
+> 
+> read_and_churn <- function(x) {
++   #nc <- RNetCDF::open.nc(x)
++   #on.exit(RNetCDF::close.nc(nc))
++   #RNetCDF::print.nc(nc)
++   ncmeta::nc_meta(x)
++   
++ }
+> i <- 0
+> con <- file("writedLines", open = "wt")
+> while(TRUE) {
++   i <- i + 1
++   fname <- files %>% sample_n(1) %>% pull(fullname)
++   catch <- try(read_and_churn(fname))
++   if (inherits(catch, "try-error")) {
++     writeLines(c(i, fname), con)
++   }
++ }
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 26 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 21 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'name'. 
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'dimension'. 
+6: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 27 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 30 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 31 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error : NetCDF: HDF error
+In addition: There were 29 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 34 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 11 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 30 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error : Unknown NC_TYPE
+In addition: There were 35 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 26 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 41 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 16 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 30 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 30 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'name'. 
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'dimension'. 
+6: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: HDF error
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 31 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 33 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 20 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 31 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 24 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 38 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: HDF error
+In addition: There were 40 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 20 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: HDF error
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 40 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 38 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 26 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 42 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 25 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 27 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 25 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 42 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 27 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 33 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error : Unknown NC_TYPE
+In addition: There were 32 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: HDF error
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'name'. 
+8: In nc_atts.NetCDF(x) : no variables recognizable
+9: Unknown or uninitialised column: 'dimension'. 
+10: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 34 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 21 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 24 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error : NetCDF: HDF error
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'name'. 
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'dimension'. 
+6: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 24 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 40 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 41 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 26 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 29 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 29 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 38 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 22 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 22 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 40 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error : NetCDF: HDF error
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: In nc_atts.NetCDF(x) : no variables recognizable
+9: In nc_atts.NetCDF(x) : no variables recognizable
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 27 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: HDF error
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 45 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 21 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 41 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 26 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 13 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 25 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 47 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 24 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'name'. 
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'dimension'. 
+6: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 48 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 37 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'name'. 
+8: In nc_atts.NetCDF(x) : no variables recognizable
+9: Unknown or uninitialised column: 'dimension'. 
+10: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 45 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 45 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 42 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 20 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: HDF error
+In addition: There were 32 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 31 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 33 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error : NetCDF: HDF error
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 26 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 24 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 43 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 33 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 34 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 24 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 31 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 12 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 22 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 22 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: In nc_atts.NetCDF(x) : no variables recognizable
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 21 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 48 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 26 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 44 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error : NetCDF: Invalid dimension ID or name
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 41 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 41 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: In nc_atts.NetCDF(x) : no variables recognizable
+9: In nc_atts.NetCDF(x) : no variables recognizable
+10: In nc_atts.NetCDF(x) : no variables recognizable
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 45 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 29 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 34 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 33 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'name'. 
+8: In nc_atts.NetCDF(x) : no variables recognizable
+9: Unknown or uninitialised column: 'dimension'. 
+10: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'name'. 
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'dimension'. 
+6: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 16 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 33 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 30 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 44 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 48 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 43 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'name'. 
+8: In nc_atts.NetCDF(x) : no variables recognizable
+9: Unknown or uninitialised column: 'dimension'. 
+10: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error : NetCDF: Invalid dimension ID or name
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+In addition: There were 34 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 47 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 16 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 40 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 20 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Invalid dimension ID or name
+In addition: There were 41 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 49 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 48 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 29 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 47 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 43 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 25 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 45 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 25 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 34 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 16 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 16 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 16 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 43 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 24 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 27 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 42 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 22 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 38 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error : NetCDF: Invalid dimension ID or name
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 42 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 46 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 22 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 26 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 34 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 37 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 16 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 16 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'name'. 
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'dimension'. 
+7: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 38 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error : Unknown NC_TYPE
+In addition: There were 32 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 38 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 40 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 35 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 40 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: Unknown or uninitialised column: 'name'. 
+7: In nc_atts.NetCDF(x) : no variables recognizable
+8: Unknown or uninitialised column: 'dimension'. 
+9: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 27 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 42 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: Unknown file format
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 43 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 18 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 40 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 27 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 39 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 43 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 36 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 14 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 11 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 19 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'name'. 
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'dimension'. 
+8: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 42 warnings (use warnings() to see them)
+Error : NetCDF: Unknown file format
+In addition: There were 13 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 34 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 32 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: Unknown or uninitialised column: 'name'. 
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: Unknown or uninitialised column: 'dimension'. 
+5: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 45 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 21 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: In nc_atts.NetCDF(x) : no variables recognizable
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: In nc_atts.NetCDF(x) : no variables recognizable
+6: In nc_atts.NetCDF(x) : no variables recognizable
+7: Unknown or uninitialised column: 'name'. 
+8: In nc_atts.NetCDF(x) : no variables recognizable
+9: Unknown or uninitialised column: 'dimension'. 
+10: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 16 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 21 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: In nc_atts.NetCDF(x) : no variables recognizable
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'name'. 
+4: In nc_atts.NetCDF(x) : no variables recognizable
+5: Unknown or uninitialised column: 'dimension'. 
+6: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: Warning messages:
+1: Unknown or uninitialised column: 'name'. 
+2: In nc_atts.NetCDF(x) : no variables recognizable
+3: Unknown or uninitialised column: 'dimension'. 
+4: Unknown or uninitialised column: 'variable'. 
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 40 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 15 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 41 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 34 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: HDF error
+In addition: There were 22 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 28 warnings (use warnings() to see them)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error : Unknown NC_TYPE
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 23 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 17 warnings (use warnings() to see them)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 41 warnings (use warnings() to see them)
+Error : NetCDF: HDF error
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error : NetCDF: HDF error
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+Error in split.default(axes$dimension, axes$variable) : 
+  first argument must be a vector
+In addition: There were 38 warnings (use warnings() to see them)
+Terminated

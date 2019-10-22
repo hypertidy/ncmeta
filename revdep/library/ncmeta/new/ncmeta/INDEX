@@ -1,0 +1,18 @@
+nc_att                  NetCDF attributes
+nc_atts                 NetCDF attributes
+nc_axes                 NetCDF axes
+nc_axis                 NetCDF axes
+nc_coord_var            Get Coordinate Variables for Given Variable
+nc_dim                  NetCDF variables Obtain information about a
+                        single dimension by index.
+nc_dims                 NetCDF dimension
+nc_gm_to_prj            Get projection from NetCDF-CF Grid Mapping
+nc_grid_mapping_atts    Get Grid Mapping
+nc_grids                NetCDF grids
+nc_inq                  File info
+nc_meta                 Top level NetCDF metadata.
+nc_prj_to_gridmapping   Get NetCDF-CF grid mapping from projection
+nc_sources              NetCDF sources
+nc_var                  NetCDF variable
+nc_vars                 NetCDF variables
+ncmeta                  ncmeta: straightforward NetCDF metadata
