@@ -1,10 +1,10 @@
 
-Release 0.1.0 of ncmeta. 
+Release 0.2.0 of ncmeta. 
 
 
 ## Test environments
-* local debian 18.04 install, R 3.5.3
-* ubuntu 14.04 (on travis-ci), R 3.5.3
+* local ubuntu 18.04 install, R 3.6.1
+* ubuntu 14.04 (on travis-ci), R 3.6.1
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -14,6 +14,6 @@ Release 0.1.0 of ncmeta.
 
 ## Reverse dependencies
 
-The dependencies stars and ncdfgeom pass check with this version.
+The reverse dependencies tidync, stars, and ncdfgeom pass check with this version.
     
     

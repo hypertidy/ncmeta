@@ -94,12 +94,16 @@ nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
     #var <- dplyr::distinct(vars, .data$id, .data$name, .data$natts)
     var <- vars[, c("id", "name", "natts")]
     var <- var[!duplicated(var), ]
-    if (!is.null(variable)) out <- dplyr::filter(out, .data$variable == variable[1])
+
+    var <- dplyr::bind_rows(var, global)  
+    if (!is.null(variable)) {
+      var <- dplyr::filter(var, .data$name == variable[1])
+    } 
   }
-    if (!is.null(variable) && !variable %in% var$variable) stop("specified variable not found")
-  var <- dplyr::bind_rows(var, global)
+    if (!is.null(variable) && !variable %in% var$name) stop("specified variable not found")
   #bind_rows(lapply(split(var, var$name), function(v) bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
 #bind_rows <- function(x) x
+
   if (any(var$natts > 0)) {
    out <-  dplyr::bind_rows(lapply(split(var, var$name)[unique(var$name)], 
                      function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))

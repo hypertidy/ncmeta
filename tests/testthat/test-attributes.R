@@ -65,3 +65,14 @@ test_that("failure is graceful", {
 
 })
 
+
+test_that("nc_atts works", {
+  ## https://github.com/hypertidy/ncmeta/issues/36
+  f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+  expect_equal(nc_atts(f, "NC_GLOBAL")$variable, rep("NC_GLOBAL", 65))
+  expect_equal(nrow(nc_atts(f)), 87)
+  expect_equal(nrow(nc_atts(f, "chlor_a")), 12)
+  expect_equal(nrow(nc_atts(f, "lon")), 5)
+  
+  
+})

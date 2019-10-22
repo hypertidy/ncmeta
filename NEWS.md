@@ -1,3 +1,7 @@
+# ncmeta dev
+
+* Fixed bug in nc_atts() https://github.com/hypertidy/ncmeta/issues/36. 
+
 # ncmeta 0.1.0
 
 * Extra checks and fixes to align with stars, and a future release of RNetCDF. 
