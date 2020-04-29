@@ -13,5 +13,5 @@
 ^CODE_OF_CONDUCT\.md$
 ^revdep
 ^CRAN-RELEASE$
-^inst/extdata/flowchart$
 ^inst/extdata/madishydro.nc
+^inst/expts$
