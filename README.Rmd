@@ -33,7 +33,7 @@ framework for expressing data formats. The explicit entities in NetCDF are
 
 Also includes functions for implicit entities, these are **grids** and **axes**. These don't exist in the NetCDF specification explicitly, but are meaningful and worth making explicit. Many NetCDF tools don't explicitly present these concepts so grab hold of them with ncmeta!
 
-A **grid** is an ordered set of dimensions, and the [Unidata site](https://www.unidata.ucar.edu/software/netcdf/netcdf/The-NetCDF-Data-Model.html#The-NetCDF-Data-Model) refers *informally* to this concept as **shape**. 
+A **grid** is an ordered set of dimensions, and the [Unidata site](https://www.unidata.ucar.edu/software/netcdf/) refers *informally* to this concept as **shape**. 
 
 An **axis** is an *instance* of a dimension, the use of that dimension within a particular variable. 
 
