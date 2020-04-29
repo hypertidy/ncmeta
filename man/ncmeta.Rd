@@ -3,7 +3,6 @@
 \docType{package}
 \name{ncmeta}
 \alias{ncmeta}
-\alias{ncmeta-package}
 \title{ncmeta: straightforward NetCDF metadata}
 \description{
 \code{ncmeta} provides a consistent set of tools to obtain metadata from NetCDF. NetCDF

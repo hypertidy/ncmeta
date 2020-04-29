@@ -1,12 +1,10 @@
+# Release 0.2.5 of ncmeta
 
-# Release 0.2.0 of ncmeta
-
-Some small bug fixes, one that adds clarity when file read fails due to a 
-dependency problem. 
+Fix in equivalence test, required for upcoming dplyr 1.0.0. 
 
 ## Test environments
-* local ubuntu 18.04 install, R 3.6.1
-* ubuntu 14.04 (on travis-ci), R 3.6.1
+
+* local ubuntu 18.04 install, R 3.6.3
 * win-builder (devel and release)
 
 ## R CMD check results

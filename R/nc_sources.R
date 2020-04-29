@@ -13,5 +13,5 @@ nc_sources <- function(x, ...) {
 #' @name nc_sources
 #' @export
 nc_sources.character <- function(x, ...) {
-  tibble(access = Sys.time(), source = x)
+  tibble(access = Sys.time(), source = normalizePath(x, winslash = "/"))
 }

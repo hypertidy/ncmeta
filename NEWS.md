@@ -1,3 +1,7 @@
+# ncmeta 0.2.5 
+
+* Improved equivalence test thanks to Romain Francois #37. 
+
 # ncmeta 0.2.0
 
 * Simplified error handling when file not able to be opened. https://github.com/ropensci/tidync/issues/98
