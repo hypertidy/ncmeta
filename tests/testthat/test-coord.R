@@ -5,7 +5,7 @@ f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "nc
 nc <- RNetCDF::open.nc(f)
 
 test_that("nc_coord_var brings back expected content for one variable", {
-  expect_equal(nc_coord_var(f, "chlor_a"), 
+  expect_equivalent(nc_coord_var(f, "chlor_a"), 
                data.frame(variable = "chlor_a", X = "lon", Y = "lat", 
                           Z = NA_character_, T = NA_character_,
                           bounds = NA_character_, 
@@ -22,7 +22,7 @@ test_that("nc_coord_vars brings back expected content for sample", {
   
   coord_vars <- nc_coord_var(f)
   
-  expect_equal(dplyr::filter(coord_vars, variable == "chlor_a"),
+  expect_equivalent(dplyr::filter(coord_vars, variable == "chlor_a"),
                data.frame(variable = "chlor_a", 
                           X = "lon", Y = "lat", 
                           Z = NA_character_, T = NA_character_, 
@@ -35,7 +35,7 @@ f <- system.file("extdata", "guam.nc", package = "ncmeta")
 nc <- RNetCDF::open.nc(f)
 
 test_that("nc_coord_var brings back expected content for one variable", {
-  expect_equal(nc_coord_var(f, "RAINNC_present"), 
+  expect_equivalent(nc_coord_var(f, "RAINNC_present"), 
                data.frame(variable = "RAINNC_present", X = "XLONG", Y = "XLAT", 
                           Z = NA_character_, T = "Time",
                           bounds = NA_character_, stringsAsFactors = FALSE))
