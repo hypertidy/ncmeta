@@ -2,22 +2,21 @@
 
 |field    |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.6.1 (2019-07-05) |
-|os       |Ubuntu 18.04.3 LTS           |
+|version  |R version 3.6.3 (2020-02-29) |
+|os       |Ubuntu 18.04.4 LTS           |
 |system   |x86_64, linux-gnu            |
 |ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_AU.UTF-8                  |
 |ctype    |en_AU.UTF-8                  |
 |tz       |Etc/UTC                      |
-|date     |2019-10-22                   |
+|date     |2020-04-29                   |
 
 # Dependencies
 
-|package |old   |new    |Δ  |
-|:-------|:-----|:------|:--|
-|ncmeta  |0.1.0 |0.2.0  |*  |
-|digest  |NA    |0.6.22 |*  |
+|package |old   |new   |Δ  |
+|:-------|:-----|:-----|:--|
+|ncmeta  |0.2.0 |0.2.5 |*  |
 
 # Revdeps
 

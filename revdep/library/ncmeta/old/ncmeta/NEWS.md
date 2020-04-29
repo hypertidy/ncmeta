@@ -1,3 +1,9 @@
+# ncmeta 0.2.0
+
+* Simplified error handling when file not able to be opened. https://github.com/ropensci/tidync/issues/98
+
+* Fixed bug in nc_atts() https://github.com/hypertidy/ncmeta/issues/36. 
+
 # ncmeta 0.1.0
 
 * Extra checks and fixes to align with stars, and a future release of RNetCDF. 

@@ -1,6 +1,6 @@
 Package: ncmeta
 Title: Straightforward 'NetCDF' Metadata
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c("aut", "cre")), 
              person("Tomas", "Remenyi", role = "ctb"), 
              person("Ben", "Raymond", role = "ctb"), 
@@ -23,12 +23,12 @@ URL: https://github.com/hypertidy/ncmeta
 BugReports: https://github.com/hypertidy/ncmeta/issues
 ByteCompile: TRUE
 NeedsCompilation: no
-Packaged: 2019-08-28 12:15:59 UTC; mdsumner
+Packaged: 2019-10-22 14:55:10 UTC; mdsumner
 Author: Michael Sumner [aut, cre],
   Tomas Remenyi [ctb],
   Ben Raymond [ctb],
   David Blodgett [ctb]
 Maintainer: Michael Sumner <mdsumner@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-08-28 12:30:03 UTC
-Built: R 3.6.1; ; 2019-08-29 09:57:12 UTC; unix
+Date/Publication: 2019-10-22 17:10:02 UTC
+Built: R 3.6.3; ; 2020-04-29 11:03:53 UTC; unix
