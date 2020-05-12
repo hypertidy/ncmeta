@@ -1,0 +1,33 @@
+RNetCDF                 R Interface to NetCDF Datasets
+att.copy.nc             Copy Attribute from One NetCDF to Another
+att.delete.nc           Delete a NetCDF Attribute
+att.get.nc              Get a NetCDF Attribute
+att.inq.nc              Inquire About a NetCDF Attribute
+att.put.nc              Put a NetCDF Attribute
+att.rename.nc           Rename a NetCDF Attribute
+close.nc                Close a NetCDF Dataset
+create.nc               Create a NetCDF Dataset
+dim.def.nc              Define a NetCDF Dimension
+dim.inq.nc              Inquire About a NetCDF Dimension
+dim.rename.nc           Rename a NetCDF Dimension
+file.inq.nc             Inquire About a NetCDF Dataset
+grp.def.nc              Define a NetCDF Group
+grp.inq.nc              Inquire About a NetCDF Group
+grp.rename.nc           Rename a NetCDF Group
+open.nc                 Open a NetCDF Dataset
+print.nc                Print Summary Information About a NetCDF
+                        Dataset
+read.nc                 Read a NetCDF Dataset
+sync.nc                 Synchronize a NetCDF Dataset
+type.def.nc             Define a NetCDF Type
+type.inq.nc             Inquire About a NetCDF Type
+utcal.nc                Convert Temporal Amounts to UTC Referenced
+                        Dates
+utinit.nc               Initialize the UDUNITS2 Library
+utinvcal.nc             Convert UTC Referenced Dates Into Temporal
+                        Amounts
+var.def.nc              Define a NetCDF Variable
+var.get.nc              Read Data from a NetCDF Variable
+var.inq.nc              Inquire About a NetCDF Variable
+var.put.nc              Write Data to a NetCDF Variable
+var.rename.nc           Rename a NetCDF Variable

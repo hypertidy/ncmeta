@@ -1,0 +1,28 @@
+Package: RNetCDF
+Version: 2.3-1
+Date: 2020-04-27
+Title: Interface to 'NetCDF' Datasets
+Authors@R: c(person("Pavel", "Michna", role = "aut",
+                    email = "rnetcdf-devel@bluewin.ch"),
+             person("Milton", "Woods", role = c("aut", "cre"),
+                    email = "miltonjwoods@gmail.com"))
+Depends: R (>= 3.0.0)
+SystemRequirements: netcdf udunits-2
+Suggests: bit64
+Description: An interface to the 'NetCDF' file formats designed by Unidata
+  for efficient storage of array-oriented scientific data and descriptions.
+  Most capabilities of 'NetCDF' version 4 are supported. Optional conversions
+  of time units are enabled by 'UDUNITS' version 2, also from Unidata.
+License: GPL (>= 2) | file LICENSE
+URL: https://github.com/mjwoods/RNetCDF
+        http://www.unidata.ucar.edu/software/netcdf/
+        http://www.unidata.ucar.edu/software/udunits/
+BugReports: https://github.com/mjwoods/RNetCDF/issues
+NeedsCompilation: yes
+Packaged: 2020-05-02 02:57:13 UTC; mwoods
+Author: Pavel Michna [aut],
+  Milton Woods [aut, cre]
+Maintainer: Milton Woods <miltonjwoods@gmail.com>
+Repository: CRAN
+Date/Publication: 2020-05-04 08:40:10 UTC
+Built: R 3.6.3; x86_64-pc-linux-gnu; 2020-05-12 11:30:35 UTC; unix

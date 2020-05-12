@@ -9,14 +9,20 @@
 |language |(EN)                         |
 |collate  |en_AU.UTF-8                  |
 |ctype    |en_AU.UTF-8                  |
-|tz       |Etc/UTC                      |
-|date     |2020-04-29                   |
+|tz       |Australia/Hobart             |
+|date     |2020-05-12                   |
 
 # Dependencies
 
-|package |old   |new   |Δ  |
-|:-------|:-----|:-----|:--|
-|ncmeta  |0.2.0 |0.2.5 |*  |
+|package    |old   |new   |Δ  |
+|:----------|:-----|:-----|:--|
+|ncmeta     |0.2.0 |0.2.5 |*  |
+|pillar     |NA    |1.4.4 |*  |
+|rlang      |NA    |0.4.6 |*  |
+|RNetCDF    |NA    |2.3-1 |*  |
+|tidyr      |NA    |1.0.3 |*  |
+|tidyselect |NA    |1.1.0 |*  |
+|vctrs      |NA    |0.3.0 |*  |
 
 # Revdeps
 
