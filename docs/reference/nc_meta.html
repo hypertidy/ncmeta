@@ -153,64 +153,64 @@ obscure error messages from the underlying library.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
 <span class='fu'>nc_meta</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; $dimension
-#&gt; <span style='color: #949494;'># A tibble: 4 x 5</span><span>
+#&gt; <span style='color: #555555;'># A tibble: 4 x 5</span><span>
 #&gt;      id name          length unlim coord_dim
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>    
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     0 lat             </span><span style='text-decoration: underline;'>2</span><span>160 FALSE TRUE     
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1 lon             </span><span style='text-decoration: underline;'>4</span><span>320 FALSE TRUE     
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2 rgb                3 FALSE FALSE    
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     3 eightbitcolor    256 FALSE FALSE    
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span>     0 lat             </span><span style='text-decoration: underline;'>2</span><span>160 FALSE TRUE     
+#&gt; </span><span style='color: #555555;'>2</span><span>     1 lon             </span><span style='text-decoration: underline;'>4</span><span>320 FALSE TRUE     
+#&gt; </span><span style='color: #555555;'>3</span><span>     2 rgb                3 FALSE FALSE    
+#&gt; </span><span style='color: #555555;'>4</span><span>     3 eightbitcolor    256 FALSE FALSE    
 #&gt; 
 #&gt; $variable
-#&gt; </span><span style='color: #949494;'># A tibble: 4 x 6</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
 #&gt;      id name    type     ndims natts dim_coord
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>    
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     0 chlor_a NC_FLOAT     2    12 FALSE    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1 lat     NC_FLOAT     1     5 TRUE     
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2 lon     NC_FLOAT     1     5 TRUE     
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     3 palette NC_UBYTE     2     0 FALSE    
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span>     0 chlor_a NC_FLOAT     2    12 FALSE    
+#&gt; </span><span style='color: #555555;'>2</span><span>     1 lat     NC_FLOAT     1     5 TRUE     
+#&gt; </span><span style='color: #555555;'>3</span><span>     2 lon     NC_FLOAT     1     5 TRUE     
+#&gt; </span><span style='color: #555555;'>4</span><span>     3 palette NC_UBYTE     2     0 FALSE    
 #&gt; 
 #&gt; $attribute
-#&gt; </span><span style='color: #949494;'># A tibble: 87 x 4</span><span>
-#&gt;       id name          variable value    
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     0 long_name     chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     1 units         chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     2 standard_name chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     3 _FillValue    chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>     4 valid_min     chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>     5 valid_max     chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>     6 display_scale chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     7 display_min   chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>     8 display_max   chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>     9 scale_factor  chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #949494;'># … with 77 more rows</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 87 x 4</span><span>
+#&gt;       id name          variable value       
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;named list&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     0 long_name     chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 2</span><span>     1 units         chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 3</span><span>     2 standard_name chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 4</span><span>     3 _FillValue    chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4 valid_min     chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 6</span><span>     5 valid_max     chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 7</span><span>     6 display_scale chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 8</span><span>     7 display_min   chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 9</span><span>     8 display_max   chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'>10</span><span>     9 scale_factor  chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'># ... with 77 more rows</span><span>
 #&gt; 
 #&gt; $axis
-#&gt; </span><span style='color: #949494;'># A tibble: 6 x 3</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;    axis variable dimension
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 chlor_a          1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2 chlor_a          0
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3 lat              0
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     4 lon              1
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 palette          3
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     6 palette          2
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 chlor_a          1
+#&gt; </span><span style='color: #555555;'>2</span><span>     2 chlor_a          0
+#&gt; </span><span style='color: #555555;'>3</span><span>     3 lat              0
+#&gt; </span><span style='color: #555555;'>4</span><span>     4 lon              1
+#&gt; </span><span style='color: #555555;'>5</span><span>     5 palette          3
+#&gt; </span><span style='color: #555555;'>6</span><span>     6 palette          2
 #&gt; 
 #&gt; $grid
-#&gt; </span><span style='color: #949494;'># A tibble: 4 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
 #&gt;   grid  ndims variables        nvars
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> D1,D0     2 </span><span style='color: #949494;'>&lt;tibble [1 × 1]&gt;</span><span>     1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> D3,D2     2 </span><span style='color: #949494;'>&lt;tibble [1 × 1]&gt;</span><span>     1
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> D0        1 </span><span style='color: #949494;'>&lt;tibble [1 × 1]&gt;</span><span>     1
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> D1        1 </span><span style='color: #949494;'>&lt;tibble [1 × 1]&gt;</span><span>     1
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> D1,D0     2 </span><span style='color: #555555;'>&lt;tibble [1 x 1]&gt;</span><span>     1
+#&gt; </span><span style='color: #555555;'>2</span><span> D3,D2     2 </span><span style='color: #555555;'>&lt;tibble [1 x 1]&gt;</span><span>     1
+#&gt; </span><span style='color: #555555;'>3</span><span> D0        1 </span><span style='color: #555555;'>&lt;tibble [1 x 1]&gt;</span><span>     1
+#&gt; </span><span style='color: #555555;'>4</span><span> D1        1 </span><span style='color: #555555;'>&lt;tibble [1 x 1]&gt;</span><span>     1
 #&gt; 
 #&gt; $source
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   access              source                                                    
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                                                     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 2020-04-29 </span><span style='color: #949494;'>14:19:28</span><span> /tmp/RtmpP6bvir/temp_libpath4e6b69b1a942/ncmeta/extdata/S…
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                     
+#&gt; </span><span style='color: #555555;'>1</span><span> 2020-05-12 </span><span style='color: #555555;'>21:26:10</span><span> C:/Users/michae_sum/AppData/Local/Temp/RtmpIJvJs2/temp_li~
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "ncmeta"</div><div class='input'><span class='co'># \donttest{</span>

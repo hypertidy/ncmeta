@@ -155,20 +155,20 @@ only those attributes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ncmeta"</span>)
-<span class='fu'>nc_atts</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 87 x 4</span><span>
-#&gt;       id name          variable value    
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>     0 long_name     chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>     1 units         chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>     2 standard_name chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>     3 _FillValue    chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>     4 valid_min     chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>     5 valid_max     chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>     6 display_scale chlor_a  </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>     7 display_min   chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>     8 display_max   chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span>     9 scale_factor  chlor_a  </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #949494;'># … with 77 more rows</span><span></div></span></pre>
+<span class='fu'>nc_atts</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 87 x 4</span><span>
+#&gt;       id name          variable value       
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;named list&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>     0 long_name     chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 2</span><span>     1 units         chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 3</span><span>     2 standard_name chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 4</span><span>     3 _FillValue    chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 5</span><span>     4 valid_min     chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 6</span><span>     5 valid_max     chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 7</span><span>     6 display_scale chlor_a  </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 8</span><span>     7 display_min   chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 9</span><span>     8 display_max   chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'>10</span><span>     9 scale_factor  chlor_a  </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'># ... with 77 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
