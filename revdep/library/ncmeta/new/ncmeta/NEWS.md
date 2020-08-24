@@ -1,3 +1,7 @@
+# ncmeta 0.3.0
+
+* Fix file path mangling introduced in #27. 
+
 # ncmeta 0.2.5 
 
 * Improved equivalence test thanks to Romain Francois #37. 

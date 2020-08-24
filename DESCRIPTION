@@ -10,8 +10,7 @@ Description: Extract metadata from 'NetCDF' data sources, these can be files, fi
  providing a consistent set of functions that all return data frames. We introduce named concepts 
  of 'grid', 'axis' and 'source' which are all meaningful entities without formal definition in the 
  'NetCDF' library <https://www.unidata.ucar.edu/software/netcdf/>. 'RNetCDF' matches the library 
- itself with only the named concepts of 'variables', 'dimensions' and 'attributes'. 'ncmeta'
- provides a required framework for the in-development 'tidync' project <https://github.com/hypertidy/tidync>.
+ itself with only the named concepts of 'variables', 'dimensions' and 'attributes'. 
 Depends: R (>= 3.3.0)
 License: GPL-3
 Encoding: UTF-8

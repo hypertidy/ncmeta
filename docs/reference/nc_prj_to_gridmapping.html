@@ -73,7 +73,7 @@ a named list of attributes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ncmeta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -148,34 +148,34 @@ a named list of attributes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>prj</span> <span class='kw'>&lt;-</span> <span class='st'>"+proj=longlat +datum=NAD27 +no_defs"</span>
-<span class='fu'>nc_prj_to_gridmapping</span>(<span class='no'>prj</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+<span class='fu'>nc_prj_to_gridmapping</span>(<span class='no'>prj</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;   name                        value    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>1</span><span> grid_mapping_name           </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> semi_major_axis             </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> inverse_flattening          </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> longitude_of_prime_meridian </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span></div><div class='input'><span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='st'>"+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96"</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> grid_mapping_name           </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> semi_major_axis             </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> inverse_flattening          </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> longitude_of_prime_meridian </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span></div><div class='input'><span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='st'>"+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96"</span>
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='st'>"+x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"</span>
 <span class='no'>prj2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"%s %s"</span>, <span class='no'>p1</span>, <span class='no'>p2</span>)
-<span class='fu'>nc_prj_to_gridmapping</span>(<span class='no'>prj2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 2</span><span>
+<span class='fu'>nc_prj_to_gridmapping</span>(<span class='no'>prj2</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 9 x 2</span><span>
 #&gt;   name                          value    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>1</span><span> grid_mapping_name             </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> longitude_of_central_meridian </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> latitude_of_projection_origin </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> false_easting                 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> false_northing                </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> standard_parallel             </span><span style='color: #555555;'>&lt;dbl [2]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>7</span><span> semi_major_axis               </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>8</span><span> inverse_flattening            </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>9</span><span> longitude_of_prime_meridian   </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span></div><div class='input'>
-<span class='fu'>nc_prj_to_gridmapping</span>(<span class='st'>"+proj=longlat +a=6378137 +f=0.00335281066474748 +pm=0 +no_defs"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> grid_mapping_name             </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> longitude_of_central_meridian </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> latitude_of_projection_origin </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> false_easting                 </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> false_northing                </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> standard_parallel             </span><span style='color: #949494;'>&lt;dbl [2]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> semi_major_axis               </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span> inverse_flattening            </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>9</span><span> longitude_of_prime_meridian   </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span></div><div class='input'>
+<span class='fu'>nc_prj_to_gridmapping</span>(<span class='st'>"+proj=longlat +a=6378137 +f=0.00335281066474748 +pm=0 +no_defs"</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 2</span><span>
 #&gt;   name                        value    
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>1</span><span> grid_mapping_name           </span><span style='color: #555555;'>&lt;chr [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> semi_major_axis             </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> inverse_flattening          </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> longitude_of_prime_meridian </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span></div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> grid_mapping_name           </span><span style='color: #949494;'>&lt;chr [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> semi_major_axis             </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> inverse_flattening          </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> longitude_of_prime_meridian </span><span style='color: #949494;'>&lt;dbl [1]&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
