@@ -1,10 +1,10 @@
-# Release 0.2.5 of ncmeta
+# Release 0.3.0 of ncmeta
 
-Fix in equivalence test, required for upcoming dplyr 1.0.0. 
+Fix path mangling. 
 
 ## Test environments
 
-* local ubuntu 18.04 install, R 3.6.3
+* local ubuntu 18.04 install, R 4.0.2
 * win-builder (devel and release)
 
 ## R CMD check results

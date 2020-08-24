@@ -13,5 +13,10 @@ nc_sources <- function(x, ...) {
 #' @name nc_sources
 #' @export
 nc_sources.character <- function(x, ...) {
-  tibble(access = Sys.time(), source = normalizePath(x, winslash = "/"))
+  if (file.exists(x)) {
+    path <- normalizePath(x, winslash = "/")
+  } else {
+    path <- x
+  }
+  tibble(access = Sys.time(), source = path)
 }
