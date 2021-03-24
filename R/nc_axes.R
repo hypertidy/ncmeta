@@ -39,7 +39,8 @@ nc_axes.NetCDF <- function(x, variables = NULL, ...) {
       nc_axis_var(x, variable)
     })
   )
-
+  ## if no dims, then it's not an axis see https://github.com/r-spatial/stars/pull/399
+ axes <- dplyr::filter(axes, .data$ndims > 0)
 #  axes$id <- seq_len(nrow(axes)) ## row_number wtf
 
   #dplyr::transmute(axes, axis = row_number(), variable = .data$name, dimension = .data$dimids)

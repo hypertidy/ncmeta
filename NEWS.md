@@ -1,3 +1,7 @@
+# ncmeta 0.3.5
+
+* Fix bug where Scalar variables were treated as an axis. Picked up in stars PR #399. 
+
 # ncmeta 0.3.0
 
 * Fix file path mangling introduced in #27. 
