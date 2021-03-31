@@ -174,7 +174,7 @@ GPFN.stereographic <- function(gm) {
 GPFN.transverse_mercator <- function(gm) {
   projargs <- paste("+proj=tmerc",
                     latProjOrig(gm),
-                    lonProjOrig(gm),
+                    lonCentMer(gm),
                     scaleFactor(gm),
                     falseEastNorth(gm),
                     getGeoDatum(gm))

@@ -422,16 +422,16 @@ test_that("stereographic", {
 
 test_that("transverse_mercator", {
   p <- "+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=0.99982 +x_0=600000 +y_0=750000 +units=m +a=6378137 +f=0.00335281066474748 +pm=0 +no_defs"
-
+  
   c <- list(grid_mapping_name = "transverse_mercator",
-              longitude_of_projection_origin = -8,
-              latitude_of_projection_origin = 53.5,
-              scale_factor_at_projection_origin = 0.99982,
-              false_easting = 600000,
-              false_northing = 750000,
-              longitude_of_prime_meridian = 0.0,
-              semi_major_axis = 6378137.0,
-              inverse_flattening = 298.257223563)
+            longitude_of_central_meridian = -8,
+            latitude_of_projection_origin = 53.5,
+            scale_factor_at_projection_origin = 0.99982,
+            false_easting = 600000,
+            false_northing = 750000,
+            longitude_of_prime_meridian = 0.0,
+            semi_major_axis = 6378137.0,
+            inverse_flattening = 298.257223563)
 
   prj <- nc_gm_to_prj(c)
 
