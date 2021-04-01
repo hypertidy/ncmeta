@@ -250,7 +250,7 @@ GGFP.stereographic <- function(al) {
 GGFP.transverse_mercator <- function(al) {
   gm <- c(list(grid_mapping_name = "transverse_mercator"),
                     latProjOrig_gm(al),
-                    lonProjOrig_gm(al),
+                    lonCentMer_gm(al),
                     scaleFactor_gm(al),
                     falseEastNorth_gm(al),
                     getGeoDatum_gm(al))
