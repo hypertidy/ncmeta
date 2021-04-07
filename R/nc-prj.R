@@ -104,7 +104,7 @@ GPFN.mercator <- function(gm) {
   if(!is.null(gm$scale_factor_at_projection_origin)) {
     projargs <- paste("+proj=merc",
                       lonProjOrig(gm),
-                      scaleFactor(gm),
+                      scaleFactorProjOrig(gm),
                       falseEastNorth(gm),
                       getGeoDatum(gm))
   } else {
@@ -120,7 +120,7 @@ GPFN.oblique_mercator <- function(gm) {
   projargs <- paste("+proj=omerc",
                     latProjOrig(gm),
                     lonProjCent(gm),
-                    scaleFactor(gm),
+                    scaleFactorProjOrig(gm),
                     oMerc(gm),
                     falseEastNorth(gm),
                     getGeoDatum(gm))
@@ -139,7 +139,7 @@ GPFN.polar_stereographic <- function(gm) {
     projargs <- paste("+proj=stere",
                       latProjOrig(gm),
                       stVertLon(gm),
-                      scaleFactor(gm),
+                      scaleFactorProjOrig(gm),
                       falseEastNorth(gm),
                       getGeoDatum(gm))
   } else {
@@ -166,7 +166,7 @@ GPFN.stereographic <- function(gm) {
   projargs <- paste("+proj=stere",
                     latProjOrig(gm),
                     lonProjOrig(gm),
-                    scaleFactor(gm),
+                    scaleFactorProjOrig(gm),
                     falseEastNorth(gm),
                     getGeoDatum(gm))
 }
@@ -175,7 +175,7 @@ GPFN.transverse_mercator <- function(gm) {
   projargs <- paste("+proj=tmerc",
                     latProjOrig(gm),
                     lonCentMer(gm),
-                    scaleFactor(gm),
+                    scaleFactorCentMer(gm),
                     falseEastNorth(gm),
                     getGeoDatum(gm))
 }
@@ -269,7 +269,11 @@ stVertLon <- function(gm) {
   outString <- paste0("+lon_0=", gm$straight_vertical_longitude_from_pole)
 }
 
-scaleFactor <- function(gm) {
+scaleFactorCentMer <- function(gm) {
+  outString <- paste0("+k=", gm$scale_factor_at_central_meridian)
+}
+
+scaleFactorProjOrig <- function(gm) {
   outString <- paste0("+k=", gm$scale_factor_at_projection_origin)
 }
 
