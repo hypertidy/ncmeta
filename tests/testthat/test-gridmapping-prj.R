@@ -426,7 +426,7 @@ test_that("transverse_mercator", {
   c <- list(grid_mapping_name = "transverse_mercator",
             longitude_of_central_meridian = -8,
             latitude_of_projection_origin = 53.5,
-            scale_factor_at_projection_origin = 0.99982,
+            scale_factor_at_central_meridian = 0.99982,
             false_easting = 600000,
             false_northing = 750000,
             longitude_of_prime_meridian = 0.0,
