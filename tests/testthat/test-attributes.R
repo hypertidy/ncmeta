@@ -20,7 +20,7 @@ test_that("attributes from Thredds works", {
   
     du <- nc_atts(u) %>%  expect_s3_class("tbl_df") %>% 
     expect_named(c("id", "name", "variable", "value"))
-  expect_that(nrow(du), equals(119L))
+  expect_true(nrow(du) >= 119L) ## 2022-07-26 was 119L, but now 124L
   expect_that(du$value, is_a("list"))
   
   })

@@ -25,8 +25,12 @@ nc_var.character <- function(x, i) {
 #'@export
 nc_var.NetCDF <- function(x, i) {
   out <- RNetCDF::var.inq.nc(x, i)
-  out$dimids <- NULL
+  #out$dimids <- NULL
   out <- out[lengths(out) > 0]
+  gt1 <- lengths(out) 
+  nested <- tibble::as_tibble(out[gt1 > 1])
+  out <- out[gt1 < 2]
+  out$dim_info <- list(nested)
   dplyr::distinct(tibble::as_tibble(out))
 }
 

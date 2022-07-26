@@ -1,3 +1,8 @@
+# ncmeta dev
+
+* Fix handling of nested variable info, `dimids` and `chunksizes` now in list col `dim_info` for `nc_vars` and `nc_var`.  Thanks
+ to David Blodgett, see https://github.com/hypertidy/ncmeta/issues/42. 
+
 # ncmeta 0.3.5
 
 * Fix bug where Scalar variables were treated as an axis. Picked up in stars PR #399. 
