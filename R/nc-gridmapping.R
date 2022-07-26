@@ -346,8 +346,7 @@ check_args <- function (x)
 }
 
 prepCRS <- function(prj) {
-  if(class(prj) == "CRS") prj <- prj@projargs
-
+  if(inherits(prj, "CRS")) prj <- prj@projargs
   if(!check_args(prj)[1][[1]]) {
  
     warning("not a valid crs, returning an empty tibble")
