@@ -25,8 +25,6 @@ nc_var.character <- function(x, i) {
 #'@export
 nc_var.NetCDF <- function(x, i) {
   out <- RNetCDF::var.inq.nc(x, i)
-  # Remove NULL list items:
-  out <- out[lengths(out) > 0]
   # Convert dimids to empty vector when variable is scalar:
   if (anyNA(out$dimids)) {
     out$dimids <- integer(0)
@@ -35,6 +33,8 @@ nc_var.NetCDF <- function(x, i) {
   vectors <- c("dimids", "chunksizes", "filter_id", "filter_params")
   listcols <- vectors[vectors %in% names(out)]
   out[listcols] <- lapply(out[listcols], list)
+  # Keep only list items with length 1:
+  out <- out[lengths(out) == 1]
   # Transform list to tibble row:
   tibble::as_tibble_row(out)
 }
