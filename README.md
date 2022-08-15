@@ -1,16 +1,12 @@
 
-[![Build
-Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=trusty_release&label=ubuntu)](https://travis-ci.org/hypertidy/ncmeta)
-[![Build
-Status](http://badges.herokuapp.com/travis/hypertidy/ncmeta?branch=master&env=BUILD_NAME=osx_release&label=osx)](https://travis-ci.org/hypertidy/ncmeta)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/ncmeta?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/ncmeta)
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/hypertidy/ncmeta/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hypertidy/ncmeta/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](http://www.r-pkg.org/badges/version/ncmeta)](https://cran.r-project.org/package=ncmeta)
 [![](https://cranlogs.r-pkg.org/badges/ncmeta)](https://cran.r-project.org/package=ncmeta)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/hypertidy/ncmeta/master.svg)](https://codecov.io/github/hypertidy/ncmeta?branch=master)
 
+<!-- badges: end -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # ncmeta
@@ -38,7 +34,7 @@ information about an individual variable, dimension, or attribute.
 Also includes functions for implicit entities, these are **grids** and
 **axes**. These don’t exist in the NetCDF specification explicitly, but
 are meaningful and worth making explicit. Many NetCDF tools don’t
-explicitly present these concepts so grab hold of them with ncmeta\!
+explicitly present these concepts so grab hold of them with ncmeta!
 
 A **grid** is an ordered set of dimensions, and the [Unidata
 site](https://www.unidata.ucar.edu/software/netcdf/) refers *informally*
@@ -79,14 +75,14 @@ nc_dim(filename, 0)  ## first dimension
 nc_dims(filename)  ## all dimensions
 ```
 
-## Get involved\!
+## Get involved!
 
 Please let us know if you have any feedback, see the [Issues
 tab](https://github.com/hypertidy/ncmeta) if you found a bug or have a
 question. Feel free to email the maintainer directly for other
 questions.
 
------
+------------------------------------------------------------------------
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/hypertidy/ncmeta/blob/master/CODE_OF_CONDUCT.md#contributor-code-of-conduct).

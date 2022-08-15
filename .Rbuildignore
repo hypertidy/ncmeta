@@ -15,3 +15,4 @@
 ^CRAN-RELEASE$
 ^inst/extdata/madishydro.nc
 ^inst/expts$
+^\.github$
