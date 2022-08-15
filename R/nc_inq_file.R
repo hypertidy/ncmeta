@@ -28,17 +28,6 @@
 #' 
 #' nc_vars(f)
 #' nc_dims(f)
-#' \donttest{
-#' \dontrun{
-#' ## thredds (see rerddap)
-#' u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
-#' nc_inq(u)
-#' # A tibble: 1 x 5
-#' #ndims nvars ngatts unlimdimid
-#' #<dbl> <dbl>  <dbl>      <lgl>
-#' #  1     2    18     37         NA
-#' # ... with 1 more variables: filename <chr>
-#' }}
 nc_inq <- function(x, ...) {
   UseMethod("nc_inq")
 }
