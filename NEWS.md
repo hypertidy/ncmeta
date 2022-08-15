@@ -1,5 +1,7 @@
 # ncmeta 0.3.5
 
+* Changed default branch name to "main", so please check if you have a fork and submit PRs. 
+
 * Fix bug where Scalar variables were treated as an axis. Picked up in stars PR #399. 
 
 # ncmeta 0.3.0
