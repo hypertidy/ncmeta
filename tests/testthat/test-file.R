@@ -32,7 +32,7 @@ test_that("multiple file inquiry works", {
 
 test_that("thredds access works", {
   skip_on_cran()
-  
+  skip() ## ERDDAP hates us now
   u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
   thredds <- nc_inq(u) %>% expect_s3_class("tbl_df")
   expect_that(nrow(thredds), equals(1L))
