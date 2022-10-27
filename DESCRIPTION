@@ -4,7 +4,8 @@ Version: 0.3.5
 Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c("aut", "cre")), 
              person("Tomas", "Remenyi", role = "ctb"), 
              person("Ben", "Raymond", role = "ctb"), 
-             person("David", "Blodgett", role = "ctb"))
+             person("David", "Blodgett", role = "ctb"), 
+             person("Milton", "Woods", role = "ctb"))
 Description: Extract metadata from 'NetCDF' data sources, these can be files, file handles or
  servers. This package leverages and extends the lower level functions of the 'RNetCDF' package 
  providing a consistent set of functions that all return data frames. We introduce named concepts 
@@ -14,7 +15,6 @@ Description: Extract metadata from 'NetCDF' data sources, these can be files, fi
 Depends: R (>= 3.3.0)
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.2.1
 Imports: 
     dplyr,

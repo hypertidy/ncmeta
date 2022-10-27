@@ -1,10 +1,10 @@
-# Release 0.3.0 of ncmeta
+# Release 0.3.5 of ncmeta
 
-Fix path mangling. 
+Fix downstream problems tidync and other revdeps where extra metadata was not handled by dataframe structure. 
 
 ## Test environments
 
-* local ubuntu 18.04 install, R 4.0.2
+* local ubuntu 
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -14,6 +14,11 @@ Fix path mangling.
 
 ## Reverse dependencies
 
-The reverse dependencies tidync, stars, and ncdfgeom pass check with this version.
+The reverse dependencies  pass check with this version.
     
+* ncdfgeom
+* oceanexplorer
+* tidync
+* sftime
+* stars
     

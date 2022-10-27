@@ -16,3 +16,4 @@
 ^inst/extdata/madishydro.nc
 ^inst/expts$
 ^\.github$
+^CRAN-SUBMISSION$
