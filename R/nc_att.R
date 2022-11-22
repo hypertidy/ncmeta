@@ -8,6 +8,7 @@
 #' @param x or file handle
 #' @param variable name or index (zero based) of variable
 #' @param attribute name or index (zero based) of attribute
+#' @param values logical, if values has to be shown, default FALSE
 #' @param ... ignored
 #'
 #' @return data frame of attribute with numeric id, character attribute name,
@@ -19,31 +20,35 @@
 #' nc_att(f, 0, 0)
 #' @name nc_att
 #' @export 
-nc_att <- function(x, variable, attribute, ...) {
+nc_att <- function(x, variable, attribute, values = FALSE, ...) {
   UseMethod("nc_att")
 }
 #' @name nc_att
 #' @export 
 #' @importFrom rlang .data
 #' @importFrom stats setNames
-nc_att.NetCDF <- function(x, variable, attribute, ...) {
-  att_info <- RNetCDF::att.inq.nc(x, variable, attribute)
+nc_att.NetCDF <- function(x, variable, attribute, values = FALSE, ...) {
+  att_info <- RNetCDF::att.inq.nc(x, variable[1], attribute[1])
   
 ## att <- structure(RNetCDF::att.get.nc(x, variable, attribute), names = att_info$name)
-  att <- RNetCDF::att.get.nc(x, variable, attribute)
-  tibble::as_tibble(list(id = att_info$id, name = att_info$name, variable = variable, 
-                         value = setNames(list(att), att_info$name)))
+  att <- RNetCDF::att.get.nc(x, variable[1], attribute[1])
+  out <- tibble::as_tibble(list(id = att_info$id, name = att_info$name, variable = variable[1], 
+                                value = setNames(list(att), att_info$name)))
+  if(isTRUE(values)) {
+    out$value <- .get_value_of_name(out, out$name, out$variable)
+  }
+  return(out)
 }
 
 #' @name nc_att
 #' @export 
 #' @importFrom tibble tibble
-nc_att.character <- function(x, variable, attribute, ...) {
+nc_att.character <- function(x, variable, attribute, values = FALSE, ...) {
   if (nchar(x) < 1) stop("NetCDF source cannot be empty string")
   
   nc <- RNetCDF::open.nc(x)
   on.exit(RNetCDF::close.nc(nc), add  = TRUE)
-  nc_att(nc, variable, attribute)
+  nc_att(nc, variable, attribute, values)
 }
 
 #' NetCDF attributes

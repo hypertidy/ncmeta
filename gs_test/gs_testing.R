@@ -6,11 +6,27 @@ library(ncmeta)
 # 
 # x <- "../../ropensci_tidync/gs_test/ftp.cdc.noaa.gov/Datasets/noaa.oisst.v2/sst.wkmean.1990-present.nc"
 x <- "/home/sapi/projekty/ropensci_tidync/gs_test/ftp.cdc.noaa.gov/Datasets/noaa.oisst.v2/sst.wkmean.1990-present.nc"
-nc_atts(x)
-nc_atts(x, variable = c("lat", "lon"), values = TRUE)
+# x <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_att(x, "lat", 2, values = TRUE)
 
-a <- nc_att(x, variable = c("lat", "lon"), attribute = 1)
-a
+
+variable = c("lat", "lon")
+attribute = 2
+
+nc <- RNetCDF::open.nc(x)
+att_info <- RNetCDF::att.inq.nc(nc, variable[1], attribute[1])
+att_info
+## att <- structure(RNetCDF::att.get.nc(x, variable, attribute), names = att_info$name)
+att <- RNetCDF::att.get.nc(nc, variable[1], attribute[1])
+att
+out <- tibble::as_tibble(list(id = att_info$id, name = att_info$name, variable = variable[1], 
+                       value = setNames(list(att), att_info$name)))
+out$value <- ncmeta:::.get_value_of_name(out, out$name, out$variable)
+
+out
+  a <- unlist(vars$value[vars$name == name & vars$variable == var])
+
+
 a$value
 x <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 x <- "../../ropensci_tidync/gs_test/ftp.cdc.noaa.gov/Datasets/noaa.oisst.v2/sst.wkmean.1990-present.nc"
