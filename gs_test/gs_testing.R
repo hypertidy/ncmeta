@@ -1,10 +1,49 @@
 library(ncmeta)
 x <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+x <- "../../ropensci_tidync/gs_test/ftp.cdc.noaa.gov/Datasets/noaa.oisst.v2/sst.wkmean.1990-present.nc"
+# nc_atts.NetCDF(x, variable = c("lat", "chlor_a"), values = TRUE)
+out <- nc_att(x, variable = c("chlor_a"), attribute = c("long_name"), values = FALSE)
+variable = c("lat", "lon", "chlor_a")
 
-nc_atts.NetCDF(x)
+names <- unique(out$name)
+v <- tibble::tibble(variable)
+t <- dplyr::bind_rows(
+  lapply(seq_along(variable), function(k)
+    dplyr::bind_cols(
+      lapply(seq_along(names), function(i) .get_value_of_name(out, names[i], variable[k])),
+      .name_repair = ~ names
+    )
+  )
+)
+out <- cbind(v,t)
+
+
+ncmeta:::.get_value_of_name(out, names[1], variable[2])
+
+
+.get_value_of_name(b, "actual_range", "lat")
+vars <- b
+name <- "actual_range"
+var <- "lat"
+.get_value_of_name <- function(vars, name, var) {
+  a <- unlist(vars$value[vars$name == name & vars$variable == var])
+  if(is.null(a)) {
+    a <- NA
+  }
+  if(length(a)>1) {
+    a <- paste(toString(a))
+  }
+  return(a)
+}
+
+
+nc_atts(x, )
+
 variable = c("lat")
+values = TRUE
+values == TRUE
 
-nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
+nc_atts.NetCDF <- function(x, variable = NULL, values = TRUE, ...) {
   global <- tibble::as_tibble(list(id = -1, name = "NC_GLOBAL", 
                                    natts = nc_inq(x)$ngatts))
   
@@ -41,22 +80,24 @@ nc_atts.NetCDF <- function(x, variable = NULL,  ...) {
   if (any(var$natts > 0)) {
     out <-  dplyr::bind_rows(lapply(split(var, var$name)[unique(var$name)], 
                                     function(v) dplyr::bind_rows(lapply(seq_len(v$natts), function(iatt) nc_att(x, v$name, iatt - 1)))))
-  } else {
-    out <- tibble::tibble(id = double(0), name = character(0), variable = character(0), value = list())
-  }
-  # let's try to unlist variable values for given variables
-  if(!is.null(variable)) {
-    names <- unique(out$name)
-    v <- tibble::tibble(variable)
-    t <- dplyr::bind_rows(
-      lapply(seq_along(variable), function(k)
-        dplyr::bind_cols(
-          lapply(seq_along(names), function(i) getv(a, names[i], variable[k])),
-          .name_repair = ~ names
+    
+    # let's try to unlist variable values for given variables
+    if(!is.null(variable) && isTRUE(values)) {
+      names <- unique(out$name)
+      v <- tibble::tibble(variable)
+      t <- dplyr::bind_rows(
+        lapply(seq_along(variable), function(k)
+          dplyr::bind_cols(
+            lapply(seq_along(names), function(i) ncmeta:::.get_value_of_name(out, names[i], variable[k])),
+            .name_repair = ~ names
+          )
         )
       )
-    )
-    out <- cbind(v,t)
+      out <- cbind(v,t)
+    }
+    
+  } else {
+    out <- tibble::tibble(id = double(0), name = character(0), variable = character(0), value = list())
   }
   out
 }

@@ -6,16 +6,18 @@
 \alias{nc_atts.character}
 \title{NetCDF attributes}
 \usage{
-nc_atts(x, variable = NULL, ...)
+nc_atts(x, variable = NULL, values = FALSE, ...)
 
-\method{nc_atts}{NetCDF}(x, variable = NULL, ...)
+\method{nc_atts}{NetCDF}(x, variable = NULL, values = FALSE, ...)
 
-\method{nc_atts}{character}(x, variable = NULL, ...)
+\method{nc_atts}{character}(x, variable = NULL, values = FALSE, ...)
 }
 \arguments{
 \item{x}{filename or handle}
 
-\item{variable}{optional single name of a variable, or 'NC_GLOBAL'}
+\item{variable}{optional, list of variables, or 'NC_GLOBAL'}
+
+\item{values}{logical, if values has to be shown, default FALSE}
 
 \item{...}{ignored}
 }

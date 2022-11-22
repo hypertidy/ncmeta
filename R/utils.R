@@ -72,3 +72,14 @@ find_var_by_att <- function(x, attribute, value = ".*", strict = TRUE) {
   
   return(atts$variable)
 }
+
+.get_value_of_name <- function(vars, name, var) {
+  a <- unlist(vars$value[vars$name == name & vars$variable == var])
+  if(is.null(a)) {
+    a <- NA
+  }
+  if(length(a)>1) {
+    a <- paste(toString(a))
+  }
+  return(a)
+}
