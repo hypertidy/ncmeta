@@ -17,22 +17,27 @@ v
 t <- dplyr::bind_rows(
   lapply(seq_along(vars), function(k)
     dplyr::bind_cols(
-      lapply(seq_along(names), function(i) getv(a, names[i], vars[k])),
+      lapply(seq_along(names), function(i) .get_value_of_name(a, names[i], vars[k])),
       .name_repair = ~ names
     )
   )
 )
 v <- cbind(v,t)
 v
-k <- 10
+k <- 1
 
-getv <- function(vars, name, var) {
+
+.get_value_of_name <- function(vars, name, var) {
   a <- unlist(vars$value[vars$name == name & vars$variable == var])
   if(is.null(a)) {
     a <- NA
   }
-  a
+  return(a)
 }
+
+a[sapply(a, is.null)] <- NA
+unlist(a)
+# p1 p2 p1 p2 p1 p2 p1 p2 
 
 getv(a, "long_name", "chlor_a")
 
