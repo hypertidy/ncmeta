@@ -15,14 +15,15 @@ Description: Extract metadata from 'NetCDF' data sources, these can be files, fi
 Depends: R (>= 3.3.0)
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Imports: 
     dplyr,
     rlang,
     RNetCDF,
     tibble,
     stats,
-    tidyr
+    tidyr,
+    CFtime
 Suggests: testthat,
     covr
 Roxygen: list(markdown = TRUE)
