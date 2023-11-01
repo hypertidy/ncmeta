@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ncmeta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.6</span>
       </span>
     </div>
 
@@ -90,20 +90,19 @@ mapping belongs to.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">nc_grid_mapping_atts</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/daymet_sample.nc"</span>, package <span class="op">=</span> <span class="st">"ncmeta"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       id name                          variable                value     data_…¹</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;named l&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     0 grid_mapping_name             lambert_conformal_conic <span style="color: #949494;">&lt;chr [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1 longitude_of_central_meridian lambert_conformal_conic <span style="color: #949494;">&lt;dbl [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     2 latitude_of_projection_origin lambert_conformal_conic <span style="color: #949494;">&lt;dbl [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     3 false_easting                 lambert_conformal_conic <span style="color: #949494;">&lt;dbl [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     4 false_northing                lambert_conformal_conic <span style="color: #949494;">&lt;dbl [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     5 standard_parallel             lambert_conformal_conic <span style="color: #949494;">&lt;dbl [2]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     6 semi_major_axis               lambert_conformal_conic <span style="color: #949494;">&lt;dbl [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     7 inverse_flattening            lambert_conformal_conic <span style="color: #949494;">&lt;dbl [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     8 longitude_of_prime_meridian   lambert_conformal_conic <span style="color: #949494;">&lt;dbl [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     9 _CoordinateTransformType      lambert_conformal_conic <span style="color: #949494;">&lt;chr [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>    10 _CoordinateAxisTypes          lambert_conformal_conic <span style="color: #949494;">&lt;chr [1]&gt;</span> prcp   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​data_variable</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       id name                          variable              value data_variable</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;nam&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     0 grid_mapping_name             lambert_conformal_co… <span style="color: #949494;">&lt;chr&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1 longitude_of_central_meridian lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     2 latitude_of_projection_origin lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     3 false_easting                 lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     4 false_northing                lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     5 standard_parallel             lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     6 semi_major_axis               lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     7 inverse_flattening            lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     8 longitude_of_prime_meridian   lambert_conformal_co… <span style="color: #949494;">&lt;dbl&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     9 _CoordinateTransformType      lambert_conformal_co… <span style="color: #949494;">&lt;chr&gt;</span> prcp         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>    10 _CoordinateAxisTypes          lambert_conformal_co… <span style="color: #949494;">&lt;chr&gt;</span> prcp         </span>
 </code></pre></div>
     </div>
   </div>
@@ -118,7 +117,7 @@ mapping belongs to.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
