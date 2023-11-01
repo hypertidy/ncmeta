@@ -1,3 +1,10 @@
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
+NULL
+
 #' ncmeta: straightforward NetCDF metadata
 #'
 #' `ncmeta` provides a consistent set of tools to obtain metadata from NetCDF. NetCDF
@@ -25,6 +32,5 @@
 #'  \code{\link{nc_var}} \tab find a given variable (0-based) \cr
 #'  \code{\link{nc_vars}} \tab find the variables of a source \cr
 #' }
-#' @name ncmeta
-#' @docType package
+#' @name ncmeta-package
 NULL

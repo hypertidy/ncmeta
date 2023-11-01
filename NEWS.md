@@ -1,3 +1,7 @@
+# ncmeta 0.3.6
+
+* Fixed namespace doc thanks to CRAN.
+
 # ncmeta 0.3.5
 
 * Removed LazyData, unused. 
