@@ -25,28 +25,10 @@ nc_extended.character <- function(x, ...) {
 
 #' @name nc_extended
 #' @export
-#' @importFrom dplyr %>% 
-#' @importFrom rlang .data
 nc_extended.NetCDF <- function(x, ...) {
-  ndims <- nc_inq(x)$ndims
-  if (ndims  < 1) return(tibble::tibble())
-  nc_extended_internal(x, nc_dims_internal(x, ndims, ...))
-}
-
-#' Compile extended dimension attributes
-#'
-#' This function will build extended dimension attributes from (mostly)
-#' metadata. The resulting tibble will have a row for every dimension, having,
-#' as a minimum, the id and variable name of the dimension. For every extended
-#' attribute there is a column whose values describe the attribute. If the
-#' attribute is not defined for the dimension, NA will be returned.
-#'
-#' @param x RNetCDF instance.
-#' @param dims The dims tibble as returned from nc_dims_internal().
-#'
-#' @returns A tibble with extended dimension attributes
-#' @noRd
-nc_extended_internal <- function(x, dims) {
+  dims <- nc_dims(x, ...)
+  if (nrow(dims) == 0) return(tibble::tibble())
+  
   ## Add time information for any "time" dimension. Since not all files have a 
   ## "calendar" attribute or "axis == "T"", just try to create a CFtime
   ## instance for any dimension variable with a "units" attribute and a 
@@ -69,3 +51,27 @@ nc_extended_internal <- function(x, dims) {
   ## Output
   tibble::tibble(dimension = dims$id, name = dims$name, time = cftime)
 }
+
+#' @name nc_extended
+#' @export
+nc_extended.ncdf4 <- function(x, ...) {
+  if (x$ndims == 0) return(tibble::tibble())
+  
+  ## Add time information for any "time" dimension. Since not all files have a 
+  ## "calendar" attribute or "axis == "T"", just try to create a CFtime
+  ## instance for any dimension variable with a "units" attribute and a 
+  ## "calendar", if present.
+  cftime <- lapply(x$dim, function(d) {
+    units <- d$units
+    if (!is.null(units) && nchar(units) >= 8) {
+      try(return(CFtime::CFtime(units, d$calendar, as.vector(d$vals))), silent = TRUE)
+    }
+    return (NA)
+  })
+  
+  ## Any other extended attributes to be added here
+  
+  ## Output
+  tibble::tibble(dimension = sapply(x$dim, function(d) d$id), name = sapply(x$dim, function(d) d$name), time = cftime)
+}
+
