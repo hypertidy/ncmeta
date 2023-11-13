@@ -64,7 +64,17 @@ nc_extended.ncdf4 <- function(x, ...) {
   cftime <- lapply(x$dim, function(d) {
     units <- d$units
     if (!is.null(units) && nchar(units) >= 8) {
-      try(return(CFtime::CFtime(units, d$calendar, as.vector(d$vals))), silent = TRUE)
+      try({
+        # Create cheap bare-bones instance, to see if units represent time
+        cf <- CFtime::CFtime(units, d$calendar)
+        
+        # If we get here we have a CFtime instance, so now add offsets.
+        # NetCDF file may have been opened with suppress_dimvals = T or 
+        # readunlim = F so test if we have vals as dim element.
+        if (!is.null(d$vals)) off <- d$vals
+        else off <- ncvar_get(x, d$name)
+        return(cf + as.vector(off))
+      }, silent = TRUE)
     }
     return (NA)
   })
