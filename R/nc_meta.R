@@ -28,16 +28,17 @@ nc_meta <- function(x, ...) {
 #' @export
 nc_meta.NetCDF <- function(x, ...) {
   inq <- nc_inq(x)
-  dims <- nc_dims_internal(x, inq[["ndims"]])
+  dims <- nc_dims_internal(x, inq$ndims)
  
   vars <- nc_vars_internal(x, inq$nvars)
- if (nrow(vars) > 1) axis <- nc_axes(x, vars$name) else axis <- nc_axes(x)
+  if (nrow(vars) > 1) axis <- nc_axes(x, vars$name) else axis <- nc_axes(x)
+
   ## does a dimension have dim-vals?
-  if (nrow(dims) > 0) dims[["coord_dim"]] <- dims[["name"]] %in% vars[["name"]]
+  if (nrow(dims) > 0) dims$coord_dim <- dims$name %in% vars$name
+
   ## is a variable a dim-val?
-  
   if (nrow(vars) > 0) {
-    vars[["dim_coord"]] <- vars[["ndims"]] == 1L & vars[["name"]] %in% dims[["name"]]
+    vars$dim_coord <- vars$ndims == 1L & vars$name %in% dims$name
   } else {
     vars <- NULL ## avoid passing along a 0-row data frame
   }
@@ -45,6 +46,7 @@ nc_meta.NetCDF <- function(x, ...) {
   structure(list(dimension = dims, 
        variable = vars, 
        attribute = nc_atts(x), 
+       extended = nc_extended(x, ...),
        axis = axis,
        grid = nc_grids_dimvar(dims, vars, axis)),
        class = "ncmeta")

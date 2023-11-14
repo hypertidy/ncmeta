@@ -22,7 +22,8 @@ Imports:
     RNetCDF,
     tibble,
     stats,
-    tidyr
+    tidyr,
+    CFtime
 Suggests: testthat,
     covr
 Roxygen: list(markdown = TRUE)
