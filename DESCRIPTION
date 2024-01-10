@@ -27,6 +27,6 @@ Imports:
 Suggests: testthat,
     covr
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/hypertidy/ncmeta
+URL: https://github.com/hypertidy/ncmeta, https://hypertidy.github.io/ncmeta/
 BugReports: https://github.com/hypertidy/ncmeta/issues
 ByteCompile: TRUE
