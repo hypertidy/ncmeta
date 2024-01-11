@@ -6,11 +6,11 @@
 \alias{nc_att.character}
 \title{NetCDF attributes}
 \usage{
-nc_att(x, variable, attribute, ...)
+nc_att(x, variable, attribute, values = FALSE, ...)
 
-\method{nc_att}{NetCDF}(x, variable, attribute, ...)
+\method{nc_att}{NetCDF}(x, variable, attribute, values = FALSE, ...)
 
-\method{nc_att}{character}(x, variable, attribute, ...)
+\method{nc_att}{character}(x, variable, attribute, values = FALSE, ...)
 }
 \arguments{
 \item{x}{or file handle}
@@ -18,6 +18,8 @@ nc_att(x, variable, attribute, ...)
 \item{variable}{name or index (zero based) of variable}
 
 \item{attribute}{name or index (zero based) of attribute}
+
+\item{values}{logical, if values has to be shown, default FALSE}
 
 \item{...}{ignored}
 }
