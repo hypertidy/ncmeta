@@ -39,6 +39,7 @@ API and by the two R wrapper providers \code{RNetCDF} and \code{ncdf4}.
 Useful links:
 \itemize{
   \item \url{https://github.com/hypertidy/ncmeta}
+  \item \url{https://hypertidy.github.io/ncmeta/}
   \item Report bugs at \url{https://github.com/hypertidy/ncmeta/issues}
 }
 

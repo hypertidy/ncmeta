@@ -1,3 +1,7 @@
+# ncmeta 0.4.0
+
+* New function `nc_extended()` to enerate a table of extended dimension attributes, supporting 'time' currently (contributed by Patrick Van Laake). 
+
 # ncmeta 0.3.6
 
 * Fixed namespace doc thanks to CRAN.

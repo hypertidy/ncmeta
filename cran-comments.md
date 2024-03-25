@@ -1,11 +1,12 @@
-# Release 0.3.5 of ncmeta
+# Release 0.4.0 of ncmeta
 
-Fix downstream problems tidync and other revdeps where extra metadata was not handled by dataframe structure. 
+New function `nc_extended()`. 
 
 ## Test environments
 
 * local ubuntu 
 * win-builder (devel and release)
+* mac-builder (release)
 
 ## R CMD check results
 
@@ -15,10 +16,4 @@ Fix downstream problems tidync and other revdeps where extra metadata was not ha
 ## Reverse dependencies
 
 The reverse dependencies  pass check with this version.
-    
-* ncdfgeom
-* oceanexplorer
-* tidync
-* sftime
-* stars
     
