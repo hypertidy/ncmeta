@@ -16,14 +16,14 @@ test_that("attributes works", {
 test_that("attributes from Thredds works", {
   context("avoiding thredds tests for RNetCDF")
   skip_on_cran()
-  ## skip()  ## github can't do this atm 2022-08-15
-    du <- try(nc_atts(u))
-    if (!inherits(du, "try-error")) {
-      du %>%  expect_s3_class("tbl_df") %>% 
-      expect_named(c("id", "name", "variable", "value"))
-      # expect_that(nrow(du), equals(119L))  ## became 124 rows in 2022 August
-      expect_that(du$value, is_a("list"))
-    }
+  # ## skip()  ## github can't do this atm 2022-08-15
+  #   du <- try(nc_atts(u))
+  #   if (!inherits(du, "try-error")) {
+  #     du %>%  expect_s3_class("tbl_df") %>% 
+  #     expect_named(c("id", "name", "variable", "value"))
+  #     # expect_that(nrow(du), equals(119L))  ## became 124 rows in 2022 August
+  #     expect_that(du$value, is_a("list"))
+  #   }
   })
 
 test_that("individual attribute inquiry works", {
