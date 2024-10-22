@@ -29,8 +29,11 @@ nc_meta <- function(x, ...) {
 nc_meta.NetCDF <- function(x, ...) {
   inq <- nc_inq(x)
   dims <- nc_dims_internal(x, inq$ndims)
- 
+  if (inq$nvars > 0) {
   vars <- nc_vars_internal(x, inq$nvars)
+  } else {
+    vars <- tibble::tibble()
+  }
   if (nrow(vars) > 1) axis <- nc_axes(x, vars$name) else axis <- nc_axes(x)
 
   ## does a dimension have dim-vals?
