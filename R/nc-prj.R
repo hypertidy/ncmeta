@@ -46,6 +46,7 @@ nc_gm_to_prj.list <- function(x) {
 
 GPFN <- function(gm) UseMethod("GPFN")
 
+#' @exportS3Method NULL
 GPFN.albers_conical_equal_area <- function(gm) {
   projargs <- paste("+proj=aea",
                     standPar(gm),
@@ -55,6 +56,7 @@ GPFN.albers_conical_equal_area <- function(gm) {
                     getGeoDatum(gm))
 }
 
+#' @exportS3Method NULL
 GPFN.azimuthal_equidistant <- function(gm) {
   projargs <- paste("+proj=aeqd",
                     latProjOrig(gm),
@@ -72,6 +74,7 @@ GPFN.azimuthal_equidistant <- function(gm) {
 #                   getGeoDatum(gm))
 # # Fixed angle and sweep angle axes?
 # }
+#' @exportS3Method NULL
 GPFN.lambert_azimuthal_equal_area <- function(gm) {
   projargs <- paste("+proj=laea",
                     latProjOrig(gm),
@@ -80,6 +83,7 @@ GPFN.lambert_azimuthal_equal_area <- function(gm) {
                     getGeoDatum(gm))
 }
 
+#' @exportS3Method NULL
 GPFN.lambert_conformal_conic <- function(gm) {
   projargs <- paste("+proj=lcc",
                     standPar(gm),
@@ -89,6 +93,7 @@ GPFN.lambert_conformal_conic <- function(gm) {
                     getGeoDatum(gm))
 }
 
+#' @exportS3Method NULL
 GPFN.lambert_cylindrical_equal_area <- function(gm) {
   projargs <- paste("+proj=cea",
                     lonCentMer(gm),
@@ -97,9 +102,11 @@ GPFN.lambert_cylindrical_equal_area <- function(gm) {
                     getGeoDatum(gm))
 }
 
+#' @exportS3Method NULL
 GPFN.latitude_longitude <- function(gm) {
   prj <- paste0("+proj=longlat ", getGeoDatum(gm))
 }
+#' @exportS3Method NULL
 GPFN.mercator <- function(gm) {
   if(!is.null(gm$scale_factor_at_projection_origin)) {
     projargs <- paste("+proj=merc",
@@ -115,6 +122,7 @@ GPFN.mercator <- function(gm) {
                       getGeoDatum(gm))
   }
 }
+#' @exportS3Method NULL
 GPFN.oblique_mercator <- function(gm) {
   #!!!! Check this one out. the oMerc function is a hack !!!!
   projargs <- paste("+proj=omerc",
@@ -126,6 +134,7 @@ GPFN.oblique_mercator <- function(gm) {
                     getGeoDatum(gm))
 }
 
+#' @exportS3Method NULL
 GPFN.orthographic <- function(gm) {
   projargs <- paste("+proj=ortho",
                     latProjOrig(gm),
@@ -134,6 +143,7 @@ GPFN.orthographic <- function(gm) {
                     getGeoDatum(gm))
 }
 
+#' @exportS3Method NULL
 GPFN.polar_stereographic <- function(gm) {
   if(!is.null(gm$scale_factor_at_projection_origin)) {
     projargs <- paste("+proj=stere",
@@ -155,6 +165,7 @@ GPFN.polar_stereographic <- function(gm) {
 #   # not supported?
 # }
 #
+#' @exportS3Method NULL
 GPFN.sinusoidal <- function(gm) {
 projargs <- paste("+proj=sinu",
                   lonProjOrig(gm),
@@ -162,6 +173,7 @@ projargs <- paste("+proj=sinu",
                   getGeoDatum(gm))
 }
 #
+#' @exportS3Method NULL
 GPFN.stereographic <- function(gm) {
   projargs <- paste("+proj=stere",
                     latProjOrig(gm),
@@ -171,6 +183,7 @@ GPFN.stereographic <- function(gm) {
                     getGeoDatum(gm))
 }
 
+#' @exportS3Method NULL
 GPFN.transverse_mercator <- function(gm) {
   projargs <- paste("+proj=tmerc",
                     latProjOrig(gm),

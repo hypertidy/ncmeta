@@ -17,3 +17,6 @@
 ^inst/expts$
 ^\.github$
 ^CRAN-SUBMISSION$
+^\.positai$
+^\.claude$
+^_pkgdown.yml$

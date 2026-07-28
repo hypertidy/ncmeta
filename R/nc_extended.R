@@ -56,6 +56,8 @@ nc_extended.NetCDF <- function(x, ...) {
 #' @export
 nc_extended.ncdf4 <- function(x, ...) {
   ## we don't support ncdf4 so pass to RNetCDF
-  nc_extended(RNetCDF::open.nc(x$filename))
+  nc <- RNetCDF::open.nc(x$filename)
+  on.exit(RNetCDF::close.nc(nc), add = TRUE)
+  nc_extended(nc, ...)
 }
 

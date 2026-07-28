@@ -66,11 +66,7 @@ nc_grids_dimvar <- function(dimension, variable, axes) {
   #   dplyr::group_by(.data$grid, .data$ndims) %>% 
   #   dplyr::summarize(nvars = dplyr::n()) %>% 
   #   dplyr::ungroup()
-  if (utils::packageVersion("tidyr") > "0.8.3" ) {
-    nout <- tidyr::nest(out, variables = c(variable)) 
-  } else {
-    nout <- tidyr::nest(out, .data$variable, .key = "variables") 
-  }
+  nout <- tidyr::nest(out, variables = c(variable))
   nout$nvars <- unlist(lapply(nout$variables, nrow))
   nout
 }

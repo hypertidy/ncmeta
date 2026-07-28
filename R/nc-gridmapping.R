@@ -119,12 +119,14 @@ nc_prj_to_gridmapping <- function(prj) {
 
 GGFP <- function(al) UseMethod("GGFP")
 
+#' @exportS3Method NULL
 GGFP.latitude_longitude <- function(al) {
   gm <- c(list(grid_mapping_name = "latitude_longitude"),
           getGeoDatum_gm(al))
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.albers_conical_equal_area <- function(al) {
   gm <- c(list(grid_mapping_name = "albers_conical_equal_area"),
        lonCentMer_gm(al),
@@ -135,6 +137,7 @@ GGFP.albers_conical_equal_area <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.azimuthal_equidistant <- function(al) {
   gm <- c(list(grid_mapping_name = "azimuthal_equidistant"),
           lonProjOrig_gm(al),
@@ -144,6 +147,7 @@ GGFP.azimuthal_equidistant <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.lambert_azimuthal_equal_area <- function(al) {
   gm <- c(list(grid_mapping_name = "lambert_azimuthal_equal_area"),
           latProjOrig_gm(al),
@@ -153,6 +157,7 @@ GGFP.lambert_azimuthal_equal_area <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.lambert_conformal_conic <- function(al) {
   gm <- c(list(grid_mapping_name = "lambert_conformal_conic"),
                     standPar_gm(al),
@@ -163,6 +168,7 @@ GGFP.lambert_conformal_conic <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.lambert_cylindrical_equal_area <- function(al) {
   gm <- c(list(grid_mapping_name = "lambert_cylindrical_equal_area"),
                     lonCentMer_gm(al),
@@ -172,6 +178,7 @@ GGFP.lambert_cylindrical_equal_area <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.mercator <- function(al) {
   if(!is.null(al$k)) {
     gm <- c(list(grid_mapping_name = "mercator"),
@@ -189,6 +196,7 @@ GGFP.mercator <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.oblique_mercator <- function(al) {
   #!!!! Check this one out. the oMerc function is a hack !!!!
   gm <- c(list(grid_mapping_name = "oblique_mercator"),
@@ -201,6 +209,7 @@ GGFP.oblique_mercator <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.orthographic <- function(al) {
   gm <- c(list(grid_mapping_name = "orthographic"),
                     latProjOrig_gm(al),
@@ -237,6 +246,7 @@ GGFP.orthographic <- function(al) {
 # gm
 # }
 
+#' @exportS3Method NULL
 GGFP.stereographic <- function(al) {
   gm <- c(list(grid_mapping_name = "stereographic"),
                     latProjOrig_gm(al),
@@ -247,6 +257,7 @@ GGFP.stereographic <- function(al) {
   gm
 }
 
+#' @exportS3Method NULL
 GGFP.transverse_mercator <- function(al) {
   gm <- c(list(grid_mapping_name = "transverse_mercator"),
                     latProjOrig_gm(al),

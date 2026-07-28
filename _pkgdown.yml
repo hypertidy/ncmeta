@@ -1,0 +1,56 @@
+url: https://hypertidy.github.io/ncmeta/
+
+template:
+  bootstrap: 5
+  light-switch: true
+
+home:
+  title: ncmeta - straightforward NetCDF metadata
+  links:
+  - text: hypertidy on GitHub
+    href: https://github.com/hypertidy
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - search
+    - github
+    - lightswitch
+  components:
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/hypertidy/ncmeta/
+      aria-label: GitHub
+
+reference:
+- title: All functions
+  contents:
+  - nc_att
+  - nc_atts
+  - nc_axes
+  - nc_axis
+  - nc_coord_var
+  - nc_dim
+  - nc_dims
+  - nc_extended
+  - nc_gm_to_prj
+  - nc_grid_mapping_atts
+  - nc_grids
+  - nc_inq
+  - nc_meta
+  - nc_prj_to_gridmapping
+  - nc_sources
+  - nc_var
+  - nc_vars
