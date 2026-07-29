@@ -1,0 +1,15 @@
+netcdf test-1 {
+dimensions:
+	x = 2 ;
+	y = 3 ;
+	c3 = 2 ;
+	c4 = 2 ;
+	c5 = 3 ;
+variables:
+	double a(c5, c4, c3, y, x) ;
+	double x(x) ;
+	double y(y) ;
+	double c3(c3) ;
+	double c4(c4) ;
+	double c5(c5) ;
+}

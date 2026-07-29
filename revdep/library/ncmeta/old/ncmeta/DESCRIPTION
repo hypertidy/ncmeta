@@ -1,0 +1,35 @@
+Package: ncmeta
+Title: Straightforward 'NetCDF' Metadata
+Version: 0.4.0
+Authors@R: c(person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c("aut", "cre")), 
+             person("Tomas", "Remenyi", role = "ctb"), 
+             person("Ben", "Raymond", role = "ctb"), 
+             person("David", "Blodgett", role = "ctb"), 
+             person("Milton", "Woods", role = "ctb"))
+Description: Extract metadata from 'NetCDF' data sources, these can be files, file handles or
+ servers. This package leverages and extends the lower level functions of the 'RNetCDF' package 
+ providing a consistent set of functions that all return data frames. We introduce named concepts 
+ of 'grid', 'axis' and 'source' which are all meaningful entities without formal definition in the 
+ 'NetCDF' library <https://www.unidata.ucar.edu/software/netcdf/>. 'RNetCDF' matches the library 
+ itself with only the named concepts of 'variables', 'dimensions' and 'attributes'. 
+Depends: R (>= 3.3.0)
+License: GPL-3
+Encoding: UTF-8
+RoxygenNote: 7.3.0
+Imports: dplyr, rlang, RNetCDF, tibble, stats, tidyr, CFtime
+Suggests: testthat, covr
+URL: https://github.com/hypertidy/ncmeta,
+        https://hypertidy.github.io/ncmeta/
+BugReports: https://github.com/hypertidy/ncmeta/issues
+ByteCompile: TRUE
+NeedsCompilation: no
+Packaged: 2024-03-25 09:49:25 UTC; mdsumner
+Author: Michael Sumner [aut, cre],
+  Tomas Remenyi [ctb],
+  Ben Raymond [ctb],
+  David Blodgett [ctb],
+  Milton Woods [ctb]
+Maintainer: Michael Sumner <mdsumner@gmail.com>
+Repository: CRAN
+Date/Publication: 2024-03-25 10:20:02 UTC
+Built: R 4.6.1; ; 2026-07-29 03:14:23 UTC; unix

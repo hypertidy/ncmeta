@@ -1,8 +1,4 @@
-# ncmeta 0.5.0
-
-* Several inconsistencies fixed. 
-
-* Implemented UTM support, workaround limitations of CF, wish of #53. 
+# ncmeta dev
 
 * `nc_meta()` no longer errors on sources with zero classic-model variables, e.g. L3 bin files or empty files.
 

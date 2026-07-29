@@ -1,11 +1,3 @@
-# ncmeta 0.5.0
-
-* Several inconsistencies fixed. 
-
-* Implemented UTM support, workaround limitations of CF, wish of #53. 
-
-* `nc_meta()` no longer errors on sources with zero classic-model variables, e.g. L3 bin files or empty files.
-
 # ncmeta 0.4.0
 
 * New function `nc_extended()` to enerate a table of extended dimension attributes, supporting 'time' currently (contributed by Patrick Van Laake). 
