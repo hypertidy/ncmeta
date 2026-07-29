@@ -40,10 +40,10 @@ nc_meta.NetCDF <- function(x, ...) {
   if (nrow(dims) > 0) dims$coord_dim <- dims$name %in% vars$name
 
   ## is a variable a dim-val?
-  if (nrow(vars) > 0) {
-    vars$dim_coord <- vars$ndims == 1L & vars$name %in% dims$name
+  if (inq$nvars > 0) {
+    vars <- nc_vars_internal(x, inq$nvars)
   } else {
-    vars <- NULL ## avoid passing along a 0-row data frame
+    vars <- empty_vars_table()
   }
   
   structure(list(dimension = dims, 

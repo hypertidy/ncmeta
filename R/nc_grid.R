@@ -51,7 +51,12 @@ expand_var <- function(x) {
 #' @importFrom dplyr desc arrange
 #' @importFrom rlang .data
 nc_grids_dimvar <- function(dimension, variable, axes) {
-  if (is.null(variable) || (nrow(variable) < 1 & nrow(dimension) < 1)) return(tibble::tibble())
+  ## no variables (or no axis instances) means no grids, a grid only
+  ## exists by virtue of a variable defined on it
+  if (is.null(variable) || nrow(variable) < 1 || is.null(axes) || nrow(axes) < 1) {
+    return(tibble::tibble(grid = character(), ndims = integer(),
+                          variables = list(), nvars = integer()))
+  }
   native_var <- unique(axes$variable)
   shape_instances_byvar <- split(axes$dimension, axes$variable)[native_var]
   shape_classify_byvar <- factor(unlist(lapply(shape_instances_byvar, 

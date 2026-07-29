@@ -26,8 +26,15 @@ nc_vars.character <- function(x, ...) {
 #' @importFrom rlang .data
 nc_vars.NetCDF <- function(x, ...) {
   nvars <- nc_inq(x)$nvars
-  if (nvars  < 1) return(tibble::tibble())
+  if (nvars  < 1) return(empty_vars_table())
   nc_vars_internal(x, nvars)
+}
+## type-stable zero-row analogue of nc_vars_internal() output, so that
+## consumers (e.g. dims$name %in% vars$name) work without warnings when
+## a source has no classic-model variables
+empty_vars_table <- function() {
+  tibble::tibble(id = integer(), name = character(), type = character(),
+                 ndims = integer(), natts = integer())
 }
 nc_vars_internal <- function(x, nvars) {
   dplyr::bind_rows(lapply(seq_len(nvars), function(i) nc_var(x, i-1))) %>% 
