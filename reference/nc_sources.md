@@ -34,5 +34,5 @@ nc_sources(f)
 #> # A tibble: 1 × 2
 #>   access              source                                                    
 #>   <dttm>              <chr>                                                     
-#> 1 2026-07-29 02:08:21 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
+#> 1 2026-07-29 02:41:23 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
 ```

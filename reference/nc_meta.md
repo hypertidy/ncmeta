@@ -110,7 +110,7 @@ nc_meta(f)
 #> # A tibble: 1 × 2
 #>   access              source                                                    
 #>   <dttm>              <chr>                                                     
-#> 1 2026-07-29 02:08:19 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
+#> 1 2026-07-29 02:41:21 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
 #> 
 #> attr(,"class")
 #> [1] "ncmeta"
@@ -199,7 +199,7 @@ nc_meta(u)
 #> # A tibble: 1 × 2
 #>   access              source                                                    
 #>   <dttm>              <chr>                                                     
-#> 1 2026-07-29 02:08:21 https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlL…
+#> 1 2026-07-29 02:41:23 https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlL…
 #> 
 #> attr(,"class")
 #> [1] "ncmeta"
