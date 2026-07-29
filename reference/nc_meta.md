@@ -47,13 +47,13 @@ nc_meta(f)
 #> 4     3 eightbitcolor    256 FALSE FALSE    
 #> 
 #> $variable
-#> # A tibble: 4 × 6
-#>      id name    type     ndims natts dim_coord
-#>   <int> <chr>   <chr>    <int> <int> <lgl>    
-#> 1     0 chlor_a NC_FLOAT     2    12 FALSE    
-#> 2     1 lat     NC_FLOAT     1     5 TRUE     
-#> 3     2 lon     NC_FLOAT     1     5 TRUE     
-#> 4     3 palette NC_UBYTE     2     0 FALSE    
+#> # A tibble: 4 × 5
+#>      id name    type     ndims natts
+#>   <int> <chr>   <chr>    <int> <int>
+#> 1     0 chlor_a NC_FLOAT     2    12
+#> 2     1 lat     NC_FLOAT     1     5
+#> 3     2 lon     NC_FLOAT     1     5
+#> 4     3 palette NC_UBYTE     2     0
 #> 
 #> $attribute
 #> # A tibble: 87 × 4
@@ -104,7 +104,7 @@ nc_meta(f)
 #> # A tibble: 1 × 2
 #>   access              source                                                    
 #>   <dttm>              <chr>                                                     
-#> 1 2026-07-28 23:22:21 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
+#> 1 2026-07-29 01:30:42 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
 #> 
 #> attr(,"class")
 #> [1] "ncmeta"
