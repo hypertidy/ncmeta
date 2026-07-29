@@ -49,13 +49,53 @@ nc_meta.NetCDF <- function(x, ...) {
     vars <- NULL ## avoid passing along a 0-row data frame
   }
   
-  structure(list(dimension = dims, 
-       variable = vars, 
-       attribute = nc_atts(x), 
+  atts <- nc_atts(x)
+  grids <- nc_grids_dimvar(dims, vars, axis)
+  flags <- bounds_flags(atts, dims, vars, axis, grids)
+
+  structure(list(dimension = flags$dimension, 
+       variable = flags$variable, 
+       attribute = atts, 
        extended = nc_extended(x, ...),
        axis = axis,
-       grid = nc_grids_dimvar(dims, vars, axis)),
+       grid = flags$grid),
        class = "ncmeta")
+}
+
+## CF cell boundaries: a variable named by a "bounds" (or "climatology")
+## attribute of a coordinate variable is part of that coordinate variable
+## metadata, not independent data (CF conventions section 7.1), see
+## https://github.com/hypertidy/ncmeta/issues/48
+## We flag rather than remove: everything in the file stays reported, and
+## downstream tools can choose to demote bounds content. Dimensions used
+## only by bounds variables (the "bnds"/"nv" vertex dimension) are flagged
+## via bnds_dim, without catching e.g. staggered-grid dimensions that carry
+## real data variables.
+bounds_flags <- function(atts, dims, vars, axis, grids) {
+  targets <- character(0)
+  if (!is.null(atts) && nrow(atts) > 0) {
+    b <- atts[atts$name %in% c("bounds", "climatology") & atts$variable != "NC_GLOBAL", ]
+    targets <- unique(unlist(lapply(b$value, as.character)))
+  }
+  if (!is.null(vars) && nrow(vars) > 0) {
+    vars$bnds <- vars$name %in% targets
+    coord_vars <- vars$name[vars$dim_coord]
+  } else {
+    coord_vars <- character(0)
+  }
+  if (!is.null(dims) && nrow(dims) > 0) {
+    dims$bnds_dim <- vapply(dims$id, function(d) {
+      users <- unique(axis$variable[axis$dimension == d])
+      data_users <- setdiff(users, coord_vars)
+      length(data_users) > 0 && all(data_users %in% targets)
+    }, logical(1))
+  }
+  if (!is.null(grids)) {
+    grids$bnds <- vapply(grids$variables, function(v) {
+      nrow(v) > 0 && all(v$variable %in% targets)
+    }, logical(1))
+  }
+  list(dimension = dims, variable = vars, grid = grids)
 }
 
 #' @name nc_meta

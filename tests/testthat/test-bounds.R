@@ -1,0 +1,40 @@
+test_that("bounds variables, dimensions, and grids are flagged (#48)", {
+  skip_if_not(requireNamespace("RNetCDF", quietly = TRUE))
+  f <- tempfile(fileext = ".nc")
+  nc <- RNetCDF::create.nc(f)
+  RNetCDF::dim.def.nc(nc, "time", 3)
+  RNetCDF::dim.def.nc(nc, "bnds", 2)
+  RNetCDF::var.def.nc(nc, "time", "NC_DOUBLE", "time")
+  RNetCDF::att.put.nc(nc, "time", "bounds", "NC_CHAR", "time_bnds")
+  RNetCDF::var.def.nc(nc, "time_bnds", "NC_DOUBLE", c("bnds", "time"))
+  RNetCDF::var.def.nc(nc, "tas", "NC_DOUBLE", "time")
+  RNetCDF::var.put.nc(nc, "time", c(0.5, 1.5, 2.5))
+  RNetCDF::var.put.nc(nc, "time_bnds", rbind(0:2, 1:3))
+  RNetCDF::var.put.nc(nc, "tas", c(1, 2, 3))
+  RNetCDF::close.nc(nc)
+  on.exit(unlink(f), add = TRUE)
+
+  m <- nc_meta(f)
+  expect_identical(m$variable$bnds[m$variable$name == "time_bnds"], TRUE)
+  expect_identical(m$variable$bnds[m$variable$name == "tas"], FALSE)
+  expect_identical(m$dimension$bnds_dim[m$dimension$name == "bnds"], TRUE)
+  expect_identical(m$dimension$bnds_dim[m$dimension$name == "time"], FALSE)
+  expect_true("bnds" %in% names(m$grid))
+  gvars <- lapply(m$grid$variables, function(v) v$variable)
+  expect_true(all(m$grid$bnds == vapply(gvars, function(v) all(v == "time_bnds"), logical(1))))
+})
+
+test_that("dimensions without coordinate variables are not flagged as bounds", {
+  ## the ROMS staggered-grid case: no bounds attributes anywhere, so no flags
+  f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+  m <- nc_meta(f)
+  expect_false(any(m$dimension$bnds_dim))
+  expect_false(any(m$variable$bnds))
+  expect_false(any(m$grid$bnds))
+
+  ## zero-variable source keeps type-stable columns
+  d <- system.file("extdata", "dims_only.nc", package = "ncmeta")
+  md <- suppressWarnings(nc_meta(d))
+  expect_false(any(md$dimension$bnds_dim))
+  expect_true("bnds" %in% names(md$grid))
+})
