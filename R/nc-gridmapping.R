@@ -360,6 +360,31 @@ check_args <- function (x)
   TRUE
 }
 
+## expand the "+proj=utm" PROJ shorthand to its equivalent explicit
+## transverse_mercator parameters, so that UTM sources map to the CF
+## "transverse_mercator" grid mapping (CF has no UTM grid mapping of its
+## own, and needs none: UTM is tmerc with fixed parameter values)
+## contributed by Patrick Van Laake https://github.com/hypertidy/ncmeta/issues/53
+utm_to_tmerc <- function(args) {
+  proj_idx  <- which(args == "+proj=utm")
+  if (!length(proj_idx)) return(args) # fast return if not UTM
+  zone_idx  <- grep("^\\+zone=\\d+$", args)
+  ## utm without a zone is not a usable projection, leave the args alone
+  ## so the caller warns about an unmapped projection
+  if (!length(zone_idx)) return(args)
+  south_idx <- which(args == "+south")
+
+  ## transverse mercator arguments from UTM zone
+  zone <- as.integer(sub("^\\+zone=", "", args[zone_idx]))
+  lon_0 <- zone * 6 - 183
+  y_0 <- if (length(south_idx)) 10000000 else 0
+
+  tmerc <- c("+proj=tmerc", "+lat_0=0", sprintf("+lon_0=%d", lon_0),
+             "+k=0.9996", "+x_0=500000", sprintf("+y_0=%d", y_0))
+
+  c(tmerc, args[-c(proj_idx, zone_idx, south_idx)])
+}
+
 prepCRS <- function(prj) {
   if(inherits(prj,  "CRS")) prj <- prj@projargs
 
@@ -370,6 +395,7 @@ prepCRS <- function(prj) {
   }
 
   args <- unique(unlist(strsplit(prj, " ")))
+  args <- utm_to_tmerc(args)
 
   argList <- list()
 

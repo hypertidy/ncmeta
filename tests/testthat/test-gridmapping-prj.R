@@ -514,3 +514,22 @@ test_that("more spherical", {
                      semi_minor_axis = 6371229, 
                      longitude_of_prime_meridian = 0))
 })
+
+test_that("utm expands to the CF transverse_mercator mapping (#53)", {
+  utm <- "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+  tm  <- "+proj=tmerc +lat_0=0 +lon_0=-3 +k=0.9996 +x_0=500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+  expect_identical(nc_prj_to_gridmapping(utm), nc_prj_to_gridmapping(tm))
+
+  s <- suppressWarnings(
+    nc_prj_to_gridmapping("+proj=utm +zone=55 +south +ellps=GRS80 +units=m +no_defs"))
+  v <- setNames(s$value, s$name)
+  expect_identical(unlist(v["grid_mapping_name"], use.names = FALSE), "transverse_mercator")
+  expect_equal(v[["longitude_of_central_meridian"]], 147)
+  expect_equal(v[["false_northing"]], 10000000)
+  expect_equal(v[["scale_factor_at_central_meridian"]], 0.9996)
+
+  ## utm without a zone is not usable, existing warning path applies
+  expect_warning(z <- nc_prj_to_gridmapping("+proj=utm +ellps=GRS80"),
+                 "no available mapping")
+  expect_identical(nrow(z), 0L)
+})
