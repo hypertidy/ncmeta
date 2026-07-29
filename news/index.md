@@ -1,5 +1,16 @@
 # Changelog
 
+## ncmeta 0.5.0
+
+- Several inconsistencies fixed.
+
+- Implemented UTM support, workaround limitations of CF, wish of
+  [\#53](https://github.com/hypertidy/ncmeta/issues/53).
+
+- [`nc_meta()`](https://hypertidy.github.io/ncmeta/reference/nc_meta.md)
+  no longer errors on sources with zero classic-model variables, e.g. L3
+  bin files or empty files.
+
 ## ncmeta 0.4.0
 
 CRAN release: 2024-03-25

@@ -110,7 +110,7 @@ nc_meta(f)
 #> # A tibble: 1 × 2
 #>   access              source                                                    
 #>   <dttm>              <chr>                                                     
-#> 1 2026-07-29 03:08:14 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
+#> 1 2026-07-29 07:33:49 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
 #> 
 #> attr(,"class")
 #> [1] "ncmeta"
