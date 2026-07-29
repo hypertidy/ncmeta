@@ -110,98 +110,13 @@ nc_meta(f)
 #> # A tibble: 1 × 2
 #>   access              source                                                    
 #>   <dttm>              <chr>                                                     
-#> 1 2026-07-29 02:41:21 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
+#> 1 2026-07-29 03:08:14 /home/runner/work/_temp/Library/ncmeta/extdata/S2008001.L…
 #> 
 #> attr(,"class")
 #> [1] "ncmeta"
-# \donttest{
+if (FALSE) { # \dontrun{
 ## remote server, not run in checks
 u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
 nc_meta(u)
-#> $dimension
-#> # A tibble: 2 × 5
-#>      id name        length unlim coord_dim
-#>   <int> <chr>        <dbl> <lgl> <lgl>    
-#> 1     0 maxStrlen64     64 FALSE FALSE    
-#> 2     1 s               36 FALSE FALSE    
-#> 
-#> $variable
-#> # A tibble: 19 × 6
-#>       id name                     type      ndims natts dim_coord
-#>    <int> <chr>                    <chr>     <int> <int> <lgl>    
-#>  1     0 s.cruise                 NC_INT        1     4 FALSE    
-#>  2     1 s.ship                   NC_CHAR       2     3 FALSE    
-#>  3     2 s.haul                   NC_INT        1     4 FALSE    
-#>  4     3 s.collection             NC_INT        1     4 FALSE    
-#>  5     4 s.latitude               NC_FLOAT      1     8 FALSE    
-#>  6     5 s.longitude              NC_FLOAT      1     8 FALSE    
-#>  7     6 s.stop_latitude          NC_FLOAT      1     4 FALSE    
-#>  8     7 s.stop_longitude         NC_FLOAT      1     4 FALSE    
-#>  9     8 s.time                   NC_DOUBLE     1     9 FALSE    
-#> 10     9 s.haulback_time          NC_DOUBLE     1     6 FALSE    
-#> 11    10 s.surface_temp           NC_FLOAT      1     5 FALSE    
-#> 12    11 s.surface_temp_method    NC_CHAR       2     3 FALSE    
-#> 13    12 s.ship_spd_through_water NC_FLOAT      1     5 FALSE    
-#> 14    13 s.itis_tsn               NC_INT        1     4 FALSE    
-#> 15    14 s.scientific_name        NC_CHAR       2     3 FALSE    
-#> 16    15 s.subsample_count        NC_INT        1     4 FALSE    
-#> 17    16 s.subsample_weight       NC_FLOAT      1     5 FALSE    
-#> 18    17 s.remaining_weight       NC_FLOAT      1     5 FALSE    
-#> 19    18 s.presence_only          NC_CHAR       2     3 FALSE    
-#> 
-#> $attribute
-#> # A tibble: 128 × 4
-#>       id name          variable value       
-#>    <int> <chr>         <chr>    <named list>
-#>  1     0 actual_range  s.cruise <dbl [2]>   
-#>  2     1 description   s.cruise <chr [1]>   
-#>  3     2 ioos_category s.cruise <chr [1]>   
-#>  4     3 long_name     s.cruise <chr [1]>   
-#>  5     0 description   s.ship   <chr [1]>   
-#>  6     1 ioos_category s.ship   <chr [1]>   
-#>  7     2 long_name     s.ship   <chr [1]>   
-#>  8     0 actual_range  s.haul   <dbl [2]>   
-#>  9     1 description   s.haul   <chr [1]>   
-#> 10     2 ioos_category s.haul   <chr [1]>   
-#> # ℹ 118 more rows
-#> 
-#> $extended
-#> # A tibble: 2 × 3
-#>   dimension name        time     
-#>       <int> <chr>       <list>   
-#> 1         0 maxStrlen64 <lgl [1]>
-#> 2         1 s           <lgl [1]>
-#> 
-#> $axis
-#> # A tibble: 23 × 3
-#>     axis variable         dimension
-#>    <int> <chr>                <int>
-#>  1     1 s.cruise                 1
-#>  2     2 s.ship                   0
-#>  3     3 s.ship                   1
-#>  4     4 s.haul                   1
-#>  5     5 s.collection             1
-#>  6     6 s.latitude               1
-#>  7     7 s.longitude              1
-#>  8     8 s.stop_latitude          1
-#>  9     9 s.stop_longitude         1
-#> 10    10 s.time                   1
-#> # ℹ 13 more rows
-#> 
-#> $grid
-#> # A tibble: 2 × 4
-#>   grid  ndims variables         nvars
-#>   <chr> <int> <list>            <int>
-#> 1 D0,D1     2 <tibble [4 × 1]>      4
-#> 2 D1        1 <tibble [15 × 1]>    15
-#> 
-#> $source
-#> # A tibble: 1 × 2
-#>   access              source                                                    
-#>   <dttm>              <chr>                                                     
-#> 1 2026-07-29 02:41:23 https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlL…
-#> 
-#> attr(,"class")
-#> [1] "ncmeta"
-# }
+} # }
 ```
