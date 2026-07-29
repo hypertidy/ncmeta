@@ -25,17 +25,15 @@ nc_inq(x, ...)
 
   ignored
 
+## Value
+
+data frame of file information, with columns 'ndims', 'nvars', 'ngatts'
+(number of global attributes), 'unlimdimid' (id of unlimited dimension,
+or NA), 'filename'
+
 ## Examples
 
 ``` r
-# \donttest{
-if (FALSE) { # \dontrun{
- f <- raadfiles:::cmip5_files()$fullname[1]
- nc_inq(f)
- nc_var(f, 0)
- nc_dim(f, 0)
- } # }
-# }
 f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 nc_inq(f)
 #> # A tibble: 1 × 5

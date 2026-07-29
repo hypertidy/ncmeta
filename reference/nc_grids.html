@@ -13,7 +13,7 @@ database techniques."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ncmeta</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,6 +79,12 @@ database techniques.</p>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>data frame of grid information, one row per grid, with columns 'grid'
+(a label of the dimensions in the grid), 'ndims', 'variables' (a nested data
+frame of the variables defined on the grid), 'nvars'</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Each data source has a set of dimensions available for use by variables. Each grid is
 an n-dimensional space available for use by 0, 1 or more variables. A grid only really
@@ -87,6 +93,19 @@ part of the NetCDF API definition. The Unidata pages refer to "shape", which is 
 we mean by "grid".</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"S2008001.L3m_DAY_CHL_chlor_a_9km.nc"</span>, package <span class="op">=</span> <span class="st">"ncmeta"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nc_grids</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   grid  ndims variables        nvars</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> D1,D0     2 <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> D3,D2     2 <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> D0        1 <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> D1        1 <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>     1</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

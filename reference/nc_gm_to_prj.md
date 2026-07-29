@@ -39,7 +39,7 @@ If only a semi_major axis is provided, a sperical earth is assumed.
 
 2.  <https://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus>
 
-3.  <https://cfconventions.org/cf-conventions/cf-conventions.html>
+3.  <https://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings>
 
 ## Examples
 

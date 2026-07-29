@@ -26,7 +26,7 @@ A named list containing attributes required for that grid_mapping.
 
 2.  <https://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus>
 
-3.  <https://cfconventions.org/cf-conventions/cf-conventions.html>
+3.  <https://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings>
 
 ## Examples
 

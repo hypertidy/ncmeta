@@ -31,6 +31,12 @@ nc_grids(x, ...)
 
   ignored
 
+## Value
+
+data frame of grid information, one row per grid, with columns 'grid' (a
+label of the dimensions in the grid), 'ndims', 'variables' (a nested
+data frame of the variables defined on the grid), 'nvars'
+
 ## Details
 
 Each data source has a set of dimensions available for use by variables.
@@ -39,3 +45,17 @@ variables. A grid only really exists if variable is defined for it, and
 'grid' is an implicit entity not an explicit part of the NetCDF API
 definition. The Unidata pages refer to "shape", which is more or less
 what we mean by "grid".
+
+## Examples
+
+``` r
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_grids(f)
+#> # A tibble: 4 × 4
+#>   grid  ndims variables        nvars
+#>   <chr> <int> <list>           <int>
+#> 1 D1,D0     2 <tibble [1 × 1]>     1
+#> 2 D3,D2     2 <tibble [1 × 1]>     1
+#> 3 D0        1 <tibble [1 × 1]>     1
+#> 4 D1        1 <tibble [1 × 1]>     1
+```

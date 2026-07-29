@@ -20,12 +20,12 @@ Source:
 [`DESCRIPTION`](https://github.com/hypertidy/ncmeta/blob/main/DESCRIPTION)
 
 Sumner M (2026). *ncmeta: Straightforward 'NetCDF' Metadata*. R package
-version 0.4.0.9004, <https://github.com/hypertidy/ncmeta>.
+version 0.5.0, <https://github.com/hypertidy/ncmeta>.
 
     @Manual{,
       title = {ncmeta: Straightforward 'NetCDF' Metadata},
       author = {Michael Sumner},
       year = {2026},
-      note = {R package version 0.4.0.9004},
+      note = {R package version 0.5.0},
       url = {https://github.com/hypertidy/ncmeta},
     }

@@ -13,7 +13,7 @@
 - [`nc_coord_var()`](https://hypertidy.github.io/ncmeta/reference/nc_coord_var.md)
   : Get Coordinate Variables for Given Variable
 - [`nc_dim()`](https://hypertidy.github.io/ncmeta/reference/nc_dim.md) :
-  NetCDF variables Obtain information about a single dimension by index.
+  NetCDF dimension
 - [`nc_dims()`](https://hypertidy.github.io/ncmeta/reference/nc_dims.md)
   : NetCDF dimension
 - [`nc_extended()`](https://hypertidy.github.io/ncmeta/reference/nc_extended.md)

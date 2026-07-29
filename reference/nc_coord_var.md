@@ -48,7 +48,7 @@ column is included in the response indicating which variable contains
 bounds information.
 
 See
-<https://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html>
+<https://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html#coordinate-system>
 for more.
 
 ## Examples

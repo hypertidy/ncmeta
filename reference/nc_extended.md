@@ -31,3 +31,17 @@ nc_extended(x, ...)
 ## Value
 
 data frame of extended dimension attribute information
+
+## Examples
+
+``` r
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_extended(f)
+#> # A tibble: 4 × 3
+#>   dimension name          time     
+#>       <int> <chr>         <list>   
+#> 1         0 lat           <lgl [1]>
+#> 2         1 lon           <lgl [1]>
+#> 3         2 rgb           <lgl [1]>
+#> 4         3 eightbitcolor <lgl [1]>
+```
