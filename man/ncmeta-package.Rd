@@ -6,10 +6,10 @@
 \alias{ncmeta-package}
 \title{ncmeta: Straightforward 'NetCDF' Metadata}
 \description{
-Extract metadata from 'NetCDF' data sources, these can be files, file handles or servers. This package leverages and extends the lower level functions of the 'RNetCDF' package providing a consistent set of functions that all return data frames. We introduce named concepts of 'grid', 'axis' and 'source' which are all meaningful entities without formal definition in the 'NetCDF' library \url{https://www.unidata.ucar.edu/software/netcdf/}. 'RNetCDF' matches the library itself with only the named concepts of 'variables', 'dimensions' and 'attributes'.
+Extract metadata from 'NetCDF' data sources, these can be files, file handles or servers. This package leverages and extends the lower level functions of the 'RNetCDF' package providing a consistent set of functions that all return data frames. We introduce named concepts of 'grid', 'axis' and 'source' which are all meaningful entities without formal definition in the 'NetCDF' library \url{https://www.unidata.ucar.edu/software/netcdf}. 'RNetCDF' matches the library itself with only the named concepts of 'variables', 'dimensions' and 'attributes'.
 
 \code{ncmeta} provides a consistent set of tools to obtain metadata from NetCDF. NetCDF
-is 'Network Common Data Form' https://www.unidata.ucar.edu/software/netcdf/.
+is 'Network Common Data Form' https://www.unidata.ucar.edu/software/netcdf.
 These functions are generics, allowing methods to be written for various providers so that
 everything can work from a common basis. All functions return a data frame.
 }

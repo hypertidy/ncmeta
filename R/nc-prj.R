@@ -260,7 +260,8 @@ oneStandPar <- function(gm) {
 }
 
 falseEastNorth <- function(gm) {
-  options(scipen=2)
+  op <- options(scipen=2)
+  on.exit(options(op), add = TRUE)
 	outString <- paste0("+x_0=", gm$false_easting,
 											" +y_0=", gm$false_northing,
 											" +units=m")

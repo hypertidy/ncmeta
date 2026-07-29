@@ -30,9 +30,9 @@ nc_meta.NetCDF <- function(x, ...) {
   inq <- nc_inq(x)
   dims <- nc_dims_internal(x, inq$ndims)
   if (inq$nvars > 0) {
-  vars <- nc_vars_internal(x, inq$nvars)
+    vars <- nc_vars_internal(x, inq$nvars)
   } else {
-    vars <- tibble::tibble()
+    vars <- empty_vars_table()
   }
   if (nrow(vars) > 1) axis <- nc_axes(x, vars$name) else axis <- nc_axes(x)
 
@@ -40,10 +40,10 @@ nc_meta.NetCDF <- function(x, ...) {
   if (nrow(dims) > 0) dims$coord_dim <- dims$name %in% vars$name
 
   ## is a variable a dim-val?
-  if (inq$nvars > 0) {
-    vars <- nc_vars_internal(x, inq$nvars)
+  if (nrow(vars) > 0) {
+    vars$dim_coord <- vars$ndims == 1L & vars$name %in% dims$name
   } else {
-    vars <- empty_vars_table()
+    vars <- NULL ## avoid passing along a 0-row data frame
   }
   
   structure(list(dimension = dims, 

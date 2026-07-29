@@ -37,7 +37,7 @@ are meaningful and worth making explicit. Many NetCDF tools don’t
 explicitly present these concepts so grab hold of them with ncmeta!
 
 A **grid** is an ordered set of dimensions, and the [Unidata
-site](https://www.unidata.ucar.edu/software/netcdf/) refers *informally*
+site](https://www.unidata.ucar.edu/software/netcdf) refers *informally*
 to this concept as **shape**.
 
 An **axis** is an *instance* of a dimension, the use of that dimension

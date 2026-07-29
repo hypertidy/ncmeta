@@ -37,7 +37,7 @@ All variables that can be related to a spatio-temporal axis, including coordinat
 variables are returned. For coordinate variables, a "bounds" column is included in
 the response indicating which variable contains bounds information.
 
-See \url{http://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html#coordinate-system}
+See \url{https://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html}
 for more.
 }
 \examples{

@@ -41,6 +41,6 @@ nc_gm_to_prj(crs)
 \enumerate{
 \item \url{https://en.wikibooks.org/wiki/PROJ.4}
 \item \url{https://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus}
-\item \url{http://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings}
+\item \url{https://cfconventions.org/cf-conventions/cf-conventions.html}
 }
 }
