@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="ncmeta - straightforward NetCDF metadata">
-<meta name="description" content="Extract metadata from NetCDF data sources, these can be files, file handles or servers. This package leverages and extends the lower level functions of the RNetCDF package providing a consistent set of functions that all return data frames. We introduce named concepts of grid, axis and source which are all meaningful entities without formal definition in the NetCDF library &lt;https://www.unidata.ucar.edu/software/netcdf/&gt;. RNetCDF matches the library itself with only the named concepts of variables, dimensions and attributes.">
-<meta property="og:description" content="Extract metadata from NetCDF data sources, these can be files, file handles or servers. This package leverages and extends the lower level functions of the RNetCDF package providing a consistent set of functions that all return data frames. We introduce named concepts of grid, axis and source which are all meaningful entities without formal definition in the NetCDF library &lt;https://www.unidata.ucar.edu/software/netcdf/&gt;. RNetCDF matches the library itself with only the named concepts of variables, dimensions and attributes.">
+<meta name="description" content="Extract metadata from NetCDF data sources, these can be files, file handles or servers. This package leverages and extends the lower level functions of the RNetCDF package providing a consistent set of functions that all return data frames. We introduce named concepts of grid, axis and source which are all meaningful entities without formal definition in the NetCDF library &lt;https://www.unidata.ucar.edu/software/netcdf&gt;. RNetCDF matches the library itself with only the named concepts of variables, dimensions and attributes.">
+<meta property="og:description" content="Extract metadata from NetCDF data sources, these can be files, file handles or servers. This package leverages and extends the lower level functions of the RNetCDF package providing a consistent set of functions that all return data frames. We introduce named concepts of grid, axis and source which are all meaningful entities without formal definition in the NetCDF library &lt;https://www.unidata.ucar.edu/software/netcdf&gt;. RNetCDF matches the library itself with only the named concepts of variables, dimensions and attributes.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ncmeta</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
 </h2>
 <p>NetCDF is both a data model and an API, and provides a very general framework for expressing data formats. The explicit entities in NetCDF are <strong>variables</strong>, <strong>dimensions</strong> and <strong>attributes</strong> and ncmeta provides functions <code>nc_vars</code>, <code>nc_dims</code>, and <code>nc_atts</code> to extract their names, order and other metadata. There are matching functions <code>nc_var</code>, <code>nc_dim</code>, and <code>nc_att</code> with an extra identifier to extract specific information about an individual variable, dimension, or attribute.</p>
 <p>Also includes functions for implicit entities, these are <strong>grids</strong> and <strong>axes</strong>. These don’t exist in the NetCDF specification explicitly, but are meaningful and worth making explicit. Many NetCDF tools don’t explicitly present these concepts so grab hold of them with ncmeta!</p>
-<p>A <strong>grid</strong> is an ordered set of dimensions, and the <a href="https://www.unidata.ucar.edu/software/netcdf/" class="external-link">Unidata site</a> refers <em>informally</em> to this concept as <strong>shape</strong>.</p>
+<p>A <strong>grid</strong> is an ordered set of dimensions, and the <a href="https://www.unidata.ucar.edu/software/netcdf" class="external-link">Unidata site</a> refers <em>informally</em> to this concept as <strong>shape</strong>.</p>
 <p>An <strong>axis</strong> is an <em>instance</em> of a dimension, the use of that dimension within a particular variable.</p>
 <p>These functions provide a more developer-friendly scheme for working with the range of formats provided by the NetCDF ecosystem.</p>
 </div>
@@ -138,7 +138,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Michael Sumner <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Michael Sumner <br><small class="roles"> Author, maintainer, copyright holder </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
