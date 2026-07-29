@@ -10,6 +10,12 @@
 #' exists if  variable is defined for it, and 'grid' is an implicit entity not an explicit
 #' part of the NetCDF API definition. The Unidata pages refer to "shape", which is more or less what
 #' we mean by "grid". 
+#' @return data frame of grid information, one row per grid, with columns 'grid'
+#' (a label of the dimensions in the grid), 'ndims', 'variables' (a nested data
+#' frame of the variables defined on the grid), 'nvars'
+#' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_grids(f)
 #' @name nc_grids
 #' @export
 nc_grids <- function(x, ...) UseMethod("nc_grids")

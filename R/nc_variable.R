@@ -7,6 +7,9 @@
 #'
 #' @return data frame of variable information
 #' @export
+#' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_vars(f)
 #'
 nc_vars <- function(x, ...)  {
   UseMethod("nc_vars")

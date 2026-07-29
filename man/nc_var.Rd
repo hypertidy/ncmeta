@@ -23,6 +23,10 @@ data frame of variable information
 \description{
 Return a data frame about the variable at index \code{i}.
 }
+\examples{
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_var(f, 0)
+}
 \seealso{
 \code{nc_vars} to obtain information about all variables, \code{nc_inq} for an
 overview of the file

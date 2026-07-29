@@ -27,3 +27,8 @@ data frame of extended dimension attribute information
 Generate a table of all extended dimension attributes. For now that means
 interpretation of any "time" dimension.
 }
+\examples{
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_extended(f)
+
+}

@@ -9,6 +9,10 @@
 #' @param variables names of vars to query
 #' @param ... ignored
 #'
+#' @return data frame of axis instances, with columns 'axis', 'variable', 'dimension'
+#' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_axes(f)
 #'@name nc_axes
 #'@export
 nc_axes <- function(x, variables = NULL, ...) {

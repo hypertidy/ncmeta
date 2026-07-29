@@ -5,8 +5,7 @@
 \alias{nc_dim.character}
 \alias{nc_dim.NetCDF}
 \alias{nc_dim.ncdf4}
-\title{NetCDF variables
-Obtain information about a single dimension by index.}
+\title{NetCDF dimension}
 \usage{
 nc_dim(x, i, ...)
 
@@ -23,11 +22,17 @@ nc_dim(x, i, ...)
 
 \item{...}{ignored}
 }
+\value{
+data frame of dimension information, with columns 'id', 'name', 'length', 'unlim'
+}
 \description{
-NetCDF variables
 Obtain information about a single dimension by index.
 }
+\examples{
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_dim(f, 0)
+}
 \seealso{
-\code{nc_vars} to obtain information about all dimensions, \code{nc_inq} for an
+\code{nc_dims} to obtain information about all dimensions, \code{nc_inq} for an
 overview of the file
 }

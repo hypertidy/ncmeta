@@ -8,6 +8,10 @@
 #' @param x NetCDF source 
 #' @param i index of axis (1-based, 0 is "empty")
 #'
+#' @return data frame of a single axis instance, with columns 'axis', 'variable', 'dimension'
+#' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_axis(f, 1)
 #' @name nc_axis
 #' @export
 nc_axis <- function(x, i) {

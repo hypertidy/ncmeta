@@ -5,8 +5,11 @@
 #' @param i variable index (zero based)
 #' @name nc_var
 #' @return data frame of variable information
-#' @seealso `nc_vars` to obtain information about all variables, `nc_inq` for an 
+#' @seealso `nc_vars` to obtain information about all variables, `nc_inq` for an
 #' overview of the file
+#' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_var(f, 0)
 #' @export
 nc_var <- function(x, i) {
   UseMethod("nc_var")

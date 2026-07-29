@@ -31,6 +31,6 @@ nc_prj_to_gridmapping("+proj=longlat +a=6378137 +f=0.00335281066474748 +pm=0 +no
 \enumerate{
 \item \url{https://en.wikibooks.org/wiki/PROJ.4}
 \item \url{https://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus}
-\item \url{https://cfconventions.org/cf-conventions/cf-conventions.html}
+\item \url{https://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings}
 }
 }

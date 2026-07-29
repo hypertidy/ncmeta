@@ -88,7 +88,7 @@ nc_grid_mapping_atts.data.frame <- function(x, data_variable = NULL) {
 #' \enumerate{
 #'   \item \url{https://en.wikibooks.org/wiki/PROJ.4}
 #'   \item \url{https://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus}
-#'   \item \url{http://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings}
+#'   \item \url{https://cfconventions.org/cf-conventions/cf-conventions.html#appendix-grid-mappings}
 #' }
 #'
 #' @export

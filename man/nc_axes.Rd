@@ -19,10 +19,17 @@ nc_axes(x, variables = NULL, ...)
 
 \item{...}{ignored}
 }
+\value{
+data frame of axis instances, with columns 'axis', 'variable', 'dimension'
+}
 \description{
 An \code{axis} is an instance of a dimension.
 }
 \details{
 Each data source has a set of dimensions available for use by variables. Each axis is
 a 1-dimensional instance.
+}
+\examples{
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_axes(f)
 }

@@ -20,6 +20,11 @@ nc_grids(x, ...)
 
 \item{...}{ignored}
 }
+\value{
+data frame of grid information, one row per grid, with columns 'grid'
+(a label of the dimensions in the grid), 'ndims', 'variables' (a nested data
+frame of the variables defined on the grid), 'nvars'
+}
 \description{
 A \code{grid} is a discretized space, defined by a set of dimensions. These are the spaces used
 by one or more variables in a source. Traditional summaries are organized by variable, but
@@ -32,4 +37,8 @@ an n-dimensional space available for use by 0, 1 or more variables. A grid only 
 exists if  variable is defined for it, and 'grid' is an implicit entity not an explicit
 part of the NetCDF API definition. The Unidata pages refer to "shape", which is more or less what
 we mean by "grid".
+}
+\examples{
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_grids(f)
 }

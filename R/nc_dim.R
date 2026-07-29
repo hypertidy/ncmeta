@@ -1,11 +1,16 @@
-#' NetCDF variables
+#' NetCDF dimension
+#'
 #' Obtain information about a single dimension by index. 
 #' @param x filename or handle
 #' @param ... ignored
 #' @param i index of dimension (zero based)
 #'
+#' @return data frame of dimension information, with columns 'id', 'name', 'length', 'unlim'
+#' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_dim(f, 0)
 #' @name nc_dim
-#' @seealso `nc_vars` to obtain information about all dimensions, `nc_inq` for an 
+#' @seealso `nc_dims` to obtain information about all dimensions, `nc_inq` for an
 #' overview of the file
 #' @export
 nc_dim <- function(x, i, ...) {

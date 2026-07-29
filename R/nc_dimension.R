@@ -4,6 +4,11 @@
 #' @param x file address or handle
 #' @param ... ignored
 #'
+#' @return data frame of dimension information, one row per dimension, with columns
+#' 'id', 'name', 'length', 'unlim'
+#' @examples
+#' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+#' nc_dims(f)
 #' @name nc_dims
 #' @export
 nc_dims <- function(x, ...)  {

@@ -1,6 +1,6 @@
 # ncmeta dev
 
-
+* `nc_meta()` no longer errors on sources with zero classic-model variables, e.g. L3 bin files or empty files.
 
 # ncmeta 0.4.0
 

@@ -14,6 +14,13 @@ nc_sources(x, ...)
 
 \item{...}{ignored}
 }
+\value{
+data frame with columns 'access' (time of access), 'source' (the source string)
+}
 \description{
 A record of file, URL, or any data source with NetCDF.
+}
+\examples{
+f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
+nc_sources(f)
 }

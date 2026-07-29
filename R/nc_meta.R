@@ -10,15 +10,18 @@
 #' @param ... ignored
 #' @param x data source address, file name or handle
 #'
+#' @return a list of data frames, with class 'ncmeta', named 'dimension', 'variable'
+#' (NULL if the source has no variables), 'attribute', 'extended', 'axis', 'grid',
+#' 'source'
 #' @export
 #' @examples 
 #' f <- system.file("extdata", "S2008001.L3m_DAY_CHL_chlor_a_9km.nc", package = "ncmeta")
 #' nc_meta(f)
-#' \donttest{
 #' \dontrun{
+#' ## remote server, not run in checks
 #' u <- "https://upwell.pfeg.noaa.gov/erddap/tabledap/FRDCPSTrawlLHHaulCatch"
 #' nc_meta(u)
-#' }}
+#' }
 nc_meta <- function(x, ...) {
   if (missing(x)) stop("'x' must be a valid NetCDF source, filename or URL")
  UseMethod("nc_meta")   
